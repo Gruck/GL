@@ -25,7 +25,7 @@ main: dtd
 
 dtd: dtd ATTLIST NAME 
      att_definition CLOSE            
-   | dtd ELEMENT NAME choix_ou_sequence CLOSE
+   | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE
    | /* empty */                     
    ;
 
@@ -50,6 +50,7 @@ liste_sequence: item
 	      ;
 
 item: NAME cardinalite
+    | PCDATA cardinalite
     | choix_ou_sequence cardinalite
     ;
 

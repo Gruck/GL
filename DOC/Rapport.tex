@@ -4,6 +4,7 @@
 \usepackage[francais]{babel}  
 \usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
 \usepackage{graphicx}
+\usepackage{algorithmic}
 
 \begin{document}
 
@@ -28,5 +29,16 @@
 \tableofcontents
 \newpage
 
+\section{Algo - exemple d'utilisation}
+\paragraph{Test}
+\begin{algorithmic}
+\IF {$i\geq maxval$} 
+        \STATE $i\gets 0$
+\ELSE
+        \IF {$i+k\leq maxval$}
+                \STATE $i\gets i+k$
+        \ENDIF
+\ENDIF 
+\end{algorithmic}
 
 \end{document}

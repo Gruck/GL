@@ -25,8 +25,37 @@ main: dtd
 
 dtd: dtd ATTLIST NAME 
      att_definition CLOSE            
+   | dtd ELEMENT NAME choix_ou_sequence CLOSE
    | /* empty */                     
    ;
+
+choix_ou_sequence: choix
+		 | sequence
+		 ;
+
+choix: OPENPAR liste_choix_plus CLOSEPAR
+     ;
+
+sequence: OPENPAR liste_sequence CLOSEPAR
+        ;
+
+cardinalite: AST|QMARK|PLUS| /* empty */
+	   ;
+
+liste_choix_plus: liste_choix PIPE item
+		;
+
+liste_sequence: item 
+	      | liste_sequence COMMA item
+	      ;
+
+item: NAME cardinalite
+    | choix_ou_sequence cardinalite
+    ;
+
+liste_choix: item
+           | liste_choix PIPE item
+           ;
 
 
 att_definition

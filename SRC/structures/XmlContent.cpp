@@ -2,8 +2,9 @@
 
 #include "XmlContent.h"
 #include "XmlElement.h"
-
+#include "Tools.h"
 
 XmlContent::~XmlContent(){
-  if(_parent) _parent->removeChildContent(this);
+  CALL_MACRO
+  if(_parent) _parent->removeChild(this);
 }

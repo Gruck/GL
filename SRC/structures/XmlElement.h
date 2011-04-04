@@ -3,29 +3,36 @@
 #define HEXALOUTRE_XMLELEMENT_H
 
 #include "XmlContent.h"
+#include "XmlAttribute.h"
+#include "Tools.h"
 
 #include <list>
 #include <string>
 #include <iostream>
 
+
 class XmlElement : public XmlContent
 { 
 public:
+  typedef std::list<XmlAttribute> AttributeList;
   typedef std::list<XmlContent*> ContentList;
   typedef std::list<XmlContent*>::iterator ContentListIterator;
 
   XmlElement(XmlElement* parent, const std::string& nameSpace, const std::string& name)
-  : XmlContent(parent), _nameSpace(nameSpace), _name(name) {}
+  : XmlContent(parent), _nameSpace(nameSpace), _name(name) {
+    CALL_MACRO
+    if(parent)parent->addChild(this);
+  }
   
-  std::string name() const { return _name; }
-  std::string nameSpace() const { return _nameSpace; }
-  std::string fullName() const { return _nameSpace+":"+_name; }
+  inline std::string name() const { CALL_MACRO return _name; }
+  inline std::string nameSpace() const { CALL_MACRO return _nameSpace; }
+  std::string fullName() const;
 
-  void addChildContent( XmlContent* toAdd );
-  void removeChildContent( XmlContent* toRemove );
-  
-  ContentListIterator childContentBegin() { return _childContentList.begin(); } 
-  ContentListIterator childContentEnd() { return _childContentList.end(); }
+  void addChild( XmlContent* toAdd );
+  void removeChild( XmlContent* toRemove );
+  int nbChildren() const { CALL_MACRO return _attributes.size(); }
+  inline ContentListIterator firstChild() { CALL_MACRO return _childContentList.begin(); } 
+  inline ContentListIterator childrenEnd() { CALL_MACRO return _childContentList.end(); }
 
   void toStream( std::ostream& stream );
   
@@ -33,7 +40,7 @@ private:
   std::string _nameSpace;
   std::string _name;
   ContentList _childContentList;
-  
+  AttributeList _attributes;
 };
 
 

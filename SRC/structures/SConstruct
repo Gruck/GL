@@ -1,0 +1,2 @@
+
+Program(['test.cpp','XmlContent.cpp','XmlElement.cpp','XmlDoc.cpp'])

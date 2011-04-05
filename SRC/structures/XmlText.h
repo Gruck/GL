@@ -8,10 +8,13 @@
 class XmlText : public XmlContent
 {
 public:
-  XmlText(XmlElement* parent, const std::string& text )
-  : XmlContent(parent), _data(text) { }
+  XmlText(const std::string& text)
+  : XmlContent(0), _data(text) { }
   
-  void toStream( std::ostream& stream ) { CALL_MACRO stream << _data; }
+  void toStream( std::ostream& stream, int indentation = 0 ) {
+    indent(stream, indentation);
+    stream << _data;
+  }
   std::string& text() { CALL_MACRO return _data; }
   
 private:

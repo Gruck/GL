@@ -10,16 +10,19 @@ class XmlElement;
 class XmlContent{
 friend class XmlElement;
 public:
-  XmlContent( XmlElement* parent ) : _parent(parent) { CALL_MACRO }
+  XmlContent( XmlElement* parent );
+  
   XmlElement* parent() { CALL_MACRO return _parent; }
 
   // to override
-  virtual void toStream( std::ostream& stream ) = 0;
+  virtual void toStream( std::ostream& stream, int indentation = 0 ) = 0;
 
   virtual ~XmlContent();
 protected:
   void setParent(XmlElement* parentElt){ CALL_MACRO _parent = parentElt; }
-
+  void indent(std::ostream& stream, int indentation){
+    for(int i = 0; i < indentation; ++i) stream << "  ";
+  }
 private:
   XmlElement* _parent;
 };

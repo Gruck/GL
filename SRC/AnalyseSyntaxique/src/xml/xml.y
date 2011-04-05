@@ -6,11 +6,13 @@ using namespace std;
 #include <cstdio>
 #include <cstdlib>
 #include "commun.h"
-#include "yy.tab.h"
+#include "xml.tab.h"
 
 int yywrap(void);
 void yyerror(char *msg);
 int yylex(void);
+
+string DtdUrl;
 
 %}
 
@@ -42,26 +44,22 @@ declarations
  ;
  
 declaration
- : DOCTYPE NAME NAME VALUE CLOSE 
+ : DOCTYPE NAME NAME VALUE CLOSE {DtdUrl = $4;} 
  ;
 
 element
- : start empty_or_content 
+ : start          
+   empty_or_content 
  ;
 start
  : START		
  | NSSTART	
  ;
 empty_or_content
- : attributes SLASH CLOSE	
- | attributes close_content_and_end name_or_nsname_opt  CLOSE 
+ : SLASH CLOSE	
+ | close_content_and_end 
+   name_or_nsname_opt CLOSE 
  ;
- 
-attributes
- : attributes NAME EQ VALUE
- | /* empty */
- ;
- 
 name_or_nsname_opt 
  : NAME     
  | NSNAME  
@@ -80,7 +78,7 @@ content
  ;
 %%
 
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
   int err;
 
@@ -88,7 +86,7 @@ int main(int argc, char **argv)
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
   	else  printf("Parse ended with sucess\n", err);
   return 0;
-}
+}*/
 int yywrap(void)
 {
   return 1;

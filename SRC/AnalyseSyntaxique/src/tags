@@ -1,0 +1,588 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AttList	xml/commun.h	/^typedef list<Attribut> AttList;$/;"	t
+Attribut	xml/commun.h	/^typedef pair<string,string> Attribut;$/;"	t
+BEGIN	xml/lex.xml.c	145;"	d	file:
+CLOSE	xml/xml.tab.c	/^     CLOSE = 260,$/;"	e	enum:yytokentype	file:
+CLOSE	xml/xml.tab.h	/^     CLOSE = 260,$/;"	e	enum:yytokentype
+CLOSESPECIAL	xml/xml.tab.c	/^     CLOSESPECIAL = 262,$/;"	e	enum:yytokentype	file:
+CLOSESPECIAL	xml/xml.tab.h	/^     CLOSESPECIAL = 262,$/;"	e	enum:yytokentype
+COMMENT	xml/xml.tab.c	/^     COMMENT = 267,$/;"	e	enum:yytokentype	file:
+COMMENT	xml/xml.tab.h	/^     COMMENT = 267,$/;"	e	enum:yytokentype
+COMMUN_H	xml/commun.h	2;"	d
+CONTENT	xml/lex.xml.c	/^{printf("%s",xmltext); BEGIN(CONTENT); return CLOSE;}$/;"	v
+CONTENT	xml/lex.xml.c	687;"	d	file:
+DATA	xml/xml.tab.c	/^     DATA = 266,$/;"	e	enum:yytokentype	file:
+DATA	xml/xml.tab.h	/^     DATA = 266,$/;"	e	enum:yytokentype
+DOCTYPE	xml/xml.tab.c	/^     DOCTYPE = 263,$/;"	e	enum:yytokentype	file:
+DOCTYPE	xml/xml.tab.h	/^     DOCTYPE = 263,$/;"	e	enum:yytokentype
+Dtd_name	xml/xml.tab.c	/^std::string Dtd_name;$/;"	v
+ECHO	xml/lex.xml.c	779;"	d	file:
+ENCODING	xml/xml.tab.c	/^     ENCODING = 264,$/;"	e	enum:yytokentype	file:
+ENCODING	xml/xml.tab.h	/^     ENCODING = 264,$/;"	e	enum:yytokentype
+END	xml/xml.tab.c	/^     END = 261,$/;"	e	enum:yytokentype	file:
+END	xml/xml.tab.h	/^     END = 261,$/;"	e	enum:yytokentype
+EOB_ACT_CONTINUE_SCAN	xml/lex.xml.c	188;"	d	file:
+EOB_ACT_END_OF_FILE	xml/lex.xml.c	189;"	d	file:
+EOB_ACT_LAST_MATCH	xml/lex.xml.c	190;"	d	file:
+EQ	xml/xml.tab.c	/^     EQ = 258,$/;"	e	enum:yytokentype	file:
+EQ	xml/xml.tab.h	/^     EQ = 258,$/;"	e	enum:yytokentype
+ElementName	xml/commun.h	/^typedef pair<string,string> ElementName;$/;"	t
+FLEXINT_H	xml/lex.xml.c	49;"	d	file:
+FLEX_BETA	xml/lex.xml.c	33;"	d	file:
+FLEX_SCANNER	xml/lex.xml.c	28;"	d	file:
+INITIAL	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char * tmp = word(xmltext); xmllval.en = new ElementName("",tmp); free(tmp); return START;}$/;"	v
+INITIAL	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char * tmp = word(xmltext); xmllval.en = new ElementName("",tmp); free(tmp); return STARTSPECIAL;}$/;"	v
+INITIAL	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char *tmp1 = nameSpace(xmltext); char * tmp2 = split_namespace(xmltext); xmllval.en = new ElementName(tmp1,tmp2); free(tmp1); free(tmp2); return NSSTART;}$/;"	v
+INITIAL	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); return END;}$/;"	v
+INITIAL	xml/lex.xml.c	686;"	d	file:
+INT16_MAX	xml/lex.xml.c	91;"	d	file:
+INT16_MIN	xml/lex.xml.c	82;"	d	file:
+INT32_MAX	xml/lex.xml.c	94;"	d	file:
+INT32_MIN	xml/lex.xml.c	85;"	d	file:
+INT8_MAX	xml/lex.xml.c	88;"	d	file:
+INT8_MIN	xml/lex.xml.c	79;"	d	file:
+NAME	xml/xml.tab.c	/^     NAME = 268,$/;"	e	enum:yytokentype	file:
+NAME	xml/xml.tab.h	/^     NAME = 268,$/;"	e	enum:yytokentype
+NSNAME	xml/xml.tab.c	/^     NSNAME = 269,$/;"	e	enum:yytokentype	file:
+NSNAME	xml/xml.tab.h	/^     NSNAME = 269,$/;"	e	enum:yytokentype
+NSSTART	xml/xml.tab.c	/^     NSSTART = 270,$/;"	e	enum:yytokentype	file:
+NSSTART	xml/xml.tab.h	/^     NSSTART = 270,$/;"	e	enum:yytokentype
+REJECT	xml/lex.xml.c	610;"	d	file:
+SLASH	xml/xml.tab.c	/^     SLASH = 259,$/;"	e	enum:yytokentype	file:
+SLASH	xml/xml.tab.h	/^     SLASH = 259,$/;"	e	enum:yytokentype
+START	xml/xml.tab.c	/^     START = 271,$/;"	e	enum:yytokentype	file:
+START	xml/xml.tab.h	/^     START = 271,$/;"	e	enum:yytokentype
+STARTSPECIAL	xml/xml.tab.c	/^     STARTSPECIAL = 272$/;"	e	enum:yytokentype	file:
+STARTSPECIAL	xml/xml.tab.h	/^     STARTSPECIAL = 272$/;"	e	enum:yytokentype
+UINT16_MAX	xml/lex.xml.c	100;"	d	file:
+UINT32_MAX	xml/lex.xml.c	103;"	d	file:
+UINT8_MAX	xml/lex.xml.c	97;"	d	file:
+VALUE	xml/xml.tab.c	/^     VALUE = 265,$/;"	e	enum:yytokentype	file:
+VALUE	xml/xml.tab.h	/^     VALUE = 265,$/;"	e	enum:yytokentype
+YYABORT	xml/xml.tab.c	579;"	d	file:
+YYACCEPT	xml/xml.tab.c	578;"	d	file:
+YYBACKUP	xml/xml.tab.c	591;"	d	file:
+YYBISON	xml/xml.tab.c	46;"	d	file:
+YYBISON_VERSION	xml/xml.tab.c	49;"	d	file:
+YYCOPY	xml/xml.tab.c	351;"	d	file:
+YYCOPY	xml/xml.tab.c	354;"	d	file:
+YYDEBUG	xml/xml.tab.c	103;"	d	file:
+YYDPRINTF	xml/xml.tab.c	671;"	d	file:
+YYDPRINTF	xml/xml.tab.c	820;"	d	file:
+YYEMPTY	xml/xml.tab.c	575;"	d	file:
+YYEOF	xml/xml.tab.c	576;"	d	file:
+YYERRCODE	xml/xml.tab.c	610;"	d	file:
+YYERROR	xml/xml.tab.c	580;"	d	file:
+YYERROR_VERBOSE	xml/xml.tab.c	108;"	d	file:
+YYERROR_VERBOSE	xml/xml.tab.c	109;"	d	file:
+YYERROR_VERBOSE	xml/xml.tab.c	111;"	d	file:
+YYERROR_VERBOSE_ARGS_MAXIMUM	xml/xml.tab.c	/^      enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };$/;"	e	enum:__anon1	file:
+YYFAIL	xml/xml.tab.c	587;"	d	file:
+YYFINAL	xml/xml.tab.c	384;"	d	file:
+YYFPRINTF	xml/xml.tab.c	668;"	d	file:
+YYFREE	xml/xml.tab.c	317;"	d	file:
+YYID	xml/xml.tab.c	/^YYID (int yyi)$/;"	f	file:	signature:(int yyi)
+YYID	xml/xml.tab.c	241;"	d	file:
+YYINITDEPTH	xml/xml.tab.c	829;"	d	file:
+YYLAST	xml/xml.tab.c	386;"	d	file:
+YYLEX	xml/xml.tab.c	658;"	d	file:
+YYLEX	xml/xml.tab.c	660;"	d	file:
+YYLLOC_DEFAULT	xml/xml.tab.c	619;"	d	file:
+YYLSP_NEEDED	xml/xml.tab.c	64;"	d	file:
+YYMALLOC	xml/xml.tab.c	310;"	d	file:
+YYMAXDEPTH	xml/xml.tab.c	840;"	d	file:
+YYMAXUTOK	xml/xml.tab.c	399;"	d	file:
+YYNNTS	xml/xml.tab.c	391;"	d	file:
+YYNRULES	xml/xml.tab.c	393;"	d	file:
+YYNSTATES	xml/xml.tab.c	395;"	d	file:
+YYNTOKENS	xml/xml.tab.c	389;"	d	file:
+YYPACT_NINF	xml/xml.tab.c	528;"	d	file:
+YYPOPSTACK	xml/xml.tab.c	1180;"	d	file:
+YYPULL	xml/xml.tab.c	61;"	d	file:
+YYPURE	xml/xml.tab.c	55;"	d	file:
+YYPUSH	xml/xml.tab.c	58;"	d	file:
+YYRECOVERING	xml/xml.tab.c	589;"	d	file:
+YYRHSLOC	xml/xml.tab.c	617;"	d	file:
+YYSIZE_MAXIMUM	xml/xml.tab.c	218;"	d	file:
+YYSIZE_T	xml/xml.tab.c	206;"	d	file:
+YYSIZE_T	xml/xml.tab.c	208;"	d	file:
+YYSIZE_T	xml/xml.tab.c	212;"	d	file:
+YYSIZE_T	xml/xml.tab.c	214;"	d	file:
+YYSKELETON_NAME	xml/xml.tab.c	52;"	d	file:
+YYSTACK_ALLOC	xml/xml.tab.c	264;"	d	file:
+YYSTACK_ALLOC	xml/xml.tab.c	268;"	d	file:
+YYSTACK_ALLOC	xml/xml.tab.c	273;"	d	file:
+YYSTACK_ALLOC	xml/xml.tab.c	296;"	d	file:
+YYSTACK_ALLOC_MAXIMUM	xml/xml.tab.c	293;"	d	file:
+YYSTACK_ALLOC_MAXIMUM	xml/xml.tab.c	299;"	d	file:
+YYSTACK_BYTES	xml/xml.tab.c	343;"	d	file:
+YYSTACK_FREE	xml/xml.tab.c	287;"	d	file:
+YYSTACK_FREE	xml/xml.tab.c	297;"	d	file:
+YYSTACK_GAP_MAXIMUM	xml/xml.tab.c	339;"	d	file:
+YYSTACK_RELOCATE	xml/xml.tab.c	370;"	d	file:
+YYSTATE	xml/lex.xml.c	152;"	d	file:
+YYSTYPE	xml/xml.tab.c	/^typedef union YYSTYPE$/;"	u	file:
+YYSTYPE	xml/xml.tab.c	/^} YYSTYPE;$/;"	t	typeref:union:YYSTYPE	file:
+YYSTYPE	xml/xml.tab.h	/^typedef union YYSTYPE$/;"	u
+YYSTYPE	xml/xml.tab.h	/^} YYSTYPE;$/;"	t	typeref:union:YYSTYPE
+YYSTYPE::en	xml/xml.tab.c	/^   ElementName * en;  \/* le nom d'un element avec son namespace *\/$/;"	m	union:YYSTYPE	file:	access:public
+YYSTYPE::en	xml/xml.tab.h	/^   ElementName * en;  \/* le nom d'un element avec son namespace *\/$/;"	m	union:YYSTYPE	access:public
+YYSTYPE::s	xml/xml.tab.c	/^   char * s;$/;"	m	union:YYSTYPE	file:	access:public
+YYSTYPE::s	xml/xml.tab.h	/^   char * s;$/;"	m	union:YYSTYPE	access:public
+YYSTYPE_IS_DECLARED	xml/xml.tab.c	163;"	d	file:
+YYSTYPE_IS_DECLARED	xml/xml.tab.h	79;"	d
+YYSTYPE_IS_TRIVIAL	xml/xml.tab.c	161;"	d	file:
+YYSTYPE_IS_TRIVIAL	xml/xml.tab.h	77;"	d
+YYTABLES_NAME	xml/lex.xml.c	2057;"	d	file:
+YYTABLE_NINF	xml/xml.tab.c	548;"	d	file:
+YYTERROR	xml/xml.tab.c	609;"	d	file:
+YYTOKENTYPE	xml/xml.tab.c	122;"	d	file:
+YYTOKENTYPE	xml/xml.tab.h	38;"	d
+YYTOKEN_TABLE	xml/xml.tab.c	116;"	d	file:
+YYTRANSLATE	xml/xml.tab.c	401;"	d	file:
+YYUNDEFTOK	xml/xml.tab.c	398;"	d	file:
+YYUSE	xml/xml.tab.c	234;"	d	file:
+YYUSE	xml/xml.tab.c	236;"	d	file:
+YY_	xml/xml.tab.c	224;"	d	file:
+YY_	xml/xml.tab.c	228;"	d	file:
+YY_AT_BOL	xml/lex.xml.c	359;"	d	file:
+YY_BREAK	xml/lex.xml.c	858;"	d	file:
+YY_BUFFER_EOF_PENDING	xml/lex.xml.c	275;"	d	file:
+YY_BUFFER_NEW	xml/lex.xml.c	263;"	d	file:
+YY_BUFFER_NORMAL	xml/lex.xml.c	264;"	d	file:
+YY_BUFFER_STATE	xml/lex.xml.c	/^typedef struct yy_buffer_state *YY_BUFFER_STATE;$/;"	t	typeref:struct:yy_buffer_state	file:
+YY_BUF_SIZE	xml/lex.xml.c	169;"	d	file:
+YY_BUF_SIZE	xml/lex.xml.c	171;"	d	file:
+YY_CHAR	xml/lex.xml.c	/^typedef unsigned char YY_CHAR;$/;"	t	file:
+YY_CURRENT_BUFFER	xml/lex.xml.c	291;"	d	file:
+YY_CURRENT_BUFFER_LVALUE	xml/lex.xml.c	298;"	d	file:
+YY_DECL	xml/lex.xml.c	846;"	d	file:
+YY_DECL_IS_OURS	xml/lex.xml.c	842;"	d	file:
+YY_DO_BEFORE_ACTION	xml/lex.xml.c	385;"	d	file:
+YY_END_OF_BUFFER	xml/lex.xml.c	393;"	d	file:
+YY_END_OF_BUFFER_CHAR	xml/lex.xml.c	160;"	d	file:
+YY_EXIT_FAILURE	xml/lex.xml.c	1855;"	d	file:
+YY_EXTRA_TYPE	xml/lex.xml.c	698;"	d	file:
+YY_FATAL_ERROR	xml/lex.xml.c	833;"	d	file:
+YY_FLEX_MAJOR_VERSION	xml/lex.xml.c	29;"	d	file:
+YY_FLEX_MINOR_VERSION	xml/lex.xml.c	30;"	d	file:
+YY_FLEX_SUBMINOR_VERSION	xml/lex.xml.c	31;"	d	file:
+YY_FLUSH_BUFFER	xml/lex.xml.c	327;"	d	file:
+YY_INPUT	xml/lex.xml.c	786;"	d	file:
+YY_INT_ALIGNED	xml/lex.xml.c	5;"	d	file:
+YY_LESS_LINENO	xml/lex.xml.c	192;"	d	file:
+YY_LOCATION_PRINT	xml/xml.tab.c	645;"	d	file:
+YY_LOCATION_PRINT	xml/xml.tab.c	650;"	d	file:
+YY_MORE_ADJ	xml/lex.xml.c	612;"	d	file:
+YY_NEW_FILE	xml/lex.xml.c	158;"	d	file:
+YY_NULL	xml/lex.xml.c	132;"	d	file:
+YY_NUM_RULES	xml/lex.xml.c	392;"	d	file:
+YY_READ_BUF_SIZE	xml/lex.xml.c	768;"	d	file:
+YY_READ_BUF_SIZE	xml/lex.xml.c	770;"	d	file:
+YY_REDUCE_PRINT	xml/xml.tab.c	810;"	d	file:
+YY_REDUCE_PRINT	xml/xml.tab.c	823;"	d	file:
+YY_RESTORE_YY_MORE_OFFSET	xml/lex.xml.c	613;"	d	file:
+YY_RULE_SETUP	xml/lex.xml.c	861;"	d	file:
+YY_SC_TO_UI	xml/lex.xml.c	139;"	d	file:
+YY_SKIP_YYWRAP	xml/lex.xml.c	362;"	d	file:
+YY_STACK_PRINT	xml/xml.tab.c	772;"	d	file:
+YY_STACK_PRINT	xml/xml.tab.c	822;"	d	file:
+YY_START	xml/lex.xml.c	151;"	d	file:
+YY_START_STACK_INCR	xml/lex.xml.c	828;"	d	file:
+YY_STATE_BUF_SIZE	xml/lex.xml.c	177;"	d	file:
+YY_STATE_EOF	xml/lex.xml.c	/^case YY_STATE_EOF(INITIAL):$/;"	p	file:
+YY_STATE_EOF	xml/lex.xml.c	155;"	d	file:
+YY_STRUCT_YY_BUFFER_STATE	xml/lex.xml.c	216;"	d	file:
+YY_SYMBOL_PRINT	xml/xml.tab.c	677;"	d	file:
+YY_SYMBOL_PRINT	xml/xml.tab.c	821;"	d	file:
+YY_TYPEDEF_YY_BUFFER_STATE	xml/lex.xml.c	180;"	d	file:
+YY_TYPEDEF_YY_SIZE_T	xml/lex.xml.c	211;"	d	file:
+YY_USER_ACTION	xml/lex.xml.c	853;"	d	file:
+YY_USE_CONST	xml/lex.xml.c	113;"	d	file:
+YY_USE_CONST	xml/lex.xml.c	120;"	d	file:
+_STDLIB_H	xml/xml.tab.c	278;"	d	file:
+_STDLIB_H	xml/xml.tab.c	306;"	d	file:
+__STDC_LIMIT_MACROS	xml/lex.xml.c	59;"	d	file:
+alloca	xml/xml.tab.c	271;"	d	file:
+b	xml/lex.xml.c	/^			YY_BUFFER_STATE b = YY_CURRENT_BUFFER;$/;"	l
+b	xml/lex.xml.c	/^	YY_BUFFER_STATE b;$/;"	l
+buf	xml/lex.xml.c	/^	char *buf;$/;"	l
+buf	xml/lex.xml.c	/^  char *buf;$/;"	l
+c	xml/lex.xml.c	/^	int c;$/;"	l
+cardinalite	dtd/dtd.y	/^cardinalite: AST|QMARK|PLUS| \/* empty *\/$/;"	l
+choix	dtd/dtd.y	/^choix: OPENPAR liste_choix_plus CLOSEPAR$/;"	l
+choix_ou_sequence	dtd/dtd.y	/^choix_ou_sequence: choix$/;"	l
+debug	xml/commun.h	14;"	d
+debug	xml/commun.h	16;"	d
+dest	xml/lex.xml.c	/^		register char *dest = &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[$/;"	l
+dest	xml/lex.xml.c	/^    	register char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;$/;"	l
+dtd	dtd/dtd.y	/^dtd: dtd ATTLIST NAME $/;"	l
+en	xml/xml.tab.c	/^   ElementName * en;  \/* le nom d'un element avec son namespace *\/$/;"	m	union:YYSTYPE	file:	access:public
+en	xml/xml.tab.h	/^   ElementName * en;  \/* le nom d'un element avec son namespace *\/$/;"	m	union:YYSTYPE	access:public
+err	main.cpp	/^  int err;$/;"	l
+fid	main.cpp	/^  FILE * fid;$/;"	l
+flex_int16_t	xml/lex.xml.c	/^typedef int16_t flex_int16_t;$/;"	t	file:
+flex_int16_t	xml/lex.xml.c	/^typedef short int flex_int16_t;$/;"	t	file:
+flex_int32_t	xml/lex.xml.c	/^typedef int flex_int32_t;$/;"	t	file:
+flex_int32_t	xml/lex.xml.c	/^typedef int32_t flex_int32_t;$/;"	t	file:
+flex_int8_t	xml/lex.xml.c	/^typedef int8_t flex_int8_t;$/;"	t	file:
+flex_int8_t	xml/lex.xml.c	/^typedef signed char flex_int8_t;$/;"	t	file:
+flex_uint16_t	xml/lex.xml.c	/^typedef uint16_t flex_uint16_t;$/;"	t	file:
+flex_uint16_t	xml/lex.xml.c	/^typedef unsigned short int flex_uint16_t;$/;"	t	file:
+flex_uint32_t	xml/lex.xml.c	/^typedef uint32_t flex_uint32_t;$/;"	t	file:
+flex_uint32_t	xml/lex.xml.c	/^typedef unsigned int flex_uint32_t;$/;"	t	file:
+flex_uint8_t	xml/lex.xml.c	/^typedef uint8_t flex_uint8_t;$/;"	t	file:
+flex_uint8_t	xml/lex.xml.c	/^typedef unsigned char flex_uint8_t; $/;"	t	file:
+free	xml/xml.tab.c	/^void free (void *); \/* INFRINGES ON USER NAME SPACE *\/$/;"	p	file:	signature:(void *)
+getString	xml/lex.xml.c	/^static char * getString(char *s) {$/;"	f	file:	signature:(char *s)
+grow_size	xml/lex.xml.c	/^		int grow_size = 8 \/* arbitrary grow size *\/;$/;"	l
+i	xml/lex.xml.c	/^	int i;$/;"	l
+i	xml/lex.xml.c	/^	register int i;$/;"	l
+i	xml/lex.xml.c	/^	register int number_to_move, i;$/;"	l
+i	xml/lex.xml.c	/^   int i,k;$/;"	l
+i	xml/lex.xml.c	/^  int i, k;$/;"	l
+i	xml/lex.xml.c	/^  int i,lastnonspace;$/;"	l
+input	xml/lex.xml.c	/^static int input (void );$/;"	p	file:	signature:(void )
+isatty	xml/lex.xml.c	/^extern int isatty (int );$/;"	p	file:	signature:(int )
+item	dtd/dtd.y	/^item: NAME cardinalite$/;"	l
+k	xml/lex.xml.c	/^   int i,k;$/;"	l
+k	xml/lex.xml.c	/^  int i, k;$/;"	l
+lastnonspace	xml/lex.xml.c	/^  int i,lastnonspace;$/;"	l
+liste_choix	dtd/dtd.y	/^liste_choix: item$/;"	l
+liste_choix_plus	dtd/dtd.y	/^liste_choix_plus: liste_choix PIPE item$/;"	l
+liste_sequence	dtd/dtd.y	/^liste_sequence: item $/;"	l
+main	dtd/dtd.y	/^main: dtd                           $/;"	l
+main	main.cpp	/^int main(int argc, char **argv)$/;"	f	signature:(int argc, char **argv)
+malloc	xml/xml.tab.c	/^void *malloc (YYSIZE_T); \/* INFRINGES ON USER NAME SPACE *\/$/;"	p	file:
+n	xml/lex.xml.c	/^	register int n;$/;"	l
+n	xml/lex.xml.c	/^	yy_size_t n;$/;"	l
+name	xml/lex.xml.c	/^   char *name;$/;"	l
+nameSpace	xml/lex.xml.c	/^static char * nameSpace(char *s)  \/* extrait la première partie, l'espace de nom *\/$/;"	f	file:	signature:(char *s)
+new_size	xml/lex.xml.c	/^				int new_size = b->yy_buf_size * 2;$/;"	l
+new_size	xml/lex.xml.c	/^		yy_size_t new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);$/;"	l
+num_to_alloc	xml/lex.xml.c	/^	int num_to_alloc;$/;"	l
+num_to_read	xml/lex.xml.c	/^			int num_to_read =$/;"	l
+number_to_move	xml/lex.xml.c	/^		register int number_to_move = (yy_n_chars) + 2;$/;"	l
+number_to_move	xml/lex.xml.c	/^	register int number_to_move, i;$/;"	l
+oerrno	xml/lex.xml.c	/^	int oerrno = errno;$/;"	l
+offset	xml/lex.xml.c	/^			int offset = (yy_c_buf_p) - (yytext_ptr);$/;"	l
+ret_val	xml/lex.xml.c	/^	int ret_val;$/;"	l
+s	xml/xml.tab.c	/^   char * s;$/;"	m	union:YYSTYPE	file:	access:public
+s	xml/xml.tab.h	/^   char * s;$/;"	m	union:YYSTYPE	access:public
+sequence	dtd/dtd.y	/^sequence: OPENPAR liste_sequence CLOSEPAR$/;"	l
+short	xml/xml.tab.c	174;"	d	file:
+skipSpace	xml/lex.xml.c	/^static char* skipSpace(char *s) {$/;"	f	file:	signature:(char *s)
+source	xml/lex.xml.c	/^		register char *source =$/;"	l
+source	xml/lex.xml.c	/^	register char *source = (yytext_ptr);$/;"	l
+split_namespace	xml/lex.xml.c	/^static char *split_namespace(char *s) { \/* extrait la deuxième partie après l'espace de nom *\/$/;"	f	file:	signature:(char *s)
+std	xml/xml.tab.c	/^using namespace std;$/;"	v
+std	xml/xml.y	/^std::string Dtd_name;$/;"	l
+tmp	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char * tmp = word(xmltext); xmllval.en = new ElementName("",tmp); free(tmp); return START;}$/;"	v
+tmp	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char * tmp = word(xmltext); xmllval.en = new ElementName("",tmp); free(tmp); return STARTSPECIAL;}$/;"	v
+tmp1	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char *tmp1 = nameSpace(xmltext); char * tmp2 = split_namespace(xmltext); xmllval.en = new ElementName(tmp1,tmp2); free(tmp1); free(tmp2); return NSSTART;}$/;"	v
+tmp2	xml/lex.xml.c	/^{printf("%s",xmltext);BEGIN(INITIAL); char *tmp1 = nameSpace(xmltext); char * tmp2 = split_namespace(xmltext); xmllval.en = new ElementName(tmp1,tmp2); free(tmp1); free(tmp2); return NSSTART;}$/;"	v
+unput	xml/lex.xml.c	208;"	d	file:
+word	xml/lex.xml.c	/^static char* word(char *s)$/;"	f	file:	signature:(char *s)
+xml_create_buffer	xml/lex.xml.c	/^    YY_BUFFER_STATE xml_create_buffer  (FILE * file, int  size )$/;"	f	signature:(FILE * file, int size )
+xml_create_buffer	xml/lex.xml.c	/^YY_BUFFER_STATE xml_create_buffer (FILE *file,int size  );$/;"	p	file:	signature:(FILE *file,int size )
+xml_delete_buffer	xml/lex.xml.c	/^    void xml_delete_buffer (YY_BUFFER_STATE  b )$/;"	f	signature:(YY_BUFFER_STATE b )
+xml_delete_buffer	xml/lex.xml.c	/^void xml_delete_buffer (YY_BUFFER_STATE b  );$/;"	p	file:	signature:(YY_BUFFER_STATE b )
+xml_flex_debug	xml/lex.xml.c	/^int xml_flex_debug = 0;$/;"	v
+xml_flush_buffer	xml/lex.xml.c	/^    void xml_flush_buffer (YY_BUFFER_STATE  b )$/;"	f	signature:(YY_BUFFER_STATE b )
+xml_flush_buffer	xml/lex.xml.c	/^void xml_flush_buffer (YY_BUFFER_STATE b  );$/;"	p	file:	signature:(YY_BUFFER_STATE b )
+xml_init_buffer	xml/lex.xml.c	/^    static void xml_init_buffer  (YY_BUFFER_STATE  b, FILE * file )$/;"	f	file:	signature:(YY_BUFFER_STATE b, FILE * file )
+xml_init_buffer	xml/lex.xml.c	/^static void xml_init_buffer (YY_BUFFER_STATE b,FILE *file  );$/;"	p	file:	signature:(YY_BUFFER_STATE b,FILE *file )
+xml_load_buffer_state	xml/lex.xml.c	/^static void xml_load_buffer_state  (void)$/;"	f	file:	signature:(void)
+xml_load_buffer_state	xml/lex.xml.c	/^static void xml_load_buffer_state (void );$/;"	p	file:	signature:(void )
+xml_scan_buffer	xml/lex.xml.c	/^YY_BUFFER_STATE xml_scan_buffer  (char * base, yy_size_t  size )$/;"	f	signature:(char * base, yy_size_t size )
+xml_scan_buffer	xml/lex.xml.c	/^YY_BUFFER_STATE xml_scan_buffer (char *base,yy_size_t size  );$/;"	p	file:	signature:(char *base,yy_size_t size )
+xml_scan_bytes	xml/lex.xml.c	/^YY_BUFFER_STATE xml_scan_bytes  (yyconst char * yybytes, int  _yybytes_len )$/;"	f	signature:(yyconst char * yybytes, int _yybytes_len )
+xml_scan_bytes	xml/lex.xml.c	/^YY_BUFFER_STATE xml_scan_bytes (yyconst char *bytes,int len  );$/;"	p	file:	signature:(yyconst char *bytes,int len )
+xml_scan_string	xml/lex.xml.c	/^YY_BUFFER_STATE xml_scan_string (yyconst char * yystr )$/;"	f	signature:(yyconst char * yystr )
+xml_scan_string	xml/lex.xml.c	/^YY_BUFFER_STATE xml_scan_string (yyconst char *yy_str  );$/;"	p	file:	signature:(yyconst char *yy_str )
+xml_switch_to_buffer	xml/lex.xml.c	/^    void xml_switch_to_buffer  (YY_BUFFER_STATE  new_buffer )$/;"	f	signature:(YY_BUFFER_STATE new_buffer )
+xml_switch_to_buffer	xml/lex.xml.c	/^void xml_switch_to_buffer (YY_BUFFER_STATE new_buffer  );$/;"	p	file:	signature:(YY_BUFFER_STATE new_buffer )
+xmlalloc	xml/lex.xml.c	/^void *xmlalloc (yy_size_t  );$/;"	p	file:
+xmlalloc	xml/lex.xml.c	/^void *xmlalloc (yy_size_t  size )$/;"	f	signature:(yy_size_t size )
+xmlensure_buffer_stack	xml/lex.xml.c	/^static void xmlensure_buffer_stack (void );$/;"	p	file:	signature:(void )
+xmlensure_buffer_stack	xml/lex.xml.c	/^static void xmlensure_buffer_stack (void)$/;"	f	file:	signature:(void)
+xmlerror	xml/xml.tab.c	/^void xmlerror(char *msg)$/;"	f	signature:(char *msg)
+xmlerror	xml/xml.tab.c	/^void xmlerror(char *msg);$/;"	p	file:	signature:(char *msg)
+xmlfree	xml/lex.xml.c	/^void xmlfree (void *  );$/;"	p	file:	signature:(void * )
+xmlfree	xml/lex.xml.c	/^void xmlfree (void * ptr )$/;"	f	signature:(void * ptr )
+xmlget_debug	xml/lex.xml.c	/^int xmlget_debug  (void)$/;"	f	signature:(void)
+xmlget_debug	xml/lex.xml.c	/^int xmlget_debug (void );$/;"	p	file:	signature:(void )
+xmlget_extra	xml/lex.xml.c	/^YY_EXTRA_TYPE xmlget_extra (void );$/;"	p	file:	signature:(void )
+xmlget_in	xml/lex.xml.c	/^FILE *xmlget_in  (void)$/;"	f	signature:(void)
+xmlget_in	xml/lex.xml.c	/^FILE *xmlget_in (void );$/;"	p	file:	signature:(void )
+xmlget_leng	xml/lex.xml.c	/^int xmlget_leng  (void)$/;"	f	signature:(void)
+xmlget_leng	xml/lex.xml.c	/^int xmlget_leng (void );$/;"	p	file:	signature:(void )
+xmlget_lineno	xml/lex.xml.c	/^int xmlget_lineno  (void)$/;"	f	signature:(void)
+xmlget_lineno	xml/lex.xml.c	/^int xmlget_lineno (void );$/;"	p	file:	signature:(void )
+xmlget_out	xml/lex.xml.c	/^FILE *xmlget_out  (void)$/;"	f	signature:(void)
+xmlget_out	xml/lex.xml.c	/^FILE *xmlget_out (void );$/;"	p	file:	signature:(void )
+xmlget_text	xml/lex.xml.c	/^char *xmlget_text  (void)$/;"	f	signature:(void)
+xmlget_text	xml/lex.xml.c	/^char *xmlget_text (void );$/;"	p	file:	signature:(void )
+xmlin	xml/lex.xml.c	/^FILE *xmlin = (FILE *) 0, *xmlout = (FILE *) 0;$/;"	v
+xmlleng	xml/lex.xml.c	/^int xmlleng;$/;"	v
+xmllex	xml/lex.xml.c	/^extern int xmllex (void);$/;"	p	file:	signature:(void)
+xmllex	xml/xml.tab.c	/^int xmllex(void);$/;"	p	file:	signature:(void)
+xmllex_destroy	xml/lex.xml.c	/^int xmllex_destroy  (void)$/;"	f	signature:(void)
+xmllex_destroy	xml/lex.xml.c	/^int xmllex_destroy (void );$/;"	p	file:	signature:(void )
+xmllineno	xml/lex.xml.c	/^int xmllineno = 1;$/;"	v
+xmlout	xml/lex.xml.c	/^FILE *xmlin = (FILE *) 0, *xmlout = (FILE *) 0;$/;"	v
+xmlpop_buffer_state	xml/lex.xml.c	/^void xmlpop_buffer_state (void );$/;"	p	file:	signature:(void )
+xmlpop_buffer_state	xml/lex.xml.c	/^void xmlpop_buffer_state (void)$/;"	f	signature:(void)
+xmlpush_buffer_state	xml/lex.xml.c	/^void xmlpush_buffer_state (YY_BUFFER_STATE new_buffer  );$/;"	p	file:	signature:(YY_BUFFER_STATE new_buffer )
+xmlpush_buffer_state	xml/lex.xml.c	/^void xmlpush_buffer_state (YY_BUFFER_STATE new_buffer )$/;"	f	signature:(YY_BUFFER_STATE new_buffer )
+xmlrealloc	xml/lex.xml.c	/^void *xmlrealloc  (void * ptr, yy_size_t  size )$/;"	f	signature:(void * ptr, yy_size_t size )
+xmlrealloc	xml/lex.xml.c	/^void *xmlrealloc (void *,yy_size_t  );$/;"	p	file:	signature:(void *,yy_size_t )
+xmlrestart	xml/lex.xml.c	/^    void xmlrestart  (FILE * input_file )$/;"	f	signature:(FILE * input_file )
+xmlrestart	xml/lex.xml.c	/^void xmlrestart (FILE *input_file  );$/;"	p	file:	signature:(FILE *input_file )
+xmlset_debug	xml/lex.xml.c	/^void xmlset_debug (int  bdebug )$/;"	f	signature:(int bdebug )
+xmlset_debug	xml/lex.xml.c	/^void xmlset_debug (int debug_flag  );$/;"	p	file:	signature:(int debug_flag )
+xmlset_extra	xml/lex.xml.c	/^void xmlset_extra (YY_EXTRA_TYPE user_defined  );$/;"	p	file:	signature:(YY_EXTRA_TYPE user_defined )
+xmlset_in	xml/lex.xml.c	/^void xmlset_in  (FILE * in_str  );$/;"	p	file:	signature:(FILE * in_str )
+xmlset_in	xml/lex.xml.c	/^void xmlset_in (FILE *  in_str )$/;"	f	signature:(FILE * in_str )
+xmlset_lineno	xml/lex.xml.c	/^void xmlset_lineno (int  line_number )$/;"	f	signature:(int line_number )
+xmlset_lineno	xml/lex.xml.c	/^void xmlset_lineno (int line_number  );$/;"	p	file:	signature:(int line_number )
+xmlset_out	xml/lex.xml.c	/^void xmlset_out  (FILE * out_str  );$/;"	p	file:	signature:(FILE * out_str )
+xmlset_out	xml/lex.xml.c	/^void xmlset_out (FILE *  out_str )$/;"	f	signature:(FILE * out_str )
+xmltext	xml/lex.xml.c	/^char *xmltext;$/;"	v
+xmlwrap	xml/lex.xml.c	/^extern "C" int xmlwrap (void );$/;"	p	file:	signature:(void )
+xmlwrap	xml/lex.xml.c	/^extern int xmlwrap (void );$/;"	p	file:	signature:(void )
+xmlwrap	xml/lex.xml.c	361;"	d	file:
+xmlwrap	xml/xml.tab.c	/^int xmlwrap(void)$/;"	f	signature:(void)
+xmlwrap	xml/xml.tab.c	/^int xmlwrap(void);$/;"	p	file:	signature:(void)
+yy_accept	xml/lex.xml.c	/^static yyconst flex_int16_t yy_accept[135] =$/;"	v	file:
+yy_act	xml/lex.xml.c	/^	register int yy_act;$/;"	v
+yy_amount_of_matched_text	xml/lex.xml.c	/^		int yy_amount_of_matched_text = (int) (yy_cp - (yytext_ptr)) - 1;$/;"	v
+yy_at_bol	xml/lex.xml.c	/^	int yy_at_bol;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_base	xml/lex.xml.c	/^static yyconst flex_int16_t yy_base[159] =$/;"	v	file:
+yy_bp	xml/lex.xml.c	/^	register char *yy_cp, *yy_bp;$/;"	v
+yy_bs_column	xml/lex.xml.c	/^    int yy_bs_column; \/**< The column count. *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_bs_lineno	xml/lex.xml.c	/^    int yy_bs_lineno; \/**< The line count. *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buf_pos	xml/lex.xml.c	/^	char *yy_buf_pos;		\/* current position in input buffer *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buf_size	xml/lex.xml.c	/^	yy_size_t yy_buf_size;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_stack	xml/lex.xml.c	/^static YY_BUFFER_STATE * yy_buffer_stack = 0; \/**< Stack as an array. *\/$/;"	v	file:
+yy_buffer_stack_max	xml/lex.xml.c	/^static size_t yy_buffer_stack_max = 0; \/**< capacity of stack. *\/$/;"	v	file:
+yy_buffer_stack_top	xml/lex.xml.c	/^static size_t yy_buffer_stack_top = 0; \/**< index of top of stack. *\/$/;"	v	file:
+yy_buffer_state	xml/lex.xml.c	/^struct yy_buffer_state$/;"	s	file:
+yy_buffer_state::yy_at_bol	xml/lex.xml.c	/^	int yy_at_bol;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_bs_column	xml/lex.xml.c	/^    int yy_bs_column; \/**< The column count. *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_bs_lineno	xml/lex.xml.c	/^    int yy_bs_lineno; \/**< The line count. *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_buf_pos	xml/lex.xml.c	/^	char *yy_buf_pos;		\/* current position in input buffer *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_buf_size	xml/lex.xml.c	/^	yy_size_t yy_buf_size;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_buffer_status	xml/lex.xml.c	/^	int yy_buffer_status;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_ch_buf	xml/lex.xml.c	/^	char *yy_ch_buf;		\/* input buffer *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_fill_buffer	xml/lex.xml.c	/^	int yy_fill_buffer;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_input_file	xml/lex.xml.c	/^	FILE *yy_input_file;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_is_interactive	xml/lex.xml.c	/^	int yy_is_interactive;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_is_our_buffer	xml/lex.xml.c	/^	int yy_is_our_buffer;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_state::yy_n_chars	xml/lex.xml.c	/^	int yy_n_chars;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_buffer_status	xml/lex.xml.c	/^	int yy_buffer_status;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_c	xml/lex.xml.c	/^			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];$/;"	v
+yy_c	xml/lex.xml.c	/^		register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);$/;"	l
+yy_c	xml/lex.xml.c	/^	register YY_CHAR yy_c = 1;$/;"	l
+yy_c_buf_p	xml/lex.xml.c	/^static char *yy_c_buf_p = (char *) 0;$/;"	v	file:
+yy_c_buf_p_offset	xml/lex.xml.c	/^			int yy_c_buf_p_offset =$/;"	l
+yy_ch_buf	xml/lex.xml.c	/^	char *yy_ch_buf;		\/* input buffer *\/$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_chk	xml/lex.xml.c	/^static yyconst flex_int16_t yy_chk[402] =$/;"	v	file:
+yy_cp	xml/lex.xml.c	/^	register char *yy_cp, *yy_bp;$/;"	v
+yy_cp	xml/lex.xml.c	/^	register char *yy_cp;$/;"	l
+yy_cp	xml/lex.xml.c	/^    	register char *yy_cp = (yy_c_buf_p);$/;"	l
+yy_create_buffer	xml/lex.xml.c	9;"	d	file:
+yy_current_state	xml/lex.xml.c	/^	register yy_state_type yy_current_state;$/;"	l
+yy_current_state	xml/lex.xml.c	/^	register yy_state_type yy_current_state;$/;"	v
+yy_def	xml/lex.xml.c	/^static yyconst flex_int16_t yy_def[159] =$/;"	v	file:
+yy_delete_buffer	xml/lex.xml.c	10;"	d	file:
+yy_did_buffer_switch_on_eof	xml/lex.xml.c	/^static int yy_did_buffer_switch_on_eof;$/;"	v	file:
+yy_ec	xml/lex.xml.c	/^static yyconst flex_int32_t yy_ec[256] =$/;"	v	file:
+yy_fatal_error	xml/lex.xml.c	/^static void yy_fatal_error (yyconst char msg[]  );$/;"	p	file:	signature:(yyconst char msg[] )
+yy_fatal_error	xml/lex.xml.c	/^static void yy_fatal_error (yyconst char* msg )$/;"	f	file:	signature:(yyconst char* msg )
+yy_fill_buffer	xml/lex.xml.c	/^	int yy_fill_buffer;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_flex_debug	xml/lex.xml.c	11;"	d	file:
+yy_flex_strlen	xml/lex.xml.c	/^static int yy_flex_strlen (yyconst char * );$/;"	p	file:	signature:(yyconst char * )
+yy_flex_strlen	xml/lex.xml.c	/^static int yy_flex_strlen (yyconst char * s )$/;"	f	file:	signature:(yyconst char * s )
+yy_flex_strncpy	xml/lex.xml.c	/^static void yy_flex_strncpy (char *,yyconst char *,int );$/;"	p	file:	signature:(char *,yyconst char *,int )
+yy_flex_strncpy	xml/lex.xml.c	/^static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )$/;"	f	file:	signature:(char* s1, yyconst char * s2, int n )
+yy_flush_buffer	xml/lex.xml.c	13;"	d	file:
+yy_get_next_buffer	xml/lex.xml.c	/^static int yy_get_next_buffer (void );$/;"	p	file:	signature:(void )
+yy_get_next_buffer	xml/lex.xml.c	/^static int yy_get_next_buffer (void)$/;"	f	file:	signature:(void)
+yy_get_previous_state	xml/lex.xml.c	/^    static yy_state_type yy_get_previous_state (void)$/;"	f	file:	signature:(void)
+yy_get_previous_state	xml/lex.xml.c	/^static yy_state_type yy_get_previous_state (void );$/;"	p	file:	signature:(void )
+yy_hold_char	xml/lex.xml.c	/^static char yy_hold_char;$/;"	v	file:
+yy_init	xml/lex.xml.c	/^static int yy_init = 0;		\/* whether we need to initialize *\/$/;"	v	file:
+yy_init_buffer	xml/lex.xml.c	12;"	d	file:
+yy_init_globals	xml/lex.xml.c	/^static int yy_init_globals (void );$/;"	p	file:	signature:(void )
+yy_init_globals	xml/lex.xml.c	/^static int yy_init_globals (void)$/;"	f	file:	signature:(void)
+yy_input_file	xml/lex.xml.c	/^	FILE *yy_input_file;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_is_interactive	xml/lex.xml.c	/^	int yy_is_interactive;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_is_jam	xml/lex.xml.c	/^	register int yy_is_jam;$/;"	l
+yy_is_our_buffer	xml/lex.xml.c	/^	int yy_is_our_buffer;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_last_accepting_cpos	xml/lex.xml.c	/^static char *yy_last_accepting_cpos;$/;"	v	file:
+yy_last_accepting_state	xml/lex.xml.c	/^static yy_state_type yy_last_accepting_state;$/;"	v	file:
+yy_load_buffer_state	xml/lex.xml.c	14;"	d	file:
+yy_meta	xml/lex.xml.c	/^static yyconst flex_int32_t yy_meta[42] =$/;"	v	file:
+yy_n_chars	xml/lex.xml.c	/^	int yy_n_chars;$/;"	m	struct:yy_buffer_state	file:	access:public
+yy_n_chars	xml/lex.xml.c	/^static int yy_n_chars;		\/* number of characters read into yy_ch_buf *\/$/;"	v	file:
+yy_new_buffer	xml/lex.xml.c	337;"	d	file:
+yy_next_state	xml/lex.xml.c	/^			yy_state_type yy_next_state;$/;"	v
+yy_nxt	xml/lex.xml.c	/^	flex_int32_t yy_nxt;$/;"	m	struct:yy_trans_info	file:	access:public
+yy_nxt	xml/lex.xml.c	/^static yyconst flex_int16_t yy_nxt[402] =$/;"	v	file:
+yy_reduce_print	xml/xml.tab.c	/^yy_reduce_print (YYSTYPE *yyvsp, int yyrule)$/;"	f	file:	signature:(YYSTYPE *yyvsp, int yyrule)
+yy_set_bol	xml/lex.xml.c	349;"	d	file:
+yy_set_interactive	xml/lex.xml.c	339;"	d	file:
+yy_size_t	xml/lex.xml.c	/^typedef size_t yy_size_t;$/;"	t	file:
+yy_stack_print	xml/xml.tab.c	/^yy_stack_print (yytype_int16 *yybottom, yytype_int16 *yytop)$/;"	f	file:	signature:(yytype_int16 *yybottom, yytype_int16 *yytop)
+yy_start	xml/lex.xml.c	/^static int yy_start = 0;	\/* start state number *\/$/;"	v	file:
+yy_state_type	xml/lex.xml.c	/^typedef int yy_state_type;$/;"	t	file:
+yy_switch_to_buffer	xml/lex.xml.c	15;"	d	file:
+yy_symbol_print	xml/xml.tab.c	/^yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)$/;"	f	file:	signature:(FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print	xml/xml.tab.c	/^yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)$/;"	f	file:	signature:(FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+yy_trans_info	xml/lex.xml.c	/^struct yy_trans_info$/;"	s	file:
+yy_trans_info::yy_nxt	xml/lex.xml.c	/^	flex_int32_t yy_nxt;$/;"	m	struct:yy_trans_info	file:	access:public
+yy_trans_info::yy_verify	xml/lex.xml.c	/^	flex_int32_t yy_verify;$/;"	m	struct:yy_trans_info	file:	access:public
+yy_try_NUL_trans	xml/lex.xml.c	/^    static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )$/;"	f	file:	signature:(yy_state_type yy_current_state )
+yy_try_NUL_trans	xml/lex.xml.c	/^static yy_state_type yy_try_NUL_trans (yy_state_type current_state  );$/;"	p	file:	signature:(yy_state_type current_state )
+yy_verify	xml/lex.xml.c	/^	flex_int32_t yy_verify;$/;"	m	struct:yy_trans_info	file:	access:public
+yyalloc	xml/lex.xml.c	24;"	d	file:
+yyalloc	xml/xml.tab.c	/^	    YYSIZE_T yyalloc = 2 * yysize;$/;"	l
+yyalloc	xml/xml.tab.c	/^union yyalloc$/;"	u	file:
+yyalloc::yyss_alloc	xml/xml.tab.c	/^  yytype_int16 yyss_alloc;$/;"	m	union:yyalloc	file:	access:public
+yyalloc::yyvs_alloc	xml/xml.tab.c	/^  YYSTYPE yyvs_alloc;$/;"	m	union:yyalloc	file:	access:public
+yyarg	xml/xml.tab.c	/^      char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];$/;"	l
+yybot	xml/xml.tab.c	/^      int yybot = *yybottom;$/;"	l
+yychar	xml/xml.tab.c	/^int yychar;$/;"	v
+yychar	xml/xml.tab.c	71;"	d	file:
+yycheck	xml/xml.tab.c	/^static const yytype_int8 yycheck[] =$/;"	v	file:
+yychecklim	xml/xml.tab.c	/^      int yychecklim = YYLAST - yyn + 1;$/;"	l
+yyclearin	xml/xml.tab.c	574;"	d	file:
+yyconst	xml/lex.xml.c	126;"	d	file:
+yyconst	xml/lex.xml.c	128;"	d	file:
+yycount	xml/xml.tab.c	/^      int yycount = 1;$/;"	l
+yyd	xml/xml.tab.c	/^  char *yyd = yydest;$/;"	l
+yydebug	xml/xml.tab.c	/^int yydebug;$/;"	v
+yydebug	xml/xml.tab.c	72;"	d	file:
+yydefact	xml/xml.tab.c	/^static const yytype_uint8 yydefact[] =$/;"	v	file:
+yydefgoto	xml/xml.tab.c	/^static const yytype_int8 yydefgoto[] =$/;"	v	file:
+yydestruct	xml/xml.tab.c	/^yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)$/;"	f	file:	signature:(const char *yymsg, int yytype, YYSTYPE *yyvaluep)
+yyerrok	xml/xml.tab.c	573;"	d	file:
+yyerror	xml/xml.tab.c	69;"	d	file:
+yyerrstatus	xml/xml.tab.c	/^    int yyerrstatus;$/;"	l
+yyexpecting	xml/xml.tab.c	/^      static char const yyexpecting[] = ", expecting %s";$/;"	l	file:
+yyf	xml/xml.tab.c	/^      char const *yyf;$/;"	l
+yyfmt	xml/xml.tab.c	/^      char *yyfmt;$/;"	l
+yyformat	xml/xml.tab.c	/^      char yyformat[sizeof yyunexpected$/;"	l
+yyfree	xml/lex.xml.c	26;"	d	file:
+yyi	xml/xml.tab.c	/^	  int yyi = 0;$/;"	l
+yyi	xml/xml.tab.c	/^  int yyi;$/;"	l
+yyin	xml/lex.xml.c	16;"	d	file:
+yyinput	xml/lex.xml.c	/^    static int yyinput (void)$/;"	f	file:	signature:(void)
+yyinput	xml/lex.xml.c	/^static int yyinput (void );$/;"	p	file:	signature:(void )
+yylen	xml/xml.tab.c	/^  YYSIZE_T yylen;$/;"	l
+yylen	xml/xml.tab.c	/^  int yylen = 0;$/;"	l
+yyleng	xml/lex.xml.c	17;"	d	file:
+yyless	xml/lex.xml.c	1866;"	d	file:
+yyless	xml/lex.xml.c	1867;"	d	file:
+yyless	xml/lex.xml.c	195;"	d	file:
+yylex	xml/lex.xml.c	18;"	d	file:
+yylex	xml/xml.tab.c	68;"	d	file:
+yylineno	xml/lex.xml.c	19;"	d	file:
+yylno	xml/xml.tab.c	/^  unsigned long int yylno = yyrline[yyrule];$/;"	l
+yylval	xml/xml.tab.c	/^YYSTYPE yylval;$/;"	v
+yylval	xml/xml.tab.c	70;"	d	file:
+yymore	xml/lex.xml.c	611;"	d	file:
+yymsg	xml/xml.tab.c	/^  char *yymsg = yymsgbuf;$/;"	l
+yymsg_alloc	xml/xml.tab.c	/^  YYSIZE_T yymsg_alloc = sizeof yymsgbuf;$/;"	l
+yymsgbuf	xml/xml.tab.c	/^  char yymsgbuf[128];$/;"	l
+yyn	xml/xml.tab.c	/^      YYSIZE_T yyn = 0;$/;"	l
+yyn	xml/xml.tab.c	/^  int yyn = yypact[yystate];$/;"	l
+yyn	xml/xml.tab.c	/^  int yyn;$/;"	l
+yynerrs	xml/xml.tab.c	/^int yynerrs;$/;"	v
+yynerrs	xml/xml.tab.c	73;"	d	file:
+yynrhs	xml/xml.tab.c	/^  int yynrhs = yyr2[yyrule];$/;"	l
+yyor	xml/xml.tab.c	/^      static char const yyor[] = " or %s";$/;"	l	file:
+yyout	xml/lex.xml.c	20;"	d	file:
+yyp	xml/xml.tab.c	/^	  char *yyp = yyresult;$/;"	l
+yyp	xml/xml.tab.c	/^      char const *yyp = yystr;$/;"	l
+yypact	xml/xml.tab.c	/^static const yytype_int8 yypact[] =$/;"	v	file:
+yyparse	xml/xml.tab.c	/^int yyparse ();$/;"	p	file:
+yyparse	xml/xml.tab.c	/^int yyparse (void *YYPARSE_PARAM);$/;"	p	file:	signature:(void *YYPARSE_PARAM)
+yyparse	xml/xml.tab.c	/^int yyparse (void);$/;"	p	file:	signature:(void)
+yyparse	xml/xml.tab.c	/^yyparse (void *YYPARSE_PARAM)$/;"	f	signature:(void *YYPARSE_PARAM)
+yyparse	xml/xml.tab.c	67;"	d	file:
+yypgoto	xml/xml.tab.c	/^static const yytype_int8 yypgoto[] =$/;"	v	file:
+yyprefix	xml/xml.tab.c	/^      char const *yyprefix = yyexpecting;$/;"	l
+yyprhs	xml/xml.tab.c	/^static const yytype_uint8 yyprhs[] =$/;"	v	file:
+yyr1	xml/xml.tab.c	/^static const yytype_uint8 yyr1[] =$/;"	v	file:
+yyr2	xml/xml.tab.c	/^static const yytype_uint8 yyr2[] =$/;"	v	file:
+yyrealloc	xml/lex.xml.c	25;"	d	file:
+yyrestart	xml/lex.xml.c	21;"	d	file:
+yyresult	xml/xml.tab.c	/^  int yyresult;$/;"	l
+yyrhs	xml/xml.tab.c	/^static const yytype_int8 yyrhs[] =$/;"	v	file:
+yyrline	xml/xml.tab.c	/^static const yytype_uint8 yyrline[] =$/;"	v	file:
+yys	xml/xml.tab.c	/^  const char *yys = yysrc;$/;"	l
+yysize	xml/xml.tab.c	/^	YYSIZE_T yysize = yysyntax_error (0, yystate, yychar);$/;"	l
+yysize	xml/xml.tab.c	/^      YYSIZE_T yysize = yysize0;$/;"	l
+yysize	xml/xml.tab.c	/^      YYSIZE_T yysize = yyssp - yyss + 1;$/;"	l
+yysize0	xml/xml.tab.c	/^      YYSIZE_T yysize0 = yytnamerr (0, yytname[yytype]);$/;"	l
+yysize1	xml/xml.tab.c	/^      YYSIZE_T yysize1;$/;"	l
+yysize_overflow	xml/xml.tab.c	/^      int yysize_overflow = 0;$/;"	l
+yyss	xml/xml.tab.c	/^    yytype_int16 *yyss;$/;"	l
+yyss1	xml/xml.tab.c	/^	yytype_int16 *yyss1 = yyss;$/;"	l
+yyss_alloc	xml/xml.tab.c	/^  yytype_int16 yyss_alloc;$/;"	m	union:yyalloc	file:	access:public
+yyssa	xml/xml.tab.c	/^    yytype_int16 yyssa[YYINITDEPTH];$/;"	l
+yyssp	xml/xml.tab.c	/^    yytype_int16 *yyssp;$/;"	l
+yystacksize	xml/xml.tab.c	/^		    &yystacksize);$/;"	l
+yystacksize	xml/xml.tab.c	/^    YYSIZE_T yystacksize;$/;"	l
+yystate	xml/xml.tab.c	/^    int yystate;$/;"	l
+yystos	xml/xml.tab.c	/^static const yytype_uint8 yystos[] =$/;"	v	file:
+yystpcpy	xml/xml.tab.c	/^yystpcpy (char *yydest, const char *yysrc)$/;"	f	file:	signature:(char *yydest, const char *yysrc)
+yystpcpy	xml/xml.tab.c	872;"	d	file:
+yystrlen	xml/xml.tab.c	/^yystrlen (const char *yystr)$/;"	f	file:	signature:(const char *yystr)
+yystrlen	xml/xml.tab.c	849;"	d	file:
+yystype	xml/xml.tab.c	162;"	d	file:
+yystype	xml/xml.tab.h	78;"	d
+yysyntax_error	xml/xml.tab.c	/^	    (void) yysyntax_error (yymsg, yystate, yychar);$/;"	p	file:
+yysyntax_error	xml/xml.tab.c	/^yysyntax_error (char *yyresult, int yystate, int yychar)$/;"	f	file:	signature:(char *yyresult, int yystate, int yychar)
+yytable	xml/xml.tab.c	/^static const yytype_uint8 yytable[] =$/;"	v	file:
+yyterminate	xml/lex.xml.c	823;"	d	file:
+yytext	xml/lex.xml.c	22;"	d	file:
+yytext_ptr	xml/lex.xml.c	375;"	d	file:
+yytname	xml/xml.tab.c	/^static const char *const yytname[] =$/;"	v	file:
+yytnamerr	xml/xml.tab.c	/^yytnamerr (char *yyres, const char *yystr)$/;"	f	file:	signature:(char *yyres, const char *yystr)
+yytoken	xml/xml.tab.c	/^  int yytoken;$/;"	l
+yytokentype	xml/xml.tab.c	/^   enum yytokentype {$/;"	g	file:
+yytokentype	xml/xml.tab.h	/^   enum yytokentype {$/;"	g
+yytoknum	xml/xml.tab.c	/^static const yytype_uint16 yytoknum[] =$/;"	v	file:
+yytranslate	xml/xml.tab.c	/^static const yytype_uint8 yytranslate[] =$/;"	v	file:
+yytype	xml/xml.tab.c	/^      int yytype = YYTRANSLATE (yychar);$/;"	l
+yytype_int16	xml/xml.tab.c	/^typedef YYTYPE_INT16 yytype_int16;$/;"	t	file:
+yytype_int16	xml/xml.tab.c	/^typedef short int yytype_int16;$/;"	t	file:
+yytype_int8	xml/xml.tab.c	/^typedef YYTYPE_INT8 yytype_int8;$/;"	t	file:
+yytype_int8	xml/xml.tab.c	/^typedef short int yytype_int8;$/;"	t	file:
+yytype_int8	xml/xml.tab.c	/^typedef signed char yytype_int8;$/;"	t	file:
+yytype_uint16	xml/xml.tab.c	/^typedef YYTYPE_UINT16 yytype_uint16;$/;"	t	file:
+yytype_uint16	xml/xml.tab.c	/^typedef unsigned short int yytype_uint16;$/;"	t	file:
+yytype_uint8	xml/xml.tab.c	/^typedef YYTYPE_UINT8 yytype_uint8;$/;"	t	file:
+yytype_uint8	xml/xml.tab.c	/^typedef unsigned char yytype_uint8;$/;"	t	file:
+yyunexpected	xml/xml.tab.c	/^      static char const yyunexpected[] = "syntax error, unexpected %s";$/;"	l	file:
+yyunput	xml/lex.xml.c	/^    static void yyunput (int c, register char * yy_bp )$/;"	f	file:	signature:(int c, register char * yy_bp )
+yyunput	xml/lex.xml.c	/^    static void yyunput (int c,char *buf_ptr  );$/;"	p	file:	signature:(int c,char *buf_ptr )
+yyval	xml/xml.tab.c	/^  YYSTYPE yyval;$/;"	l
+yyvs	xml/xml.tab.c	/^    YYSTYPE *yyvs;$/;"	l
+yyvs1	xml/xml.tab.c	/^		    &yyvs1, yysize * sizeof (*yyvsp),$/;"	l
+yyvs1	xml/xml.tab.c	/^	YYSTYPE *yyvs1 = yyvs;$/;"	l
+yyvs_alloc	xml/xml.tab.c	/^  YYSTYPE yyvs_alloc;$/;"	m	union:yyalloc	file:	access:public
+yyvsa	xml/xml.tab.c	/^    YYSTYPE yyvsa[YYINITDEPTH];$/;"	l
+yyvsp	xml/xml.tab.c	/^    YYSTYPE *yyvsp;$/;"	l
+yywrap	xml/lex.xml.c	23;"	d	file:
+yyx	xml/xml.tab.c	/^      int yyx;$/;"	l
+yyxbegin	xml/xml.tab.c	/^      int yyxbegin = yyn < 0 ? -yyn : 0;$/;"	l
+yyxend	xml/xml.tab.c	/^      int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;$/;"	l

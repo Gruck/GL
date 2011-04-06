@@ -13,6 +13,7 @@
 
 #define INDETATION_PATTERN "  "
 
+class XmlValidatorVisitor;
 
 class XmlElement : public XmlContent
 { 
@@ -52,6 +53,10 @@ public:
 
   // prints the tree
   void toStream( std::ostream& stream, int indentation = 0 );
+
+  bool acceptValidator( XmlValidatorVisitor* validator );
+
+  ~XmlElement();
   
 private:
   std::string _nameSpace;

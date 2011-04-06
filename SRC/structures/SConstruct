@@ -1,2 +1,2 @@
 
-Program(['test.cpp','XmlContent.cpp','XmlElement.cpp','XmlDoc.cpp'])
+Program(['test.cpp','XmlContent.cpp','XmlElement.cpp','XmlText.cpp','XmlDoc.cpp','DtdDoc.cpp','DtdElement.cpp','XmlValidator.cpp','XmlValidatorVisitor.cpp','DtdPossibleContent.cpp'])

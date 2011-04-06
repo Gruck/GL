@@ -7,6 +7,7 @@
 
 
 class XmlElement;
+class XmlValidator;
 
 class XmlDoc {
 public:
@@ -15,6 +16,10 @@ public:
   void setRoot(XmlElement* newRoot) { CALL_MACRO _root = newRoot; } 
   XmlElement* root() const { CALL_MACRO return _root; }
   std::string doctype() const { CALL_MACRO return _doctype; }
+
+  
+  ~XmlDoc();
+  
 private:
   std::string _doctype;
   XmlElement* _root; 

@@ -6,17 +6,9 @@
 #include "XmlElement.h"
 #include "XmlText.h"
 
-  bool XmlValidator::Validate( XmlDoc* xmlDoc) const
-  {
-	CALL_MACRO
-  }
   
-  bool XmlValidator::Validate( XmlElement* xmlElement) const
-  {
-	CALL_MACRO
-  }
   
-  bool XmlValidator::Validate( XmlText* xmlText) const
+  bool XmlValidator::validate( XmlDoc* xmlDoc) const
   {
 	CALL_MACRO
   }

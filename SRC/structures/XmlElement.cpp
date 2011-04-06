@@ -1,5 +1,6 @@
 
 #include "XmlElement.h"
+#include "XmlValidatorVisitor.h"
 #include "Tools.h"
 
 std::string XmlElement::fullName() const {
@@ -85,4 +86,17 @@ void XmlElement::toStream( std::ostream& stream, int indentation ){
   indent(stream,indentation);
   stream << "</" << fullName() << ">\n";
   
+}
+
+XmlElement::~XmlElement(){
+  CALL_MACRO
+  ContentListIterator iter = firstChild();
+  ContentListIterator stop = childrenEnd();
+  for(;iter!=stop;++iter){
+    delete *iter;
+  }
+}
+
+bool XmlElement::acceptValidator( XmlValidatorVisitor* validator ){
+  return validator->visit(this);
 }

@@ -6,6 +6,7 @@
 #include "Tools.h"
 
 class XmlElement;
+class XmlValidatorVisitor;
 
 class XmlContent{
 friend class XmlElement;
@@ -18,6 +19,9 @@ public:
   virtual void toStream( std::ostream& stream, int indentation = 0 ) = 0;
 
   virtual ~XmlContent();
+
+  virtual bool acceptValidator( XmlValidatorVisitor* ) = 0;
+  
 protected:
   void setParent(XmlElement* parentElt){ CALL_MACRO _parent = parentElt; }
   void indent(std::ostream& stream, int indentation){

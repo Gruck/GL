@@ -1,5 +1,8 @@
 #include <string>
 #include <stdio.h>
+#include "XmlDoc.h"
+#include "XmlElement.h"
+#include <iostream>
 
 extern int xmlparse();
 extern FILE *xmlin;
@@ -7,6 +10,7 @@ extern int dtdparse();
 extern FILE *dtdin;
 
 extern std::string DtdUrl;
+extern XmlDoc* XmlDataStructure;
 
 int main(int argc, char **argv)
 {
@@ -21,6 +25,7 @@ int main(int argc, char **argv)
 
   xmlin = fid;
   err = xmlparse();
+  XmlDataStructure->root()->toStream(std::cout);
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
         else  printf("Parse ended with sucess\n");
  fclose(fid);
@@ -39,5 +44,8 @@ int main(int argc, char **argv)
 
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
         else  printf("Parse ended with sucess\n");
+  printf("Coucou j'ai dilété la datastructure.\n");
+  delete XmlDataStructure;
   return 0;
+
 } 

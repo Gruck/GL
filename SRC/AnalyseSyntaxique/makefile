@@ -1,10 +1,11 @@
 XMLPARSERPATH= src/xml 
 DTDPARSERPATH= src/dtd
+STRUCTPATH= src/structure
 SRC= src
 OBJ= obj
 APP= FullAnalyzer
 CPPFLAGS= -Wall -ansi 
-DIRFLAGS= -I$(XMLPARSERPATH) -I$(DTDPARSERPATH)
+DIRFLAGS= -I$(XMLPARSERPATH) -I$(DTDPARSERPATH) -I$(STRUCTPATH)
 DEPSXML= $(OBJ)/xml/xml.tab.o $(OBJ)/xml/lex.xml.o
 DEPSDTD= $(OBJ)/dtd/dtd.tab.o $(OBJ)/dtd/lex.dtd.o
 DEPSAPP= $(OBJ)/main.o

@@ -8,17 +8,24 @@ DIRFLAGS= -I$(XMLPARSERPATH) -I$(DTDPARSERPATH)
 DEPSXML= $(OBJ)/xml/xml.tab.o $(OBJ)/xml/lex.xml.o
 DEPSDTD= $(OBJ)/dtd/dtd.tab.o $(OBJ)/dtd/lex.dtd.o
 DEPSAPP= $(OBJ)/main.o
+DEPSSTR= $(OBJ)/structure/XmlContent.o $(OBJ)/structure/XmlDoc.o $(OBJ)/structure/XmlElement.o
+STRH= $(SRC)/structure/*.h 
 
 all : $(APP)
 
 # Edition des liens, rajouter ici dans la listes de dépendances les ".o"
 # constitués lors de la compilation.
-$(APP) : $(DEPSXML) $(DEPSDTD) $(DEPSAPP)
+$(APP) : $(DEPSXML) $(DEPSDTD) $(DEPSAPP) $(DEPSSTR)
 	@echo "Edition des liens"
 	g++ $(CPPFLAGS) $+ -o $@
 	
 # Compilation des fichiers .cpp situés a la racine du répertoire src
 $(OBJ)/%.o : $(SRC)/%.cpp
+	@echo "Compilation de $< "
+	g++ $(CPPFLAGS) $(DIRFLAGS) -c $< -o $@
+
+# Compilation des fichiers .cpp situés a la racine du répertoire src
+$(OBJ)/structure/%.o : $(SRC)/structure/%.cpp $(STRH)
 	@echo "Compilation de $< "
 	g++ $(CPPFLAGS) $(DIRFLAGS) -c $< -o $@
 
@@ -31,7 +38,7 @@ $(OBJ)/xml/%.o : $(SRC)/xml/%.c
 #Generation des fichiers .c par flex et bison pour le parser XML
 $(SRC)/xml/lex.xml.c : $(SRC)/xml/xml.l
 	@echo "Création du parser de grammaire XML"
-	flex -P xml -o $(SRC)/xml/lex.xml.c $(SRC)/xml/xml.l
+	flex -Pxml -o$(SRC)/xml/lex.xml.c $(SRC)/xml/xml.l
 
 $(SRC)/xml/xml.tab.c : $(SRC)/xml/xml.y  $(SRC)/xml/lex.xml.c $(SRC)/xml/commun.h
 	@echo "Création de la table de 'état XML"
@@ -46,7 +53,7 @@ $(OBJ)/dtd/%.o : $(SRC)/dtd/%.c
 
 $(SRC)/dtd/lex.dtd.c : $(SRC)/dtd/dtd.l
 	@echo "Création du parser de grammaire DTD"
-	flex -P dtd -o $(SRC)/dtd/lex.dtd.c $(SRC)/dtd/dtd.l
+	flex -Pdtd -o$(SRC)/dtd/lex.dtd.c $(SRC)/dtd/dtd.l
 
 $(SRC)/dtd/dtd.tab.c : $(SRC)/dtd/dtd.y  $(SRC)/dtd/lex.dtd.c $(SRC)/xml/commun.h
 	@echo "Création de la table de 'état DTD"
@@ -58,15 +65,13 @@ $(SRC)/dtd/dtd.tab.c : $(SRC)/dtd/dtd.y  $(SRC)/dtd/lex.dtd.c $(SRC)/xml/commun.
 
 # Regles de nettoyage  
 clean: 
-	rm $(SRC)/xml/*.c
-	rm $(SRC)/xml/*.output
-	rm $(SRC)/xml/xml.tab.h
-	rm $(SRC)/dtd/*.c
-	rm $(SRC)/dtd/*.output
-	rm $(SRC)/dtd/dtd.tab.h
+	rm -f $(SRC)/xml/*.c
+	rm -f $(SRC)/xml/*.output
+	rm -f $(SRC)/xml/xml.tab.h
+	rm -f $(SRC)/dtd/*.c
+	rm -f $(SRC)/dtd/*.output
+	rm -f $(SRC)/dtd/dtd.tab.h
 	
-	rm $(OBJ)/xml/*.o
-	rm $(OBJ)/dtd/*.o
-	rm $(OBJ)/*.o
+	rm -f $(OBJ)/xml/*.o $(OBJ)/dtd/*.o $(OBJ)/structure/*.o
 
-	rm ./$(APP)
+	rm -f ./$(APP)

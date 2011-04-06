@@ -22,7 +22,7 @@ int main(int argc, char **argv)
   xmlin = fid;
   err = xmlparse();
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
-        else  printf("Parse ended with sucess\n", err);
+        else  printf("Parse ended with sucess\n");
  fclose(fid);
 
   printf("Le nombre d'erreurs est %d \n", err);
@@ -38,6 +38,6 @@ int main(int argc, char **argv)
   printf("%i \n", err);
 
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
-        else  printf("Parse ended with sucess\n", err);
+        else  printf("Parse ended with sucess\n");
   return 0;
 } 

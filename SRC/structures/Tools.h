@@ -3,7 +3,7 @@
 #define HEXALOUTRE_TOOLS_H
 
 #define DEBUG
-#define TRACE_CALLS
+//#define TRACE_CALLS
 
 #include <iostream>
 

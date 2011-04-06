@@ -76,6 +76,11 @@ void XmlElement::toStream( std::ostream& stream, int indentation ){
   //CALL_MACRO
   indent(stream,indentation);
   stream << "<" << fullName();
+  AttributeList::iterator attribIter = _attributes.begin();
+  AttributeList::iterator attribStop = _attributes.end();
+  for(;attribIter != attribStop; ++attribIter){
+    stream << " "<< attribIter->name() << "=" <<attribIter->value();
+  }
   //stream << /* liste attributs */; // TODO
   stream << ">\n";
   ContentListIterator iter = firstChild();
@@ -93,6 +98,7 @@ XmlElement::~XmlElement(){
   ContentListIterator iter = firstChild();
   ContentListIterator stop = childrenEnd();
   for(;iter!=stop;++iter){
+    (*iter)->setParent(0);
     delete *iter;
   }
 }

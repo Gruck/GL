@@ -7,5 +7,5 @@
 
 XmlDoc::~XmlDoc(){ 
   CALL_MACRO
-  delete _root;
+  if(_root) delete _root;
 }

@@ -75,19 +75,39 @@ start
 		CurrentNode = tempNode;
 	}
  }		
- | NSSTART	
+ | NSSTART
+ {
+	if (!CurrentNode)
+	{
+ 		CurrentNode = new XmlElement($1->first, $1->second);
+		XmlDataStructure->setRoot(CurrentNode);
+	}
+	else
+	{
+		tempNode = new XmlElement($1->first, $1->second);
+		CurrentNode->addChild(tempNode);
+		CurrentNode = tempNode;
+	}
+ }	
  ;
 empty_or_content
- : SLASH CLOSE 
+ : attributes SLASH CLOSE 
  {
 	CurrentNode = CurrentNode->parent();
  }	
- | close_content_and_end 
+ | attributes close_content_and_end
    name_or_nsname_opt CLOSE 
  {
 	CurrentNode = CurrentNode->parent();
  }	
  ;
+
+attributes
+ : attributes NAME EQ VALUE
+ | /* empty */
+ ;
+
+
 name_or_nsname_opt 
  : NAME     
  | NSNAME  

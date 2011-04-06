@@ -64,22 +64,32 @@ XmlContent* XmlElement::detachChild( XmlContent* toRemove ){
 
 void XmlElement::addAttribute( const XmlAttribute& attribute ){
   CALL_MACRO
-  _attributes.push_back(attribute);
+  _attributes[ attribute.name() ] = attribute.value();
+}
+
+void XmlElement::addAttribute( const std::string& attributeName, const std::string& value ){
+  CALL_MACRO
+  _attributes[ attributeName ] = value;
 }
 
 void XmlElement::removeAttribute( const XmlAttribute& attribute ){
   CALL_MACRO
-  _attributes.remove( attribute );
+  _attributes.erase( attribute.name() );
+}
+
+void XmlElement::removeAttribute( const std::string& attributeName ){
+  CALL_MACRO
+  _attributes.erase( attributeName );
 }
 
 void XmlElement::toStream( std::ostream& stream, int indentation ){
   //CALL_MACRO
   indent(stream,indentation);
   stream << "<" << fullName();
-  AttributeList::iterator attribIter = _attributes.begin();
-  AttributeList::iterator attribStop = _attributes.end();
+  AttributeMap::iterator attribIter = _attributes.begin();
+  AttributeMap::iterator attribStop = _attributes.end();
   for(;attribIter != attribStop; ++attribIter){
-    stream << " "<< attribIter->name() << "=" <<attribIter->value();
+    stream << " "<< (*attribIter).first << "=" <<(*attribIter).second;
   }
   //stream << /* liste attributs */; // TODO
   stream << ">\n";

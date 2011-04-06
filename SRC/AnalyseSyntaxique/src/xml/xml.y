@@ -18,9 +18,13 @@ int yywrap(void);
 void yyerror(char *msg);
 int yylex(void);
 
+/* Name of the linked dtd in xml document */
 string DtdUrl;
+/* Root node of the tree */
 XmlDoc *XmlDataStructure;
+/* Highlighted node in the tree */
 XmlElement *CurrentNode = 0;
+/* New node of the tree, created when an open markup is detected */
 XmlElement *tempNode;
 
 %}
@@ -64,11 +68,17 @@ start
  : START 
  {
 	if (!CurrentNode)
+// When the parser meets an opening markup
+// if the currentNde is 0, it means that we met the root node of tree
+// We instanciate the object and set him root  
 	{
  		CurrentNode = new XmlElement(string(""), $1->second);
 		XmlDataStructure->setRoot(CurrentNode);
 	}
 	else
+// Else we create a new tempNode, add it like a child
+// of the current node, and set him as new Current Node
+// because of the LALR analysis
 	{
 		tempNode = new XmlElement(string(""), $1->second);
 		CurrentNode->addChild(tempNode);

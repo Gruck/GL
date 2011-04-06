@@ -7,12 +7,21 @@ using namespace std;
 #include <cstdlib>
 #include "commun.h"
 #include "xml.tab.h"
+#include "XmlDoc.h"
+#include "XmlElement.h"
+#include "XmlAttribute.h"
+#include "XmlContent.h"
+#include "XmlText.h"
+
 
 int yywrap(void);
 void yyerror(char *msg);
 int yylex(void);
 
 string DtdUrl;
+XmlDoc *XmlDataStructure;
+XmlElement *CurrentNode = 0;
+XmlElement *tempNode;
 
 %}
 
@@ -44,7 +53,7 @@ declarations
  ;
  
 declaration
- : DOCTYPE NAME NAME VALUE CLOSE {DtdUrl = $4;} 
+ : DOCTYPE NAME NAME VALUE CLOSE {DtdUrl = $4; XmlDataStructure = new XmlDoc(DtdUrl);} 
  ;
 
 element
@@ -52,13 +61,32 @@ element
    empty_or_content 
  ;
 start
- : START		
+ : START 
+ {
+	if (!CurrentNode)
+	{
+ 		CurrentNode = new XmlElement(string(""), $1->second);
+		XmlDataStructure->setRoot(CurrentNode);
+	}
+	else
+	{
+		tempNode = new XmlElement(string(""), $1->second);
+		CurrentNode->addChild(tempNode);
+		CurrentNode = tempNode;
+	}
+ }		
  | NSSTART	
  ;
 empty_or_content
- : SLASH CLOSE	
+ : SLASH CLOSE 
+ {
+	CurrentNode = CurrentNode->parent();
+ }	
  | close_content_and_end 
    name_or_nsname_opt CLOSE 
+ {
+	CurrentNode = CurrentNode->parent();
+ }	
  ;
 name_or_nsname_opt 
  : NAME     
@@ -71,7 +99,10 @@ close_content_and_end
    END 
  ;
 content 
- : content DATA		
+ : content DATA	
+ {
+	CurrentNode->addChild(new XmlText($2));
+ }	
  | content misc        
  | content element      
  | /*empty*/         

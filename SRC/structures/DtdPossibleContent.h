@@ -25,6 +25,7 @@ private:
 	Multiplicity _multiplicity;
 	Type _type;
 	std::string value;
+  std::list<DtdPossibleContent*> _children;
  
 };
 

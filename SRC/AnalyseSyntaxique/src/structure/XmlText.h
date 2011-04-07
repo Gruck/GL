@@ -12,6 +12,8 @@ class XmlText : public XmlContent
 public:
   XmlText(const std::string& text)
   : XmlContent(0), _data(text) { }
+
+  inline ~XmlText() {}
   
   void toStream( std::ostream& stream, int indentation = 0 );
   

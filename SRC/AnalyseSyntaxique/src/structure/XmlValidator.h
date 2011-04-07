@@ -11,6 +11,7 @@
 
 
 #define INDETATION_PATTERN "  "
+class DtdDoc;
 class XmlDoc;
 class XmlElement;
 class XmlText;
@@ -20,10 +21,10 @@ class XmlValidator
 public:
   XmlValidator(DtdDoc* dtdDoc)
    : _dtdDoc(dtdDoc){}
+
    
-  bool Validate( XmlDoc* xmlDoc) const;
-  bool Validate( XmlElement* xmlElement) const;
-  bool Validate( XmlText* xmlText) const;
+  bool validate( XmlDoc* xmlDoc) const;
+  
    
 private:
  DtdDoc* _dtdDoc;

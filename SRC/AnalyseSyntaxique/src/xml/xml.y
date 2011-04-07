@@ -7,12 +7,25 @@ using namespace std;
 #include <cstdlib>
 #include "commun.h"
 #include "xml.tab.h"
+#include "XmlDoc.h"
+#include "XmlElement.h"
+#include "XmlAttribute.h"
+#include "XmlContent.h"
+#include "XmlText.h"
+
 
 int yywrap(void);
 void yyerror(char *msg);
 int yylex(void);
 
+/* Name of the linked dtd in xml document */
 string DtdUrl;
+/* Root node of the tree */
+XmlDoc *XmlDataStructure;
+/* Highlighted node in the tree */
+XmlElement *CurrentNode = 0;
+/* New node of the tree, created when an open markup is detected */
+XmlElement *tempNode;
 
 %}
 
@@ -44,7 +57,7 @@ declarations
  ;
  
 declaration
- : DOCTYPE NAME NAME VALUE CLOSE {DtdUrl = $4;} 
+ : DOCTYPE NAME NAME VALUE CLOSE {DtdUrl = $4; XmlDataStructure = new XmlDoc(DtdUrl);} 
  ;
 
 element
@@ -52,14 +65,59 @@ element
    empty_or_content 
  ;
 start
- : START		
- | NSSTART	
+ : START 
+ {
+	if (!CurrentNode)
+// When the parser meets an opening markup
+// if the currentNde is 0, it means that we met the root node of tree
+// We instanciate the object and set him root  
+	{
+ 		CurrentNode = new XmlElement(string(""), $1->second);
+		XmlDataStructure->setRoot(CurrentNode);
+	}
+	else
+// Else we create a new tempNode, add it like a child
+// of the current node, and set him as new Current Node
+// because of the LALR analysis
+	{
+		tempNode = new XmlElement(string(""), $1->second);
+		CurrentNode->addChild(tempNode);
+		CurrentNode = tempNode;
+	}
+ }		
+ | NSSTART
+ {
+	if (!CurrentNode)
+	{
+ 		CurrentNode = new XmlElement($1->first, $1->second);
+		XmlDataStructure->setRoot(CurrentNode);
+	}
+	else
+	{
+		tempNode = new XmlElement($1->first, $1->second);
+		CurrentNode->addChild(tempNode);
+		CurrentNode = tempNode;
+	}
+ }	
  ;
 empty_or_content
- : SLASH CLOSE	
- | close_content_and_end 
+ : attributes SLASH CLOSE 
+ {
+	CurrentNode = CurrentNode->parent();
+ }	
+ | attributes close_content_and_end
    name_or_nsname_opt CLOSE 
+ {
+	CurrentNode = CurrentNode->parent();
+ }	
  ;
+
+attributes
+ : attributes NAME EQ VALUE
+ | /* empty */
+ ;
+
+
 name_or_nsname_opt 
  : NAME     
  | NSNAME  
@@ -71,7 +129,10 @@ close_content_and_end
    END 
  ;
 content 
- : content DATA		
+ : content DATA	
+ {
+	CurrentNode->addChild(new XmlText($2));
+ }	
  | content misc        
  | content element      
  | /*empty*/         

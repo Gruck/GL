@@ -1,5 +1,6 @@
 
 #include "XmlElement.h"
+#include "XmlValidatorVisitor.h"
 #include "Tools.h"
 
 std::string XmlElement::fullName() const {
@@ -63,18 +64,33 @@ XmlContent* XmlElement::detachChild( XmlContent* toRemove ){
 
 void XmlElement::addAttribute( const XmlAttribute& attribute ){
   CALL_MACRO
-  _attributes.push_back(attribute);
+  _attributes[ attribute.name() ] = attribute.value();
+}
+
+void XmlElement::addAttribute( const std::string& attributeName, const std::string& value ){
+  CALL_MACRO
+  _attributes[ attributeName ] = value;
 }
 
 void XmlElement::removeAttribute( const XmlAttribute& attribute ){
   CALL_MACRO
-  _attributes.remove( attribute );
+  _attributes.erase( attribute.name() );
+}
+
+void XmlElement::removeAttribute( const std::string& attributeName ){
+  CALL_MACRO
+  _attributes.erase( attributeName );
 }
 
 void XmlElement::toStream( std::ostream& stream, int indentation ){
   //CALL_MACRO
   indent(stream,indentation);
   stream << "<" << fullName();
+  AttributeMap::iterator attribIter = _attributes.begin();
+  AttributeMap::iterator attribStop = _attributes.end();
+  for(;attribIter != attribStop; ++attribIter){
+    stream << " "<< (*attribIter).first << "=" <<(*attribIter).second;
+  }
   //stream << /* liste attributs */; // TODO
   stream << ">\n";
   ContentListIterator iter = firstChild();
@@ -85,4 +101,18 @@ void XmlElement::toStream( std::ostream& stream, int indentation ){
   indent(stream,indentation);
   stream << "</" << fullName() << ">\n";
   
+}
+
+XmlElement::~XmlElement(){
+  CALL_MACRO
+  ContentListIterator iter = firstChild();
+  ContentListIterator stop = childrenEnd();
+  for(;iter!=stop;++iter){
+    (*iter)->setParent(0);
+    delete *iter;
+  }
+}
+
+bool XmlElement::acceptValidator( XmlValidatorVisitor* validator ){
+  return validator->visit(this);
 }

@@ -7,17 +7,19 @@
 #include "Tools.h"
 
 #include <list>
+#include <map>
 #include <string>
 #include <iostream>
 
 
 #define INDETATION_PATTERN "  "
 
+class XmlValidatorVisitor;
 
 class XmlElement : public XmlContent
 { 
 public:
-  typedef std::list<XmlAttribute> AttributeList;
+  typedef std::map<std::string,std::string> AttributeMap;
   typedef std::list<XmlContent*> ContentList;
   typedef std::list<XmlContent*>::iterator ContentListIterator;
 
@@ -32,7 +34,10 @@ public:
 
 
   void addAttribute( const XmlAttribute& attribute );
+  void addAttribute( const std::string& attributeName, const std::string& value );
   void removeAttribute( const XmlAttribute& attribute );
+  void removeAttribute( const std::string& attribute );
+  
   
   void addChild( XmlContent* toAdd );
   void deleteChild( XmlContent* toRemove );
@@ -52,12 +57,16 @@ public:
 
   // prints the tree
   void toStream( std::ostream& stream, int indentation = 0 );
+
+  bool acceptValidator( XmlValidatorVisitor* validator );
+
+  ~XmlElement();
   
 private:
   std::string _nameSpace;
   std::string _name;
   ContentList _childContentList;
-  AttributeList _attributes;
+  AttributeMap _attributes;
   
   
 };

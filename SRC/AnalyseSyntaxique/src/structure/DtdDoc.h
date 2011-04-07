@@ -2,6 +2,7 @@
 #ifndef HEXALOUTRE_DTDDOC_H
 #define HEXALOUTRE_DTDDOC_H
 #include <string>
+#include <list>
 
 #include "Tools.h"
 

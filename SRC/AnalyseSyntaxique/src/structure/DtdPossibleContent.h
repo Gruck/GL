@@ -13,11 +13,11 @@ public:
   typedef enum{
     QMARK,
     AST,
-    PLUS;} Multiplicity;
+    PLUS} Multiplicity;
   typedef enum{
     SEQUENCE,
     CHOICE,
-    ELEM;} Type;
+    ELEM} Type;
 	
   DtdPossibleContent(){} 
  

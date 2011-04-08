@@ -7,7 +7,9 @@
 
 
 
-
+/**
+ * Décrit un contenu possible d'un noeud xml (XmlElement).
+ */ 
 class DtdPossibleContent {
 public:
   typedef enum{
@@ -18,7 +20,10 @@ public:
     SEQUENCE,
     CHOICE,
     ELEM} Type;
-	
+    
+	/**
+   * Constructeur.
+   */ 
   DtdPossibleContent(){} 
  
 private:

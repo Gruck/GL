@@ -14,6 +14,9 @@
 
 class DtdPossibleContent;
 
+/**
+ * Fournit les descriptions nécessaire à la validation d'un XmlElement.
+ */ 
 class DtdElement 
 { 
 public:
@@ -21,12 +24,22 @@ public:
   typedef std::list<DtdPossibleContent*> PossibleContentList;
   typedef std::list<DtdPossibleContent*>::iterator DtdPossibleContentIterator;
 
+  /**
+   * Constructeur.
+   */ 
   DtdElement(const std::string& name, PossibleContentList& possibleContentList)
   :  _name(name), _possibleContentList(possibleContentList) {
     CALL_MACRO
   }
-  
-  inline std::string name() const { return _name; }
+
+  /**
+   * revoie le nom de l'élément.
+   */ 
+  const std::string& name() const { return _name; }
+  /**
+   * Déprécié
+   * TODO: ajouter les attributs un par un.
+   */ 
   inline void setAttributeMap(AttributeMap& AttributeMap) {_attributes = AttributeMap;}
 
   // prints the rule

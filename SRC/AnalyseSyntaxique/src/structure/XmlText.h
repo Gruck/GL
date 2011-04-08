@@ -22,7 +22,7 @@ public:
   void toStream( std::ostream& stream, int indentation = 0 );
 
   /**
-   * Renvoie une référence vers le texte sous forme std::string
+   * Fournit un accès au texte sous forme std::string.
    */ 
   std::string& text() { CALL_MACRO return _data; }
 

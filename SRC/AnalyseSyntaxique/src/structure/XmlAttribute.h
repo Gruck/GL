@@ -19,11 +19,11 @@ public:
   /**
    * Renvoie le nom de l'attribut.
    */ 
-  std::string name() const { CALL_MACRO return _name; }
+  const std::string& name() const { CALL_MACRO return _name; }
   /**
    * Renvoie la valeur de l'attribut.
    */ 
-  std::string value() const { CALL_MACRO return _value; }
+  const std::string& value() const { CALL_MACRO return _value; }
   /**
    * Opérateur d'égalité entre deux attributs.
    *

@@ -5,13 +5,25 @@
 #include "Tools.h"
 #include <iostream>
 
+/**
+ * Décrit un attribut d'un noeud XML par son nom et son type.
+ */ 
 class DtdAttribute{
 public:
+  /**
+   * Constructeur.
+   */ 
   DtdAttribute(const std::string& name, const std::string& type)
   : _name(name), _type(type){ }
-  
-  std::string name() const { CALL_MACRO return _name; }
-  std::string type() const { CALL_MACRO return _type; }
+
+  /**
+   * Renvoie le nom de l'attribut.
+   */ 
+  const std::string& name() const { CALL_MACRO return _name; }
+  /**
+   * Renvoie le type de l'attribut.
+   */ 
+  const std::string& type() const { CALL_MACRO return _type; }
   /*bool operator == (const XmlAttribute& attrib) const{
     return _name == attrib.name();
   }*/

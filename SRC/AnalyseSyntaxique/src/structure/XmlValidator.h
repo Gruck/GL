@@ -16,13 +16,19 @@ class XmlDoc;
 class XmlElement;
 class XmlText;
 
+/**
+ * Valide l'entête d'un document XML et fait appel à la class XmlValidatorVisitor
+ * pour valider le reste du document.
+ */ 
 class XmlValidator
 { 
 public:
   XmlValidator(DtdDoc* dtdDoc)
    : _dtdDoc(dtdDoc){}
 
-   
+  /**
+   * Valide un document XML selon une DTD.
+   */ 
   bool validate( XmlDoc* xmlDoc) const;
   
    

@@ -1,8 +1,9 @@
 ﻿
 #ifndef HEXALOUTRE_DTDPOSSIBLECONTENT_H
 #define HEXALOUTRE_DTDPOSSIBLECONTENT_H
-#include <string>
 
+#include <string>
+#include <list>
 #include "Tools.h"
 
 
@@ -30,6 +31,7 @@ private:
 	Multiplicity _multiplicity;
 	Type _type;
 	std::string value;
+  std::list<DtdPossibleContent*> _children;
  
 };
 

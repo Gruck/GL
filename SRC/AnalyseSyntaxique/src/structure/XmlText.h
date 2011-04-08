@@ -16,6 +16,7 @@ public:
   XmlText(const std::string& text)
   : XmlContent(0), _data(text) { }
 
+
   /**
    * Affiche le contenu textuel dans un flux standard. 
    */ 
@@ -31,6 +32,8 @@ public:
    * pattern visitor implémenté au niveau de l'algorithme de validation. 
    */ 
   bool acceptValidator( XmlValidatorVisitor* validator );
+
+  
   
 private:
   std::string _data;

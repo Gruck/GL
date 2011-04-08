@@ -9,14 +9,15 @@ DIRFLAGS= -I$(XMLPARSERPATH) -I$(DTDPARSERPATH) -I$(STRUCTPATH)
 DEPSXML= $(OBJ)/xml/xml.tab.o $(OBJ)/xml/lex.xml.o
 DEPSDTD= $(OBJ)/dtd/dtd.tab.o $(OBJ)/dtd/lex.dtd.o
 DEPSAPP= $(OBJ)/main.o
-DEPSSTR= $(OBJ)/structure/XmlContent.o $(OBJ)/structure/XmlDoc.o $(OBJ)/structure/XmlElement.o
+DEPSSTRXML= $(OBJ)/structure/XmlContent.o $(OBJ)/structure/XmlDoc.o $(OBJ)/structure/XmlElement.o $(OBJ)/structure/XmlValidator.o $(OBJ)/structure/XmlValidatorVisitor.o $(OBJ)/structure/XmlText.o
+DEPSSTRDTD= $(OBJ)/structure/DtdDoc.o $(OBJ)/structure/DtdElement.o $(OBJ)/structure/DtdPossibleContent.o
 STRH= $(SRC)/structure/*.h 
 
 all : $(APP)
 
 # Edition des liens, rajouter ici dans la listes de dépendances les ".o"
 # constitués lors de la compilation.
-$(APP) : $(DEPSXML) $(DEPSDTD) $(DEPSAPP) $(DEPSSTR)
+$(APP) : $(DEPSXML) $(DEPSDTD) $(DEPSAPP) $(DEPSSTRXML) $(DEPSSTRDTD)
 	@echo "Edition des liens"
 	g++ $(CPPFLAGS) $+ -o $@
 	

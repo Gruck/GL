@@ -21,16 +21,69 @@ public:
     SEQUENCE,
     CHOICE,
     ELEM} Type;
+
+  typedef std::list<DtdPossibleContent*> PossibleContentList;
     
 	/**
    * Constructeur.
    */ 
-  DtdPossibleContent(){} 
+  DtdPossibleContent(Type type, const std::string& value, Multiplicity multiplicity)
+  : _multiplicity(multiplicity), _type(type), _value(value){ CALL_MACRO }
+
+  /**
+   * Renvoie le type.
+   */ 
+  inline Type type() const {
+    return _type;
+  }
+  
+  /**
+   * Renvoie la multiplicité.
+   */ 
+  inline Multiplicity multiplicity() const {
+    return _multiplicity;
+  }
+
+  /**
+   * Renvoie la valeur.
+   */
+  inline const std::string& value() const{
+    return _value;
+  }
+
+  /**
+   * Ajoute un contenu possible fils.
+   */ 
+  inline void addChild( DtdPossibleContent* child ){
+    _children.push_back(child);
+  } 
+
+  /**
+   * Renvoie le nombre de contenus possibles fils.
+   */ 
+  inline int nbChildren() const{
+    return _children.size();
+  }
+
+  /**
+   * Renvoie un itérateur vers le premier contenu possible fils.
+   */ 
+  inline PossibleContentList::iterator firstChild(){
+    return _children.begin();
+  }
+
+  /**
+   * renvoie un itérateur servant de condition d'arrêt sur l'itération des fils.
+   */ 
+  inline PossibleContentList::iterator childrenEnd(){
+    return _children.end();
+  }
+  
  
 private:
 	Multiplicity _multiplicity;
 	Type _type;
-	std::string value;
+	std::string _value;
   std::list<DtdPossibleContent*> _children;
  
 };

@@ -11,6 +11,6 @@ XmlDoc::~XmlDoc(){
 }
 
 void XmlDoc::toStream(std::ostream& stream){
-  // TODO print the doctype !
+  stream << "<!DOCTYPE " << doctype() << " >\n";
   if(_root) _root->toStream(stream,0);
 }

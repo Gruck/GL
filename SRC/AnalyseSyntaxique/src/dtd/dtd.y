@@ -11,6 +11,8 @@ using namespace std;
 #include "DtdAttribute.h"
 #include "DtdPossibleContent.h"
 
+typedef std::list<DtdPossibleContent*> PossibleContentList;
+
 
 void dtderror(char *msg);
 int dtdwrap(void);
@@ -19,8 +21,12 @@ int dtdlex(void);
 DtdDoc *DtdDataStructure;
 /*Highlighted node in the collection*/
 DtdElement *CurrentDtdNode = 0;
-
-
+/*Possible content en liste choix*/
+DtdPossibleContent *ChoicePossibleContent = 0;
+/*Possible content en liste sequence*/
+DtdPossibleContent *SequencePossibleContent =0;
+/*Possible content actuellement traité */
+DtdPossibleContent *CurrentPossibleContent =0;
 
 %}
 
@@ -32,11 +38,16 @@ DtdElement *CurrentDtdNode = 0;
 %token <s> NAME TOKENTYPE DECLARATION STRING
 %%
 
-main: dtd                           
+main: dtd {DtdDataStructure = new DtdDoc("");}                
     ; 
 
-dtd: dtd ATTLIST NAME att_definition CLOSE            
-   | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE
+dtd: dtd ATTLIST NAME att_definition CLOSE 
+   | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE 
+        {
+            // Instanciation du de l'élément et de sa liste a la detection du tag élément
+            PossibleContentList  *currentPossibleContentList = new PossibleContentList;
+            CurrentDtdNode = new DtdElement(string($3),*currentPossibleContentList);
+        }
    | /* empty */                     
    ;
 
@@ -54,10 +65,18 @@ cardinalite: AST|QMARK|PLUS| /* empty */
 	   ;
 
 liste_choix_plus: liste_choix PIPE item
+        {
+            // A  la détection d'une liste de choix on instancie un possible Content    
+            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+        }
 		;
 
 liste_sequence: item 
 	      | liste_sequence COMMA item
+        {
+            // A  la détection d'une liste de sequence on instancie un possible Content    
+            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+        }    
 	      ;
 
 item: NAME cardinalite

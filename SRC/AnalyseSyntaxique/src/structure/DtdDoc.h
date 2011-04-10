@@ -17,7 +17,7 @@ public:
   /**
    * constructeur
    */ 
-  DtdDoc(const std::string& docType) : _doctype(docType) {}
+  DtdDoc(const std::string& docType = "") : _doctype(docType) {}
   /**
    * Renvoie le doctype du document.
    */ 

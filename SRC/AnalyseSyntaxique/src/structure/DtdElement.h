@@ -22,14 +22,12 @@ class DtdElement
 { 
 public:
   typedef std::map<std::string,std::string> AttributeMap;
-  typedef std::list<DtdPossibleContent*> PossibleContentList;
-  typedef std::list<DtdPossibleContent*>::iterator DtdPossibleContentIterator;
 
   /**
    * Constructeur.
    */ 
-  DtdElement(const std::string& name, PossibleContentList& possibleContentList)
-  :  _name(name), _possibleContentList(possibleContentList) { CALL_MACRO }
+  DtdElement(const std::string& name, DtdPossibleContent* possibleContent)
+  :  _name(name), _possibleContent(possibleContent) { CALL_MACRO }
 
   /**
    * revoie le nom de l'élément.
@@ -88,7 +86,7 @@ public:
   
 private:
   std::string _name;
-  PossibleContentList _possibleContentList;
+  DtdPossibleContent* _possibleContent;
   AttributeMap _attributes; //warning, possible confusion with XmlAttribute
   
   

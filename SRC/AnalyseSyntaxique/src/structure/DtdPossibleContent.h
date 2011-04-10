@@ -16,7 +16,8 @@ public:
   typedef enum{
     M_QMARK,     /*M(ultiplicity)_QMARK */
     M_AST,
-    M_PLUS} Multiplicity;
+    M_PLUS,
+    M_NONE} Multiplicity;
   typedef enum{
     T_SEQUENCE, /*T(ype)_SEQUENCE */
     T_CHOICE,

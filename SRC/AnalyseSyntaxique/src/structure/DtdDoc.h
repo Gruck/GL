@@ -23,6 +23,20 @@ public:
    */ 
   const std::string& doctype() const { CALL_MACRO return _doctype; }
   //todo add accessor to rules.
+  
+  /**
+   * Renvoie une DtdDoc* correspondant a ce qui aurait pu etre obtenu par parsing.
+   */ 
+  static DtdDoc* CreateDummyDtdForRap1();
+  
+  /**
+   * Permet l'ajout d'un element Dtd.
+   */ 
+   void AddElement(DtdElement *element);
+  
+  
+  
+  
 private:
   std::string _doctype;
   std::list<DtdElement *> rules;

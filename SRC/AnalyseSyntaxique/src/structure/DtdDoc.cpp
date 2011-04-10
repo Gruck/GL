@@ -37,47 +37,47 @@ pc1->addChild(pc2);
 pc1->addChild(pc3);
 pc1->addChild(pc4);
 pc1->addChild(pc5);
-//DtdElement* el1 = new DtdElement(
+DtdElement* el0 = new DtdElement("rapport", pc1);
 
 DtdPossibleContent* pc11 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc12 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "prenom", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc13 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "nom", DtdPossibleContent::M_NONE);
-pc1->addChild(pc2);
-pc1->addChild(pc3);
-//DtdElement* el1 = new DtdElement(
+pc11->addChild(pc2);
+pc11->addChild(pc3);
+DtdElement* el1 = new DtdElement("rapport", pc11);
 
 
 DtdPossibleContent* pc21 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc22 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "#PCDATA", DtdPossibleContent::M_NONE);
-pc12->addChild(pc22);
-//DtdElement* el1 = new DtdElement(
+pc21->addChild(pc22);
+DtdElement* el2 = new DtdElement("rapport", pc21);
 
 DtdPossibleContent* pc31 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc32 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "#PCDATA", DtdPossibleContent::M_NONE);
 pc31->addChild(pc32);
-//DtdElement* el1 = new DtdElement(
+DtdElement* el3 = new DtdElement("rapport", pc31);
 
 DtdPossibleContent* pc41 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc42 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "#PCDATA", DtdPossibleContent::M_NONE);
 pc41->addChild(pc42);
-//DtdElement* el1 = new DtdElement(
+DtdElement* el4 = new DtdElement("rapport", pc41);
 
 DtdPossibleContent* pc51 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc52 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "#PCDATA", DtdPossibleContent::M_NONE);
 pc51->addChild(pc52);
-//DtdElement* el1 = new DtdElement(
+DtdElement* el5 = new DtdElement("rapport", pc51);
 
 DtdPossibleContent* pc61 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc62 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "#PCDATA", DtdPossibleContent::M_NONE);
 pc61->addChild(pc62);
-//DtdElement* el1 = new DtdElement(
+DtdElement* el6 = new DtdElement("rapport", pc61);
 
 DtdPossibleContent* pc71 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc72 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "titre", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc73 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "p", DtdPossibleContent::M_PLUS);
 pc71->addChild(pc72);
 pc71->addChild(pc73);
-//DtdElement* el1 = new DtdElement(
+DtdElement* el7 = new DtdElement("rapport", pc71);
 
 DtdPossibleContent* pc81 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc82 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "titre", DtdPossibleContent::M_NONE);
@@ -88,6 +88,18 @@ pc83->addChild(pc831);
 pc83->addChild(pc832);
 pc81->addChild(pc82);
 pc81->addChild(pc83);
+DtdElement* el8 = new DtdElement("rapport", pc81);
+
+Rap1dtd->AddElement(el0);
+Rap1dtd->AddElement(el1);
+Rap1dtd->AddElement(el2);
+Rap1dtd->AddElement(el3);
+Rap1dtd->AddElement(el4);
+Rap1dtd->AddElement(el5);
+Rap1dtd->AddElement(el6);
+Rap1dtd->AddElement(el7);
+Rap1dtd->AddElement(el8);
+
 
 
 return Rap1dtd;

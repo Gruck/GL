@@ -67,7 +67,7 @@ cardinalite: AST|QMARK|PLUS| /* empty */
 liste_choix_plus: liste_choix PIPE item
         {
             // A  la détection d'une liste de choix on instancie un possible Content    
-            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+            //CurrentChoicePossibleContent = new DtdPossibleContent*();
         }
 		;
 

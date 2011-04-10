@@ -46,7 +46,7 @@ dtd: dtd ATTLIST NAME att_definition CLOSE
         {
             // Instanciation du de l'élément et de sa liste a la detection du tag élément
             //RootPossibleContent = new DtdPossibleElement("root",card);
-            CurrentDtdNode = new DtdElement(string($3),RootPossibleContent);
+            CurrentDtdNode = new DtdElement(string($3),	RootPossibleContent);
         }
    | /* empty */                     
    ;

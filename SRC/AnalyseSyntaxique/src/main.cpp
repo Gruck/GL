@@ -12,7 +12,7 @@ extern FILE *dtdin;
 
 extern std::string DtdUrl;
 extern XmlDoc* XmlDataStructure;
-//extern DtdDoc* DtdDataStructure;
+extern DtdDoc* DtdDataStructure;
 
 int main(int argc, char **argv)
 {

@@ -1,4 +1,4 @@
-﻿
+
 #ifndef HEXALOUTRE_DTDPOSSIBLECONTENT_H
 #define HEXALOUTRE_DTDPOSSIBLECONTENT_H
 
@@ -14,13 +14,13 @@
 class DtdPossibleContent {
 public:
   typedef enum{
-    QMARK,
-    AST,
-    PLUS} Multiplicity;
+    M_QMARK,     /*M(ultiplicity)_QMARK */
+    M_AST,
+    M_PLUS} Multiplicity;
   typedef enum{
-    SEQUENCE,
-    CHOICE,
-    ELEM} Type;
+    T_SEQUENCE, /*T(ype)_SEQUENCE */
+    T_CHOICE,
+    T_ELEM} Type;
 
   typedef std::list<DtdPossibleContent*> PossibleContentList;
     

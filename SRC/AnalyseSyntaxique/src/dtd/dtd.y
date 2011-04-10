@@ -6,10 +6,22 @@ using namespace std;
 #include <cstdio>
 #include <cstdlib>
 
+#include "DtdDoc.h"
+#include "DtdElement.h"
+#include "DtdAttribute.h"
+#include "DtdPossibleContent.h"
+
 
 void dtderror(char *msg);
 int dtdwrap(void);
 int dtdlex(void);
+/*root node of the dtd collection*/
+DtdDoc *DtdDataStructure;
+/*Highlighted node in the collection*/
+DtdElement *CurrentDtdNode = 0;
+
+
+
 %}
 
 %union { 
@@ -21,10 +33,9 @@ int dtdlex(void);
 %%
 
 main: dtd                           
-    ;
+    ; 
 
-dtd: dtd ATTLIST NAME 
-     att_definition CLOSE            
+dtd: dtd ATTLIST NAME att_definition CLOSE            
    | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE
    | /* empty */                     
    ;

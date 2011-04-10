@@ -79,15 +79,15 @@ pc71->addChild(pc72);
 pc71->addChild(pc73);
 //DtdElement* el1 = new DtdElement(
 
-DtdPossibleContent* pc71 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
-DtdPossibleContent* pc72 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "titre", DtdPossibleContent::M_NONE);
-DtdPossibleContent* pc73 = new DtdPossibleContent(DtdPossibleContent::T_CHOIX, "", DtdPossibleContent::M_PLUS);
-DtdPossibleContent* pc731 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "p", DtdPossibleContent::M_NONE);
-DtdPossibleContent* pc732 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "section", DtdPossibleContent::M_NONE);
-pc73->addChild(pc731);
-pc73->addChild(pc732);
-pc71->addChild(pc72);
-pc71->addChild(pc73);
+DtdPossibleContent* pc81 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
+DtdPossibleContent* pc82 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "titre", DtdPossibleContent::M_NONE);
+DtdPossibleContent* pc83 = new DtdPossibleContent(DtdPossibleContent::T_CHOICE, "", DtdPossibleContent::M_PLUS);
+DtdPossibleContent* pc831 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "p", DtdPossibleContent::M_NONE);
+DtdPossibleContent* pc832 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "section", DtdPossibleContent::M_NONE);
+pc83->addChild(pc831);
+pc83->addChild(pc832);
+pc81->addChild(pc82);
+pc81->addChild(pc83);
 
 
 return Rap1dtd;

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "XmlDoc.h"
 #include "XmlElement.h"
+#include "XmlValidator.h"
 #include <iostream>
 
 extern int xmlparse();
@@ -11,6 +12,7 @@ extern FILE *dtdin;
 
 extern std::string DtdUrl;
 extern XmlDoc* XmlDataStructure;
+//extern DtdDoc* DtdDataStructure;
 
 int main(int argc, char **argv)
 {
@@ -44,6 +46,10 @@ int main(int argc, char **argv)
 
   if (err != 0) printf("Parse ended with %d error(s)\n", err);
         else  printf("Parse ended with sucess\n");
+        
+  //ici doit être mis l'apel au validateur  
+  //XmlValidator::validate( XmlDataStructure, DtdDataStructure); 
+  
   printf("Coucou j'ai dilété la datastructure.\n");
   delete XmlDataStructure;
   return 0;

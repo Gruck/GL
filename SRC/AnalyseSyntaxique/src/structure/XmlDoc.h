@@ -8,7 +8,7 @@
 
 
 class XmlElement;
-class XmlValidator;
+class XmlValidatorVisitor;
 
 /**
  * Document Xml.
@@ -44,6 +44,12 @@ public:
    * destructeur
    */ 
   ~XmlDoc();
+  
+  /**
+   * Permet de réaliser le "double dispatch" nécessaire à l'application du design
+   * pattern visitor implémenté au niveau de l'algorithme de validation. 
+   */ 
+  bool acceptValidator( XmlValidatorVisitor* validator );
   
 private:
   std::string _doctype;

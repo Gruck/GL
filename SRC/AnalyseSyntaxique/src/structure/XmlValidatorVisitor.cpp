@@ -5,10 +5,14 @@
 #include "XmlElement.h"
 #include "XmlText.h"
 
+bool XmlValidatorVisitor::visit( XmlDoc* xmlDoc){
+  CALL_MACRO
+  //return content->acceptValidator(this);
+}
 
 bool XmlValidatorVisitor::visit( XmlContent* content){
   CALL_MACRO
-  return content->acceptValidator(this);
+  //return content->acceptValidator(this);
 }
 
 bool XmlValidatorVisitor::visit( XmlElement* xmlElement){

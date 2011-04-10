@@ -2,6 +2,8 @@
 #ifndef HEXALOUTRE_XMLVALIDATORVISITOR_H
 #define HEXALOUTRE_XMLVALIDATORVISITOR_H
 
+class DtdDoc;
+class XmlDoc;
 class XmlContent;
 class XmlElement;
 class XmlText;
@@ -12,6 +14,14 @@ class XmlText;
  */ 
 class XmlValidatorVisitor{
 public:
+	XmlValidatorVisitor( DtdDoc* dtdDoc)
+		:_dtdDoc(dtdDoc){}
+
+
+  /**
+   * Visite et valide un un Document Xml.
+   */ 
+  bool visit( XmlDoc* xmlDoc);
 
   /**
    * Visite et valide un un contenu Xml
@@ -28,6 +38,9 @@ public:
    * Visite et valide un contenu Textuel dans un document Xml.
    */ 
   bool visit( XmlText* xmlText);
+  
+private:
+  DtdDoc* _dtdDoc;
 
 };
 

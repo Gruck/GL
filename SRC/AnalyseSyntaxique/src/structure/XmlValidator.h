@@ -20,20 +20,21 @@ class XmlText;
  * Valide l'entête d'un document XML et fait appel à la class XmlValidatorVisitor
  * pour valider le reste du document.
  */ 
-class XmlValidator
+namespace XmlValidator
 { 
-public:
-  XmlValidator(DtdDoc* dtdDoc)
-   : _dtdDoc(dtdDoc){}
 
+ // XmlValidator(DtdDoc* dtdDoc)
+  // : _dtdDoc(dtdDoc){}
+
+//public:
   /**
    * Valide un document XML selon une DTD.
    */ 
-  bool validate( XmlDoc* xmlDoc) const;
-  
+  //bool validate( XmlDoc* xmlDoc) const;
+  bool validate( XmlDoc* xmlDoc, DtdDoc* dtdDoc);
    
-private:
- DtdDoc* _dtdDoc;
+//private:
+// DtdDoc* _dtdDoc;
   
   
 };

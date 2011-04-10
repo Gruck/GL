@@ -21,12 +21,12 @@ int dtdlex(void);
 DtdDoc *DtdDataStructure;
 /*Highlighted node in the collection*/
 DtdElement *CurrentDtdNode = 0;
-/*Possible content en liste choix*/
-DtdPossibleContent *ChoicePossibleContent = 0;
-/*Possible content en liste sequence*/
-DtdPossibleContent *SequencePossibleContent =0;
-/*Possible content actuellement traité */
-DtdPossibleContent *CurrentPossibleContent =0;
+/*Root possible content*/
+DtdPossibleContent *RootPossibleContent =0;
+
+/*Cardinalité de l'élément courant*/
+string card;
+
 
 %}
 
@@ -45,8 +45,8 @@ dtd: dtd ATTLIST NAME att_definition CLOSE
    | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE 
         {
             // Instanciation du de l'élément et de sa liste a la detection du tag élément
-            PossibleContentList  *currentPossibleContentList = new PossibleContentList;
-            CurrentDtdNode = new DtdElement(string($3),*currentPossibleContentList);
+            //RootPossibleContent = new DtdPossibleElement("root",card);
+            CurrentDtdNode = new DtdElement(string($3),RootPossibleContent);
         }
    | /* empty */                     
    ;
@@ -62,6 +62,9 @@ sequence: OPENPAR liste_sequence CLOSEPAR
         ;
 
 cardinalite: AST|QMARK|PLUS| /* empty */
+        {
+            //card = $1;    
+        }
 	   ;
 
 liste_choix_plus: liste_choix PIPE item

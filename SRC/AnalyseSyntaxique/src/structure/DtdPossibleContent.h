@@ -6,8 +6,6 @@
 #include <list>
 #include "Tools.h"
 
-
-
 /**
  * Décrit un contenu possible d'un noeud xml (XmlElement).
  */ 
@@ -31,7 +29,8 @@ public:
   typedef enum{
     T_SEQUENCE, /*T(ype)_SEQUENCE */
     T_CHOICE,
-    T_ELEM} Type;
+    T_ELEM
+   } Type;
 
   typedef std::list<DtdPossibleContent*> PossibleContentList;
     
@@ -108,8 +107,6 @@ private:
   std::list<DtdPossibleContent*> _children;
  
 };
-
-
 
 
 #endif

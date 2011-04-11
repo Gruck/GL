@@ -23,6 +23,9 @@ public:
    */ 
   const std::string& doctype() const { CALL_MACRO return _doctype; }
   //todo add accessor to rules.
+
+  void toStream(std::ostream& stream);
+  
 private:
   std::string _doctype;
   std::list<DtdElement *> rules;

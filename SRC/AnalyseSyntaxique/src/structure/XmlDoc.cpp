@@ -52,16 +52,16 @@ XmlDoc* XmlDoc::CreateDummyXmlForRap1()
   elt->childElement("chapitre")->childElement("titre")->addChild(new XmlText("COmment faire de la merde" ));
   
   elt->childElement("chapitre")->addChild(new XmlElement("","section"));
-  elt->childElement("chapitre")->childElement("titre",1)->addChild(new XmlElement("","titre"));
-  elt->childElement("chapitre")->childElement("titre",1)->childElement("titre")->addChild(new XmlText("titre de la section terrain" ));
-  elt->childElement("chapitre")->childElement("titre",1)->addChild(new XmlElement("","p"));
-  elt->childElement("chapitre")->childElement("titre",1)->childElement("p")->addChild(new XmlText("tqjkgjushgioshgidsghsdhsjjdghoidhgoi idrh w qrih goiwdh owdih oiwdhg iwh n" ));
+  elt->childElement("chapitre")->childElement("titre",0)->addChild(new XmlElement("","titre"));
+  elt->childElement("chapitre")->childElement("titre",0)->childElement("titre")->addChild(new XmlText("titre de la section terrain" ));
+  elt->childElement("chapitre")->childElement("titre",0)->addChild(new XmlElement("","p"));
+  elt->childElement("chapitre")->childElement("titre",0)->childElement("p")->addChild(new XmlText("tqjkgjushgioshgidsghsdhsjjdghoidhgoi idrh w qrih goiwdh owdih oiwdhg iwh n" ));
   
   elt->childElement("chapitre")->addChild(new XmlElement("","section"));
-  elt->childElement("chapitre")->childElement("titre")->addChild(new XmlElement("","titre"));
-  elt->childElement("chapitre")->childElement("titre")->childElement("titre")->addChild(new XmlText("titre de la section terrain2" ));
-  elt->childElement("chapitre")->childElement("titre")->addChild(new XmlElement("","p"));
-  elt->childElement("chapitre")->childElement("titre")->childElement("p")->addChild(new XmlText("tqjkgjushgioshgids<sdhw<  wfgj sfkijghsdhsjjdghoidhgoi idrh w qrih goiwdh owdih oiwdhg iwh n" ));
+  elt->childElement("chapitre")->childElement("titre",1)->addChild(new XmlElement("","titre"));
+  elt->childElement("chapitre")->childElement("titre",1)->childElement("titre")->addChild(new XmlText("titre de la section terrain2" ));
+  elt->childElement("chapitre")->childElement("titre",1)->addChild(new XmlElement("","p"));
+  elt->childElement("chapitre")->childElement("titre",1)->childElement("p")->addChild(new XmlText("tqjkgjushgioshgids<sdhw<  wfgj sfkijghsdhsjjdghoidhgoi idrh w qrih goiwdh owdih oiwdhg iwh n" ));
 
 
 	return rap1xml;

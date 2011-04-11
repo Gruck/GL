@@ -20,7 +20,7 @@ int dtdlex(void);
 std::list<DtdElement*> listElements;
 
 /*liste d'attributs*/
-std::list<S_Attribute*> listAttributesPerElement;
+ListAttributesPerElement listAttributesPerElement;
 
 /*root node of the dtd collection*/
 DtdDoc *DtdDataStructure = 0;
@@ -52,6 +52,20 @@ main: dtd
         {
             DtdDataStructure->AddElement(*it);
         }
+		for (ListAttributesPerElement::iterator it = listAttributesPerElement.begin();
+				it != listAttributesPerElement.end(); it++) 
+		{
+			printf((*it)->element.c_str());
+			DtdElement* element = DtdDataStructure->element((*it)->element);
+			if(element != 0)
+			{
+				for (ListAttributes::iterator itAt = (*it)->attributes.begin();
+												itAt != (*it)->attributes.end() ; itAt++) 
+				{
+					element->addAttribute((*itAt)->first,(*itAt)->second);
+				}
+			}
+		}
     }                
     ; 
 
@@ -59,6 +73,7 @@ dtd: dtd ATTLIST NAME att_definition CLOSE
         {
             S_Attribute *newAttribute = new S_Attribute;
             newAttribute->attributes = *$4;
+			delete $4;
             newAttribute->element = string($3);
             listAttributesPerElement.push_back(newAttribute);
         }

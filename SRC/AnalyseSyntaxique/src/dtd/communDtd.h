@@ -14,5 +14,7 @@ typedef struct{
             ListAttributes attributes; 
             std::string element;
         }S_Attribute;       
+typedef std::list<S_Attribute*> ListAttributesPerElement;
+
 
 #endif

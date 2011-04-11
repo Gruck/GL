@@ -1,4 +1,5 @@
 
+
 #include "DtdElement.h"
 #include "DtdPossibleContent.h"
 #include "Tools.h"
@@ -27,4 +28,5 @@ void DtdElement::toStream( std::ostream& stream ){
   for(;iter!=stop;++iter){
     stream << "<!ATTLIST "<< name() <<" " << iter->first << " #IMPLIED>\n";
   }
+	
 }

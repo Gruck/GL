@@ -15,10 +15,18 @@ public:
     M_QMARK,     /*M(ultiplicity)_QMARK */
     M_AST,
     M_PLUS,
-    M_NONE
-   } Multiplicity;
-   
-   typedef enum{
+    M_NONE} Multiplicity;
+    
+  inline std::string ToStr( Multiplicity multiplicity){
+	 switch(multiplicity){
+		 M_QMARK : return std::string( "?" );
+		 M_AST : return std::string( "*" );
+		 M_PLUS : return std::string( "+" );
+		 M_NONE : return std::string( "" );
+	 }
+  }
+  
+  typedef enum{
     T_SEQUENCE, /*T(ype)_SEQUENCE */
     T_CHOICE,
     T_ELEM
@@ -80,6 +88,16 @@ public:
   inline PossibleContentList::iterator childrenEnd(){
     return _children.end();
   }
+  
+  /**
+   * Affiche dans un flux standard l'élément courant ainsi que ses contenu fils
+   * récursivement.
+   *
+   * Le paramêtre indentation fixe le niveau d'indentation de l'élément et est
+   * incrémenté par les éléments fils. Dans le cas général il n'a pas besoin
+   * d'être précisé par l'utilisateur.
+   */ 
+  void toStream( std::ostream& stream, int indentation = 0 );
   
  
 private:

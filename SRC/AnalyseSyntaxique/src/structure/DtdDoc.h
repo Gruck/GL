@@ -37,7 +37,6 @@ public:
    */ 
    void AddElement(DtdElement *element);
 
- 
 private:
   std::string _doctype;
   ElementList _rules;

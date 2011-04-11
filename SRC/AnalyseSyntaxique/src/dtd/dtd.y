@@ -15,82 +15,110 @@ void dtderror(char *msg);
 int dtdwrap(void);
 int dtdlex(void);
 
+typedef std::list<DtdPossibleContent*> ListContent;
+
+
+/*list Elements */
+std::list<DtdElement*> listElements;
 
 /*root node of the dtd collection*/
-DtdDoc *DtdDataStructure;
-/*Highlighted node in the collection*/
-DtdElement *CurrentDtdNode = 0;
-/*Root possible content*/
-DtdPossibleContent *RootPossibleContent =0;
+DtdDoc *DtdDataStructure = 0;
 %}
 
 %union { 
    char *s;
    DtdPossibleContent::Multiplicity c;
    DtdPossibleContent* i;
+   ListContent *lc;
    }
 
 %token ELEMENT ATTLIST CLOSE OPENPAR CLOSEPAR COMMA PIPE FIXED EMPTY ANY PCDATA AST QMARK PLUS CDATA
 %token <s> NAME TOKENTYPE DECLARATION STRING
 %type <c> cardinalite
-%type <i> item choix sequence choix_ou_sequence liste_choix_plus liste_sequence liste_choix
+%type <i> item choix sequence choix_ou_sequence 
+%type <lc> liste_choix_plus liste_sequence liste_choix
 %%
 
 main: dtd 
     {
+        cout << "Création de la structure de base"<<endl;
         DtdDataStructure = new DtdDoc("");
+        for (std::list<DtdElement*>::iterator it = listElements.begin(); it != listElements.end(); it++)
+        {
+            DtdDataStructure->AddElement(*it);
+        }
     }                
     ; 
 
 dtd: dtd ATTLIST NAME att_definition CLOSE 
    | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE 
         {
-            // Instanciation du de l'élément et de sa liste a la detection du tag élément
-            CurrentDtdNode = new DtdElement(string($3),RootPossibleContent); 
-            RootPossibleContent = new DtdPossibleContent(DtdPossibleContent::T_ELEM,string(""),$5);
-            // On initialise le noeud root comme premier noeud parent
-            DtdDataStructure->AddElement(CurrentDtdNode);
+            cout << "Création d'un élément"<<endl;
+            $4->setMultiplicity($5);
+            DtdElement *CurrentDtdNode = new DtdElement(string($3),$4);
+            listElements.push_back(CurrentDtdNode);
         }
    | /* empty */                     
    ;
 
 choix_ou_sequence: choix 
          {
+            
+            cout << "sélection d'un choix"<<endl;
             $$ = $1;   
          }
 		 | sequence 
          {
+            
+            cout << "sélection d'une séquence"<<endl;
             $$ = $1;   
          }
 		 ;
 
 choix: OPENPAR liste_choix_plus CLOSEPAR
         {
-            $$ = $2;
+            cout << "Créaton d'une Liste choix"<<endl;
+            DtdPossibleContent *newContent = new DtdPossibleContent(DtdPossibleContent::T_CHOICE,"",DtdPossibleContent::M_NONE);
+            for (std::list<DtdPossibleContent*>::iterator it = $2->begin(); it != $2->end(); it++)
+            {
+                newContent->addChild(*it);
+            }
+            $$ = newContent;
         }
      ;
 
 sequence: OPENPAR liste_sequence CLOSEPAR
         {
-            $$ = $2;
+            cout << "Création d'une liste séquence"<<endl;
+            DtdPossibleContent *newContent = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE,"",DtdPossibleContent::M_NONE);
+            for (std::list<DtdPossibleContent*>::iterator it = $2->begin(); it != $2->end(); it++)
+            {
+                newContent->addChild(*it);
+            }
+            $$ = newContent;
         }
         ;
 
 cardinalite
        : AST
        {
+            cout << "Cardinalité Astérisque"<<endl;
             $$ = DtdPossibleContent::M_AST;
        }
        |QMARK 
        {
+        
+            cout << "Cardinalité QMARK"<<endl;
             $$ = DtdPossibleContent::M_QMARK;
        }
        |PLUS 
        {
+            cout << "Cardinalité PLUS"<<endl;
             $$ = DtdPossibleContent::M_PLUS;
        }
        | /* empty */ 
        {
+            cout << "Cardinalité Bonne soeur"<<endl;
             $$ = DtdPossibleContent::M_NONE;
        }
 	   ;
@@ -98,20 +126,22 @@ cardinalite
 liste_choix_plus: liste_choix PIPE item
         {
             //
-            $1->addChild($3);
+            $1->push_back($3);
             $$ = $1;
         }
 		;
 
 liste_sequence: item 
         {
-            //    
-            $$=$1;
-        }
+            //
+            ListContent *newList = new ListContent;
+            newList->push_back($1);  
+            $$= newList;
+        } 
 	      | liste_sequence COMMA item
         {
             //    
-            $1->addChild($3);
+            $1->push_back($3);
             $$ = $1;
         }    
 	      ;
@@ -130,7 +160,6 @@ item: NAME cardinalite
     }
     | choix_ou_sequence cardinalite
     {       
-        // TODO AJOUTER L'IMPLEMENTATION DU SETTER VERS CARDINALITE
         $1->setMultiplicity($2);
         $$ = $1;       
     }
@@ -138,11 +167,13 @@ item: NAME cardinalite
 
 liste_choix: item
            {
-                $$ = $1; 
+                ListContent *newList = new ListContent;
+                newList->push_back($1);
+                $$ = newList; 
            }
            | liste_choix PIPE item
            {
-                $1->addChild($3);
+                $1->push_back($3);
                 $$ = $1;
            }
            ;

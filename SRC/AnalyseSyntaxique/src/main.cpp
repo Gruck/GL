@@ -3,6 +3,9 @@
 #include "XmlDoc.h"
 #include "XmlElement.h"
 #include "XmlValidator.h"
+
+#include "DtdDoc.h"
+
 #include <iostream>
 
 extern int xmlparse();
@@ -50,6 +53,9 @@ int main(int argc, char **argv)
   //ici doit être mis l'apel au validateur  
   //XmlValidator::validate( XmlDataStructure, DtdDataStructure); 
   
+  
+  DtdDataStructure->toStream(std::cout);
+    
   printf("Coucou j'ai dilété la datastructure.\n");
   delete XmlDataStructure;
   delete DtdDataStructure;

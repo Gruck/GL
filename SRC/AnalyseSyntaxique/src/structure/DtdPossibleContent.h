@@ -49,6 +49,12 @@ public:
   }
   
   /**
+   * Permet de setter la multiplicité.
+   */ 
+  inline void setType(Type type) {
+    _type = type;
+  }
+  /**
    * Renvoie la multiplicité.
    */ 
   inline Multiplicity multiplicity() const {

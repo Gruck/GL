@@ -91,7 +91,7 @@ sequence: OPENPAR liste_sequence CLOSEPAR
         {
             cout << "Création d'une liste séquence"<<endl;
             DtdPossibleContent *newContent = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE,"",DtdPossibleContent::M_NONE);
-            for (std::list<DtdPossibleContent*>::iterator it = $2->begin(); it != $2->end(); it++)
+            for (std::list<DtdPossibleContent*>::iterator it = $2->begin(); it != $2->end(); it++)
             {
                 newContent->addChild(*it);
             }

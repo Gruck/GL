@@ -17,7 +17,7 @@ public:
     M_PLUS,
     M_NONE} Multiplicity;
     
-  inline std::string ToStr( Multiplicity multiplicity){
+  inline static std::string ToStr( Multiplicity multiplicity){
 	 switch(multiplicity){
 		 M_QMARK : return std::string( "?" );
 		 M_AST : return std::string( "*" );
@@ -37,7 +37,7 @@ public:
 	/**
    * Constructeur.
    */ 
-  DtdPossibleContent(Type type, const std::string& value, Multiplicity multiplicity)
+  DtdPossibleContent(Type type, const std::string& value, Multiplicity multiplicity = DtdPossibleContent::M_NONE)
   : _multiplicity(multiplicity), _type(type), _value(value){ CALL_MACRO }
 
   /**
@@ -52,6 +52,13 @@ public:
    */ 
   inline Multiplicity multiplicity() const {
     return _multiplicity;
+  }
+  
+  /**
+   * Permet de setter la multiplicité.
+   */ 
+  inline void setMultiplicity(Multiplicity multiplicity) {
+    _multiplicity = multiplicity;
   }
 
   /**

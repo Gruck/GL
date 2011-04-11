@@ -11,7 +11,7 @@
 
 
 int main(){
-  std::cout << "Xml::Test\n";
+  /*std::cout << "Xml::Test\n";
 
   std::cout << "...instanciate some stuff\n";
   XmlDoc doc("xhtml");
@@ -35,10 +35,11 @@ int main(){
   assert( (elt->childElement(0)->childElement(0)->parent() == elt->childElement(0) ) );
   std::cout << "...add an element from constructor\n";
   
-
-  DtdDoc::CreateDummyDtdForRap1()->toStream(std::cout);
+*/
+  DtdDoc::CreateDummyDtdForRap1();//->toStream(std::cout);
   
-
+/*
   doc.toStream(std::cout);
   std::cout << "\nEnd of the test\n";
+  * */
 }

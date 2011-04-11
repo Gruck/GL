@@ -4,6 +4,7 @@
 #include "DtdElement.h"
 #include "DtdPossibleContent.h"
 #include "Tools.h"
+#include <string>
 
 #include <iostream>
 
@@ -23,6 +24,7 @@ void DtdDoc::AddElement(DtdElement *element)
 
 DtdDoc* DtdDoc::CreateDummyDtdForRap1()
 {
+	CALL_MACRO	
 /*
 <!ELEMENT rapport (titre, auteur+, resume, chapitre+)>
 <!ELEMENT auteur (prenom, nom)>
@@ -38,17 +40,23 @@ DtdDoc* DtdDoc::CreateDummyDtdForRap1()
 DtdDoc* Rap1dtd = new DtdDoc();
 
 //creation des diverses composantes de cette Dtd
-DtdPossibleContent* pc1 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
+//DtdPossibleContent* pc1 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, std::string(), DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc2 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "titre", DtdPossibleContent::M_NONE);
-DtdPossibleContent* pc3 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "auteur", DtdPossibleContent::M_PLUS);
-DtdPossibleContent* pc4 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "resume", DtdPossibleContent::M_NONE);
-DtdPossibleContent* pc5 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "chapitre", DtdPossibleContent::M_PLUS);
-pc1->addChild(pc2);
-pc1->addChild(pc3);
-pc1->addChild(pc4);
-pc1->addChild(pc5);
-DtdElement* el0 = new DtdElement("rapport", pc1);
+//DtdPossibleContent* pc3 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, std::string("auteur"), DtdPossibleContent::M_PLUS);
+//DtdPossibleContent* pc4 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, std::string("resume"), DtdPossibleContent::M_NONE);
+//DtdPossibleContent* pc5 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, std::string("chapitre"), DtdPossibleContent::M_PLUS);
+//pc1->addChild(pc2);
+//pc1->addChild(pc3);
+//pc1->addChild(pc4);
+//pc1->addChild(pc5);
+pc2->toStream(std::cout);
+//pc3->toStream(std::cout);
+//pc4->toStream(std::cout);
+//pc5->toStream(std::cout);
 
+//DtdElement* el0 = new DtdElement("rapport", pc1);
+//el0->toStream(std::cout);
+/*
 DtdPossibleContent* pc11 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc12 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "prenom", DtdPossibleContent::M_NONE);
 DtdPossibleContent* pc13 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "nom", DtdPossibleContent::M_NONE);
@@ -110,7 +118,7 @@ Rap1dtd->AddElement(el6);
 Rap1dtd->AddElement(el7);
 Rap1dtd->AddElement(el8);
 
-
+*/
 
 return Rap1dtd;
 }

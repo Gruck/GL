@@ -19,8 +19,8 @@ bool DtdElement::hasAttribute(const std::string& attrName) const {
 void DtdElement::toStream( std::ostream& stream ){
   // element
   stream << "<!ELEMENT " << name() << " ";
-  //if(_possibleContent)
-  //  _possibleContent->toStream(stream);
+  if(_possibleContent)
+    _possibleContent->toStream(stream);
   stream << " >\n";
   // attributs
   AttributeMap::iterator iter = firstAttribute();

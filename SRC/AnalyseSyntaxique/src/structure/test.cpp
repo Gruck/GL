@@ -6,7 +6,7 @@
 #include "XmlAttribute.h"
 #include "XmlText.h"
 #include "XmlDoc.h"
-
+#include "DtdDoc.h"
 
 
 
@@ -35,6 +35,8 @@ int main(){
   assert( (elt->childElement(0)->childElement(0)->parent() == elt->childElement(0) ) );
   std::cout << "...add an element from constructor\n";
   
+
+  DtdDoc::CreateDummyDtdForRap1()->toStream(std::cout);
   
 
   doc.toStream(std::cout);

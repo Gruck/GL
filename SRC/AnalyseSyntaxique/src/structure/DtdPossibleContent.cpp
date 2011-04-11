@@ -7,7 +7,8 @@ void DtdPossibleContent::toStream( std::ostream& stream, int indentation )
 {
 	//le parcours ici est assez simple
 	
-	if(this->_type == T_ELEM){//si c'est un element, ne pas le faire précer par une parenthese
+	if(this->_type == T_ELEM){//si c'est un element, ne pas le faire précéder
+                            //par une parenthese
 		stream<<this->_value;
 		stream<<ToStr(this->_multiplicity);		
 		

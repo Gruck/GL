@@ -23,6 +23,7 @@ XmlElement* XmlElement::childElement(int nth){
 }
 
 XmlElement* XmlElement::childElement(const std::string& name, int nth){
+  CALL_MACRO
   ContentListIterator iter = firstChild();
   ContentListIterator stop = childrenEnd();
   for(;iter != stop; ++iter){

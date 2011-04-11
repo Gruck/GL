@@ -64,6 +64,7 @@ XmlDoc* XmlDoc::CreateDummyXmlForRap1()
   elt->childElement("chapitre")->childElement("section",1)->childElement("p")->addChild(new XmlText("tqjkgjushgioshgids<sdhw<  wfgj sfkijghsdhsjjdghoidhgoi idrh w qrih goiwdh owdih oiwdhg iwh n" ));
 
 
+
 	return rap1xml;
 	
 	

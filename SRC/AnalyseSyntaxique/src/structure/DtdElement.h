@@ -80,9 +80,16 @@ public:
    * Renvoie un pointeur nul dans si l'élément n'existe pas.
    */ 
   std::string* findAttribute(const std::string& attrName);
-
-  // prints the rule
-  // void toStream( std::ostream& stream, int indentation = 0 );
+  
+   /**
+   * Affiche dans un flux standard l'élément courant ainsi que ses contenu fils
+   * récursivement.
+   *
+   * Le paramêtre indentation fixe le niveau d'indentation de l'élément et est
+   * incrémenté par les éléments fils. Dans le cas général il n'a pas besoin
+   * d'être précisé par l'utilisateur.
+   */ 
+  void toStream( std::ostream& stream, int indentation = 0 );
   
 private:
   std::string _name;

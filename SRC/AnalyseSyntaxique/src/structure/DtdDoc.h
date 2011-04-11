@@ -33,6 +33,8 @@ public:
    * Permet l'ajout d'un element Dtd.
    */ 
    void AddElement(DtdElement *element);
+   
+
   
   
   

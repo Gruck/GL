@@ -6,26 +6,46 @@ using namespace std;
 #include <cstdio>
 #include <cstdlib>
 
+#include "DtdDoc.h"
+#include "DtdElement.h"
+#include "DtdAttribute.h"
+#include "DtdPossibleContent.h"
 
 void dtderror(char *msg);
 int dtdwrap(void);
 int dtdlex(void);
+
+
+/*root node of the dtd collection*/
+DtdDoc *DtdDataStructure;
+/*Highlighted node in the collection*/
+DtdElement *CurrentDtdNode = 0;
+/*Root possible content*/
+DtdPossibleContent *RootPossibleContent =0;
+
+
 %}
 
 %union { 
-   char *s; 
+   char *s;
+   DtdPossibleContent::Multiplicity c;
    }
 
 %token ELEMENT ATTLIST CLOSE OPENPAR CLOSEPAR COMMA PIPE FIXED EMPTY ANY PCDATA AST QMARK PLUS CDATA
 %token <s> NAME TOKENTYPE DECLARATION STRING
+%type <c> cardinalite
 %%
 
-main: dtd                           
-    ;
+main: dtd {DtdDataStructure = new DtdDoc("");}                
+    ; 
 
-dtd: dtd ATTLIST NAME 
-     att_definition CLOSE            
-   | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE
+dtd: dtd ATTLIST NAME att_definition CLOSE 
+   | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE 
+        {
+            // Instanciation du de l'élément et de sa liste a la detection du tag élément
+            RootPossibleContent = new DtdPossibleContent(DtdPossibleContent::T_ELEM,string("root"),$5);
+            CurrentDtdNode = new DtdElement(string($3),RootPossibleContent);
+        }
    | /* empty */                     
    ;
 
@@ -39,14 +59,38 @@ choix: OPENPAR liste_choix_plus CLOSEPAR
 sequence: OPENPAR liste_sequence CLOSEPAR
         ;
 
-cardinalite: AST|QMARK|PLUS| /* empty */
+cardinalite
+       : AST
+       {
+            $$ = DtdPossibleContent::M_AST;
+       }
+       |QMARK 
+       {
+            $$ = DtdPossibleContent::M_QMARK;
+       }
+       |PLUS 
+       {
+            $$ = DtdPossibleContent::M_PLUS;
+       }
+       | /* empty */ 
+       {
+            $$ = DtdPossibleContent::M_NONE;
+       }
 	   ;
 
 liste_choix_plus: liste_choix PIPE item
+        {
+            // A  la détection d'une liste de choix on instancie un possible Content    
+            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+        }
 		;
 
 liste_sequence: item 
 	      | liste_sequence COMMA item
+        {
+            // A  la détection d'une liste de sequence on instancie un possible Content    
+            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+        }    
 	      ;
 
 item: NAME cardinalite

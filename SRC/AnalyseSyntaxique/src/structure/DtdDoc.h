@@ -14,25 +14,35 @@ class DtdElement;
  */ 
 class DtdDoc {
 public:
+  typedef std::list<DtdElement*> ElementList;
   /**
    * constructeur
    */ 
-  DtdDoc(const std::string& docType) : _doctype(docType) {}
+  DtdDoc(const std::string& docType = "") : _doctype(docType) {}
   /**
    * Renvoie le doctype du document.
    */ 
   const std::string& doctype() const { CALL_MACRO return _doctype; }
-  //todo add accessor to rules.
+  //todo add accessor to_rules.
 
   void toStream(std::ostream& stream);
   
+  /**
+   * Renvoie une DtdDoc* correspondant a ce qui aurait pu etre obtenu par parsing.
+   */ 
+  static DtdDoc* CreateDummyDtdForRap1();
+  
+  /**
+   * Permet l'ajout d'un element Dtd.
+   */ 
+   void AddElement(DtdElement *element);
+
+ 
 private:
   std::string _doctype;
-  std::list<DtdElement *> rules;
+  ElementList _rules;
  
 };
-
-
 
 
 #endif

@@ -12,7 +12,7 @@ extern FILE *dtdin;
 
 extern std::string DtdUrl;
 extern XmlDoc* XmlDataStructure;
-//extern DtdDoc* DtdDataStructure;
+extern DtdDoc* DtdDataStructure;
 
 int main(int argc, char **argv)
 {
@@ -52,6 +52,7 @@ int main(int argc, char **argv)
   
   printf("Coucou j'ai dilété la datastructure.\n");
   delete XmlDataStructure;
+  delete DtdDataStructure;
   return 0;
 
 } 

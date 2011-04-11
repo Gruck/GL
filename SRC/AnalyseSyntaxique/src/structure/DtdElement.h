@@ -3,6 +3,7 @@
 #define HEXALOUTRE_DTDELEMENT_H
 
 //#include "DtdAttribute.h"
+
 #include "Tools.h"
 
 #include <list>
@@ -22,14 +23,12 @@ class DtdElement
 { 
 public:
   typedef std::map<std::string,std::string> AttributeMap;
-  typedef std::list<DtdPossibleContent*> PossibleContentList;
-  typedef std::list<DtdPossibleContent*>::iterator DtdPossibleContentIterator;
 
   /**
    * Constructeur.
    */ 
-  DtdElement(const std::string& name, PossibleContentList& possibleContentList)
-  :  _name(name), _possibleContentList(possibleContentList) { CALL_MACRO }
+  DtdElement(const std::string& name, DtdPossibleContent* possibleContent)
+  :  _name(name), _possibleContent(possibleContent) { CALL_MACRO }
 
   /**
    * revoie le nom de l'élément.
@@ -84,16 +83,15 @@ public:
   std::string* findAttribute(const std::string& attrName);
 
   // prints the rule
-  // void toStream( std::ostream& stream, int indentation = 0 );
+  void toStream( std::ostream& stream );
   
 private:
   std::string _name;
-  PossibleContentList _possibleContentList;
+  DtdPossibleContent* _possibleContent;
   AttributeMap _attributes; //warning, possible confusion with XmlAttribute
   
   
 };
-
 
 
 #endif

@@ -22,41 +22,58 @@ DtdDoc *DtdDataStructure;
 DtdElement *CurrentDtdNode = 0;
 /*Root possible content*/
 DtdPossibleContent *RootPossibleContent =0;
-
-
 %}
 
 %union { 
    char *s;
    DtdPossibleContent::Multiplicity c;
+   DtdPossibleContent* i;
    }
 
 %token ELEMENT ATTLIST CLOSE OPENPAR CLOSEPAR COMMA PIPE FIXED EMPTY ANY PCDATA AST QMARK PLUS CDATA
 %token <s> NAME TOKENTYPE DECLARATION STRING
 %type <c> cardinalite
+%type <i> item choix sequence choix_ou_sequence liste_choix_plus liste_sequence liste_choix
 %%
 
-main: dtd {DtdDataStructure = new DtdDoc("");}                
+main: dtd 
+    {
+        DtdDataStructure = new DtdDoc("");
+    }                
     ; 
 
 dtd: dtd ATTLIST NAME att_definition CLOSE 
    | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE 
         {
             // Instanciation du de l'élément et de sa liste a la detection du tag élément
-            RootPossibleContent = new DtdPossibleContent(DtdPossibleContent::T_ELEM,string("root"),$5);
-            CurrentDtdNode = new DtdElement(string($3),RootPossibleContent);
+            CurrentDtdNode = new DtdElement(string($3),RootPossibleContent); 
+            RootPossibleContent = new DtdPossibleContent(DtdPossibleContent::T_ELEM,string(""),$5);
+            // On initialise le noeud root comme premier noeud parent
+            DtdDataStructure->AddElement(CurrentDtdNode);
         }
    | /* empty */                     
    ;
 
-choix_ou_sequence: choix
-		 | sequence
+choix_ou_sequence: choix 
+         {
+            $$ = $1;   
+         }
+		 | sequence 
+         {
+            $$ = $1;   
+         }
 		 ;
 
 choix: OPENPAR liste_choix_plus CLOSEPAR
+        {
+            $$ = $2;
+        }
      ;
 
 sequence: OPENPAR liste_sequence CLOSEPAR
+        {
+            $$ = $2;
+        }
         ;
 
 cardinalite
@@ -80,26 +97,54 @@ cardinalite
 
 liste_choix_plus: liste_choix PIPE item
         {
-            // A  la détection d'une liste de choix on instancie un possible Content    
-            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+            //
+            $1->addChild($3);
+            $$ = $1;
         }
 		;
 
 liste_sequence: item 
+        {
+            //    
+            $$=$1;
+        }
 	      | liste_sequence COMMA item
         {
-            // A  la détection d'une liste de sequence on instancie un possible Content    
-            //CurrentChoicePossibleContent = new DtdPossibleContent*();
+            //    
+            $1->addChild($3);
+            $$ = $1;
         }    
 	      ;
 
 item: NAME cardinalite
+    {
+        DtdPossibleContent *newDtdContentNode = 
+            new DtdPossibleContent(DtdPossibleContent::T_ELEM,string($1),$2);
+        $$ = newDtdContentNode;    
+    }
     | PCDATA cardinalite
+    {
+        DtdPossibleContent *newDtdContentNode = 
+            new DtdPossibleContent(DtdPossibleContent::T_ELEM,string("#PCDATA"),$2);
+        $$ = newDtdContentNode;  
+    }
     | choix_ou_sequence cardinalite
+    {       
+        // TODO AJOUTER L'IMPLEMENTATION DU SETTER VERS CARDINALITE
+        $1->setMultiplicity($2);
+        $$ = $1;       
+    }
     ;
 
 liste_choix: item
+           {
+                $$ = $1; 
+           }
            | liste_choix PIPE item
+           {
+                $1->addChild($3);
+                $$ = $1;
+           }
            ;
 
 

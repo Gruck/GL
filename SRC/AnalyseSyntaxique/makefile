@@ -11,12 +11,17 @@ DEPSDTD= $(OBJ)/dtd/dtd.tab.o $(OBJ)/dtd/lex.dtd.o
 DEPSAPP= $(OBJ)/main.o
 DEPSSTRXML= $(OBJ)/structure/XmlContent.o $(OBJ)/structure/XmlDoc.o $(OBJ)/structure/XmlElement.o $(OBJ)/structure/XmlValidator.o $(OBJ)/structure/XmlValidatorVisitor.o $(OBJ)/structure/XmlText.o
 DEPSSTRDTD= $(OBJ)/structure/DtdDoc.o $(OBJ)/structure/DtdElement.o $(OBJ)/structure/DtdPossibleContent.o
-STRH= $(SRC)/structure/*.h 
+STRH= $(SRC)/structure/*.h
+MKDIR= MKDIR 
 
-all : $(APP)
+all : $(MKDIR) $(APP)
 
 # Edition des liens, rajouter ici dans la listes de dépendances les ".o"
 # constitués lors de la compilation.
+
+$(MKDIR) :
+	@mkdir -p obj $(OBJ)/xml $(OBJ)/dtd $(OBJ)/structure
+
 $(APP) : $(DEPSXML) $(DEPSDTD) $(DEPSAPP) $(DEPSSTRXML) $(DEPSSTRDTD)
 	@echo "Edition des liens"
 	g++ $(CPPFLAGS) $+ -o $@

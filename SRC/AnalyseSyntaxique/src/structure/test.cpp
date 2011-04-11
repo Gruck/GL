@@ -22,7 +22,7 @@ int main(){
 
   
   
-  XmlAttribute attrib();
+
 
   elt->addChild( new XmlElement( "" ,"pipo" ) );
   XmlText* text = new XmlText("Il faut revaloriser la dynamique manageriale par une revalorisation de l'experience leadership.\n" );
@@ -36,8 +36,9 @@ int main(){
   std::cout << "...add an element from constructor\n";
   
 */
+  XmlDoc::CreateDummyXmlForRap1()->toStream(std::cout);
   DtdDoc::CreateDummyDtdForRap1()->toStream(std::cout);
-  DtdDoc::CreateDummyDtdForRap3()->toStream(std::cout);
+  //DtdDoc::CreateDummyDtdForRap3()->toStream(std::cout);
   
 /*
   doc.toStream(std::cout);

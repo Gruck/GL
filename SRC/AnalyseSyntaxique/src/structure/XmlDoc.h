@@ -51,6 +51,8 @@ public:
    */ 
   bool acceptValidator( XmlValidatorVisitor* validator );
   
+  static XmlDoc* CreateDummyXmlForRap1();
+  
 private:
   std::string _doctype;
   XmlElement* _root; 

@@ -22,12 +22,15 @@ XmlElement* XmlElement::childElement(int nth){
   return 0;
 }
 
-XmlElement* XmlElement::childElement(const std::string& name){
+XmlElement* XmlElement::childElement(const std::string& name, int nth){
   ContentListIterator iter = firstChild();
   ContentListIterator stop = childrenEnd();
   for(;iter != stop; ++iter){
     XmlElement* elt = dynamic_cast<XmlElement*>(*iter);
-    if(elt && (elt->name() == name) ) return elt;
+    if(elt && (elt->name() == name) ) {
+		if(nth == 0) return elt;
+		--nth;
+	}
   }
   return 0;
 }

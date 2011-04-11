@@ -7,6 +7,7 @@
 #include "XmlText.h"
 #include "XmlDoc.h"
 #include "DtdDoc.h"
+#include "DtdElement.h"
 
 
 
@@ -45,12 +46,8 @@ int main(){
   std::cout << "--------------------------------------- print dtd\n";
   dtd->toStream(std::cout);
 
-  //DtdDoc::CreateDummyDtdForRap3()->toStream(std::cout);
-  
-/*
-  doc.toStream(std::cout);
-  std::cout << "\nEnd of the test\n";
-  * */
+  assert( dtd->element("titre")->name() == std::string("titre") );
+
   std::cout << "--------------------------------------- delete xml\n";
   delete xml;
   std::cout << "--------------------------------------- delete dtd\n";

@@ -37,6 +37,7 @@ int main(){
   
 */
   DtdDoc::CreateDummyDtdForRap1()->toStream(std::cout);
+  DtdDoc::CreateDummyDtdForRap3()->toStream(std::cout);
   
 /*
   doc.toStream(std::cout);

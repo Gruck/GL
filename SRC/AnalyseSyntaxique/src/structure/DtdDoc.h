@@ -31,6 +31,10 @@ public:
    * Renvoie une DtdDoc* correspondant a ce qui aurait pu etre obtenu par parsing.
    */ 
   static DtdDoc* CreateDummyDtdForRap1();
+  /**
+   * Renvoie une DtdDoc* correspondant a ce qui aurait pu etre obtenu par parsing.
+   */ 
+  static DtdDoc* CreateDummyDtdForRap3();
   
   /**
    * Permet l'ajout d'un element Dtd.

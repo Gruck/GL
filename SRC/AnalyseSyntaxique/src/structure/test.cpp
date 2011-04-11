@@ -36,7 +36,7 @@ int main(){
   std::cout << "...add an element from constructor\n";
   
 */
-  DtdDoc::CreateDummyDtdForRap1();//->toStream(std::cout);
+  DtdDoc::CreateDummyDtdForRap1()->toStream(std::cout);
   
 /*
   doc.toStream(std::cout);

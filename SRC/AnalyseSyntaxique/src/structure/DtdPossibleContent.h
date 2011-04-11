@@ -17,12 +17,13 @@ public:
     M_PLUS,
     M_NONE} Multiplicity;
     
-  inline static std::string ToStr( Multiplicity multiplicity){
+  inline static std::string ToStr( Multiplicity multiplicity ){
 	 switch(multiplicity){
-		 M_QMARK : return std::string( "?" );
-		 M_AST : return std::string( "*" );
-		 M_PLUS : return std::string( "+" );
-		 M_NONE : return std::string( "" );
+		 case M_QMARK : return std::string( "?" );
+		 case M_AST : return std::string( "*" );
+		 case M_PLUS : return std::string( "+" );
+		 case M_NONE : return std::string( "" );
+		 default : return std::string( "ERROR" );
 	 }
   }
   

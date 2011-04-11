@@ -3,6 +3,7 @@
 #define HEXALOUTRE_DTDELEMENT_H
 
 //#include "DtdAttribute.h"
+
 #include "Tools.h"
 
 #include <list>
@@ -91,7 +92,6 @@ private:
   
   
 };
-
 
 
 #endif

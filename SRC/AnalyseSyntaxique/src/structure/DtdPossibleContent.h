@@ -6,8 +6,6 @@
 #include <list>
 #include "Tools.h"
 
-
-
 /**
  * Décrit un contenu possible d'un noeud xml (XmlElement).
  */ 
@@ -17,11 +15,14 @@ public:
     M_QMARK,     /*M(ultiplicity)_QMARK */
     M_AST,
     M_PLUS,
-    M_NONE} Multiplicity;
-  typedef enum{
+    M_NONE
+   } Multiplicity;
+   
+   typedef enum{
     T_SEQUENCE, /*T(ype)_SEQUENCE */
     T_CHOICE,
-    T_ELEM} Type;
+    T_ELEM
+   } Type;
 
   typedef std::list<DtdPossibleContent*> PossibleContentList;
     
@@ -88,8 +89,6 @@ private:
   std::list<DtdPossibleContent*> _children;
  
 };
-
-
 
 
 #endif

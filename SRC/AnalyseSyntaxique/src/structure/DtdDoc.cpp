@@ -22,6 +22,21 @@ void DtdDoc::AddElement(DtdElement *element)
 	_rules.push_back(element);
 }
 
+
+
+DtdElement* DtdDoc::element(const std::string& eltName){
+  ElementList::iterator iter = _rules.begin();
+  ElementList::iterator stop = _rules.end();
+  for(;iter!=stop;++iter){
+    if((*iter)->name() == eltName){
+      return (*iter);
+    }
+  }
+  return 0;
+}
+
+
+
 DtdDoc* DtdDoc::CreateDummyDtdForRap1()
 {
 	CALL_MACRO	

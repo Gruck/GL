@@ -39,8 +39,13 @@ public:
   /**
    * Permet l'ajout d'un element Dtd.
    */ 
-   void AddElement(DtdElement *element);
+  void AddElement(DtdElement *element);
 
+  /**
+   * 
+   */  
+  DtdElement* element(const std::string& eltNmae);
+  
 private:
   std::string _doctype;
   ElementList _rules;

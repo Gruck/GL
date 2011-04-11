@@ -36,12 +36,23 @@ int main(){
   std::cout << "...add an element from constructor\n";
   
 */
-  XmlDoc::CreateDummyXmlForRap1()->toStream(std::cout);
-  DtdDoc::CreateDummyDtdForRap1()->toStream(std::cout);
+  std::cout << "--------------------------------------- create xml\n"; 
+  XmlDoc* xml = XmlDoc::CreateDummyXmlForRap1();
+  std::cout << "--------------------------------------- create dtd\n";
+  DtdDoc* dtd = DtdDoc::CreateDummyDtdForRap3();
+  std::cout << "--------------------------------------- print xml\n";
+  xml->toStream(std::cout);
+  std::cout << "--------------------------------------- print dtd\n";
+  dtd->toStream(std::cout);
+
   //DtdDoc::CreateDummyDtdForRap3()->toStream(std::cout);
   
 /*
   doc.toStream(std::cout);
   std::cout << "\nEnd of the test\n";
   * */
+  std::cout << "--------------------------------------- delete xml\n";
+  delete xml;
+  std::cout << "--------------------------------------- delete dtd\n";
+  delete dtd;
 }

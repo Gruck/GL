@@ -1,4 +1,3 @@
-
 #ifndef HEXALOUTRE_XMLELEMENT_H
 #define HEXALOUTRE_XMLELEMENT_H
 
@@ -131,6 +130,11 @@ public:
    * par itération)
    */ 
   XmlElement* childElement(int nth);
+  
+  /**
+   * Cette méthode fournit un accès facile au n-ième XmlContnet fils 
+   */ 
+  XmlContent* childContent(int nth);
   
   /**
    * Méthode non générique pour accéder uniquement aux XmlElement fils.

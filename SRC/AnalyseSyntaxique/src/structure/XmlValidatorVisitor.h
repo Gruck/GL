@@ -46,7 +46,7 @@ public:
 private:
   DtdDoc* _dtdDoc;
   bool visitContent(XmlElement* xmlElement);
-  bool visitContentRecurse(XmlElement* xmlElement, XmlElement::ContentListIterator& currentXmlChildIterator, DtdPossibleContent* possibleContent, DtdPossibleContent::PossibleContentIterator& currentDtdChildIterator);
+  bool visitContentRecurse(XmlElement* xmlElement, int currentXmlChildIndex, DtdPossibleContent* possibleContent, int currentDtdChildIndex);
 
 
 };

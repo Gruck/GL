@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include "DtdPossibleContent.h"
+#include "communDtd.h"
 
 
 #include "dtd.tab.h"

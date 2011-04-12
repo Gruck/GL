@@ -23,19 +23,11 @@ class XmlText;
 namespace XmlValidator
 { 
 
- // XmlValidator(DtdDoc* dtdDoc)
-  // : _dtdDoc(dtdDoc){}
-
-//public:
   /**
    * Valide un document XML selon une DTD.
    */ 
-  //bool validate( XmlDoc* xmlDoc) const;
   bool validate( XmlDoc* xmlDoc, DtdDoc* dtdDoc);
    
-//private:
-// DtdDoc* _dtdDoc;
-  
   
 };
 

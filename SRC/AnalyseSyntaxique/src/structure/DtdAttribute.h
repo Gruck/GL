@@ -7,9 +7,6 @@
 // ----------------------------------------------
 
 
-
-
-
 #ifndef HEXALOUTRE_DTDATTRIBUTE_H
 #define HEXALOUTRE_DTDATTRIBUTE_H
 

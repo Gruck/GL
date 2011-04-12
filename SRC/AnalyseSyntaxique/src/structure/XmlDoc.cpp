@@ -18,6 +18,7 @@ void XmlDoc::toStream(std::ostream& stream){
 }
 
 bool XmlDoc::acceptValidator( XmlValidatorVisitor* validator ){
+  CALL_MACRO
   return validator->visit(this);
 }
 

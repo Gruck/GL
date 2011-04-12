@@ -8,6 +8,7 @@
 #include "XmlDoc.h"
 #include "DtdDoc.h"
 #include "DtdElement.h"
+#include "XmlValidator.h"
 
 
 
@@ -44,9 +45,12 @@ int main(){
   std::cout << "--------------------------------------- print xml\n";
   xml->toStream(std::cout);
   std::cout << "--------------------------------------- print dtd\n";
-  dtd->toStream(std::cout);
+  dtd->toStream(std::cout); 
 
   assert( dtd->element("titre")->name() == std::string("titre") );
+  
+  std::cout << "--------------------------------------- Validation du Xml\n";
+  XmlValidator::validate(xml, dtd);
 
   std::cout << "--------------------------------------- delete xml\n";
   delete xml;

@@ -34,6 +34,7 @@ public:
    } Type;
 
   typedef std::list<DtdPossibleContent*> PossibleContentList;
+  typedef std::list<DtdPossibleContent*>::iterator PossibleContentIterator;
     
 	/**
    * Constructeur.

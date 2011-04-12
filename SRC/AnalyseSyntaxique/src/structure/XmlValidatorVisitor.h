@@ -2,11 +2,15 @@
 #ifndef HEXALOUTRE_XMLVALIDATORVISITOR_H
 #define HEXALOUTRE_XMLVALIDATORVISITOR_H
 
+#include "DtdPossibleContent.h"
+#include "XmlElement.h"
 class DtdDoc;
 class XmlDoc;
 class XmlContent;
 class XmlElement;
 class XmlText;
+class DtdPossibleContent;
+//class DtdPossibleContent::PossibleContentIterator;
 
 /**
  * Implémentation, sur le modèle du design pattern visitor, de la validation d'un
@@ -41,6 +45,9 @@ public:
   
 private:
   DtdDoc* _dtdDoc;
+  bool visitContent(XmlElement* xmlElement);
+  bool visitContentRecurse(XmlElement* xmlElement, XmlElement::ContentListIterator& currentXmlChildIterator, DtdPossibleContent* possibleContent, DtdPossibleContent::PossibleContentIterator& currentDtdChildIterator);
+
 
 };
 

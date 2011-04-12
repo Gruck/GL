@@ -92,6 +92,11 @@ public:
    */ 
   void toStream( std::ostream& stream );
   
+  /**
+   * Obtient le possibleContent associé a ce noeud
+   */ 
+    DtdPossibleContent* getPossibleContent(){return _possibleContent;}
+  
 private:
   std::string _name;
   DtdPossibleContent* _possibleContent;

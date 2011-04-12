@@ -118,5 +118,6 @@ XmlElement::~XmlElement(){
 }
 
 bool XmlElement::acceptValidator( XmlValidatorVisitor* validator ){
+	CALL_MACRO
   return validator->visit(this);
 }

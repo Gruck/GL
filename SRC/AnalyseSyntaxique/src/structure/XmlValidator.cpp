@@ -9,7 +9,7 @@
   
   
   //bool XmlValidator::validate( XmlDoc* xmlDoc) const
-  bool validate( XmlDoc* xmlDoc, DtdDoc* dtdDoc)
+  bool XmlValidator::validate( XmlDoc* xmlDoc, DtdDoc* dtdDoc)
   {
 	CALL_MACRO
 	//creer le XmlValidatorVisitor

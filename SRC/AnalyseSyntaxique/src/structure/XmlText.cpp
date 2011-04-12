@@ -5,6 +5,7 @@
 
 
 bool XmlText::acceptValidator( XmlValidatorVisitor* validator ){
+	CALL_MACRO
   return validator->visit(this);
 }
 

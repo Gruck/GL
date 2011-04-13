@@ -49,8 +49,11 @@ private:
   bool visitContent(XmlElement* xmlElement);
   bool checkAttributes(XmlElement* xmlElement);
   bool checkContent(XmlElement* xmlElement);
-  bool visitContentRecurse(XmlElement* xmlElement, XmlElement::ContentListIterator& currentXmlChildIterator, DtdPossibleContent* possibleContent, DtdPossibleContent::PossibleContentIterator currentDtdChildIterator);
-
+   
+  bool visitContentRecurse(
+    DtdPossibleContent* possibleContent
+    , XmlElement::ContentListIterator& xmlIter
+    , const XmlElement::ContentListIterator& xmlIterStop );
 
 };
 

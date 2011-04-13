@@ -37,7 +37,7 @@ public:
   /**
    * Renvoie le nom de la balise XML.
    */ 
-  inline std::string name() const { return _name; }
+  std::string name() const { return _name; }
 
   /**
    * Renvoie l'espace de nom de la balise XML.

@@ -28,6 +28,8 @@ public:
    */  
   XmlElement* parent() { CALL_MACRO return _parent; }
 
+  virtual std::string name() const = 0;
+
   /**
    * Affiche le contenu XML dans un flux standard.
    *

@@ -28,6 +28,14 @@ public:
   std::string& text() { CALL_MACRO return _data; }
 
   /**
+   * Renvoie un nom fictif désignant en réalité le type de ce noeud xml, du texte.
+   *
+   * Cette entourloupe permet de valider BIEN PLUS FACILEMENT le xml via une dtd
+   * (beaucoup moins de dynamic cast à faire pour rien)
+   */ 
+  std::string name() const { return "#PCDATA"; }
+
+  /**
    * Permet de réaliser le "double dispatch" nécessaire à l'application du design
    * pattern visitor implémenté au niveau de l'algorithme de validation. 
    */ 

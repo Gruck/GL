@@ -26,72 +26,46 @@ bool XmlValidatorVisitor::visit( XmlDoc* xmlDoc){
 bool XmlValidatorVisitor::visit( XmlContent* content){
   CALL_MACRO
   
-  
+  std::cout<<"on ne devrait jamais passer par ici"<<std::endl;
   
 }
 
 bool XmlValidatorVisitor::visit( XmlElement* xmlElement){
   CALL_MACRO
 
-
+ std::cout<<"visiting element called : "<<xmlElement->name()<<std::endl;
   XmlElement::ContentListIterator it = xmlElement->firstChild();
   for(;it != xmlElement->childrenEnd();it++){
-	 
-	  if(!((*it)->acceptValidator(this)))
+		if(!(*it)->acceptValidator(this)){
+			std::cout<<"un de mes fils est invalide"<<std::endl;
+			return false;
+		}
+	}
+  if(!checkAttributes(xmlElement)){//mes attributs
+  std::cout<<"mes attributs sont invalides"<<std::endl;
 		return false;
-	  else if(!visitContent(xmlElement))
+	}else if(!checkContent(xmlElement)){//mon contenu
+	std::cout<<"mon contenu est invalide"<<std::endl;
 		return false;
-	  else {
-	  }
-		//do nothing
-  }
-  
+	}
+	std::cout<<"l'element "<< xmlElement->name() << " est valide"<<std::endl;  
   return true; //un noeud est valide tant qu'on a pas prouvé qu'il était invalide
 }
 
-bool XmlValidatorVisitor::visitContent(XmlElement* xmlElement)
-{
+bool XmlValidatorVisitor::checkAttributes(XmlElement* xmlElement){
 	CALL_MACRO
-	//trouver la définition dtd de cet element
-	//comparer avec ce qui peut etre fait
-	//XmlElement::ContentListIterator itXml = xmlElement->firstChild();
-	//DtdPossibleContent::PossibleContentIterator itDtd_dtdDoc->element(xmlElement->name())->getPossibleContent()->firstChild());
-	/*
-	int i=0,j=0;
 	
-	for(;it != xmlElement->childrenEnd(); it++){
-		if(!visitContentRecurse(xmlElement, itXml, _dtdDoc->element(xmlElement->name())->getPossibleContent(), itDtd)
-			return false;
-	}*/
+	//trouver la définition dtd de cet element,
+	//verifier que pour tout element de la map d'attributs, on ai un équivalent dans la dtd
 	return true;
-	
 }
 
-bool XmlValidatorVisitor::visitContentRecurse(XmlElement* xmlElement, int currentXmlChildIndex, DtdPossibleContent* possibleContent, int currentDtdChildIndex)
-{
-	//DANGER : 
-	/*POURQUOI DES REFERENCES
-	 * Car celles ci sont pour interet de permettre de transmettre plus facilement aux autres niveaux
-	 * POURQUOI SANS REFERENCES
-	 * Car plus évident pour l'implementation du backtracking
-	 */
-	/*
+bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
 	CALL_MACRO
-	//trois choix possibles basé sur le type du possible content
-
-    if(possibleContent->type() ==   DtdPossibleContent::T_ELEM){
-		//c'est simple, il faut que le nom corresponde ! 
-		if(!(possibleContent->value() == xmlElement->name()))
-			return false;
-	}else if(possibleContent->type() ==  DtdPossibleContent::T_SEQUENCE){
-		//il faut que tout ses dtdPossibleContents fils matchent qqc
-		
-		
-	}else{
-		
-	}
-	*/
 	
+	//trouver la définition dtd de cet element,
+	//verifier que pour tout element de la map d'attributs, on ai un équivalent dans la dtd
+	return true;
 }
 
 

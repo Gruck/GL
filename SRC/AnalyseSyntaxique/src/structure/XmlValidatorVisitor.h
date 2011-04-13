@@ -45,8 +45,11 @@ public:
   
 private:
   DtdDoc* _dtdDoc;
+  
   bool visitContent(XmlElement* xmlElement);
-  bool visitContentRecurse(XmlElement* xmlElement, int currentXmlChildIndex, DtdPossibleContent* possibleContent, int currentDtdChildIndex);
+  bool checkAttributes(XmlElement* xmlElement);
+  bool checkContent(XmlElement* xmlElement);
+  //bool visitContentRecurse(XmlElement* xmlElement, int& currentXmlChildIndex, DtdPossibleContent* possibleContent, int& currentDtdChildIndex);
 
 
 };

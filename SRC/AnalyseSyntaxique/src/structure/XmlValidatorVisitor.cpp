@@ -77,32 +77,97 @@ bool XmlValidatorVisitor::visit( XmlText* xmlText){
   return true;
 }
 
-bool XmlValidatorVisitor::visitContentRecurse(XmlElement* xmlElement, XmlElement::ContentListIterator& currentXmlChildIterator, DtdPossibleContent* possibleContent, DtdPossibleContent::PossibleContentIterator currentDtdChildIterator){
-	CALL_MACRO
-	
-	//faire une copie des itérateurs.
-	XmlElement::ContentListIterator SAVEcurrentXmlChildIterator = currentXmlChildIterator;
-	DtdPossibleContent::PossibleContentIterator SAVEcurrentDtdChildIterator = currentDtdChildIterator;
-	
-	//faire la différence suivant les différents types de contenus possibles
-	
-	if(possibleContent->type() == DtdPossibleContent::T_CHOICE){
-		return true;
-	}else if(possibleContent->type() == DtdPossibleContent::T_SEQUENCE){
-		//faire la différence suivant la multiplicité
-		switch(possibleContent->multiplicity()){
-			case DtdPossibleContent::M_QMARK : {return true; break;}
-			case DtdPossibleContent::M_AST : {return true; break;}
-			case DtdPossibleContent::M_PLUS : {return true; break;}
-			case DtdPossibleContent::M_NONE : {/*visitContentRecurse(xmlElement, currentXmlChildIterator,*/   break;}
-			default : std::cout<<"la multiplicité indiqué dans le possibleContent n'est pas légale\n";
-		}
-	}else if(possibleContent->type() == DtdPossibleContent::T_ELEM){
-		
-	}else{
-		std::cout<<"dtd possible content invalide, n'est ni une sequance, ni un choix, un rien du tout ^^"<<std::endl;
-		return false;
-	}
-	return true;
-}
+bool XmlValidatorVisitor::visitContentRecurse(
+  DtdPossibleContent* possibleContent
+  , ContentListIterator& xmlIter
+  , ContentListIterator& xmlIterStop )
+{
+  ContentListIterator& xmlIterCopy; // copie l'avancement actuel dans les fils de l'elt xml
 
+  // en fonction du type d'opération (Et, Ou, element)
+  switch( possibleContent->type() ){
+    case T_SEQ : { // --------------------------------------------- Sequence (ET)
+      // en fonction de la multiplicité
+      switch(possibleContent->multiplicity() ){
+        case : M_NONE{ 
+          bool status = true;
+          // préparation de l'itérateur et de la condition d'arrete de boucle
+          DtdPossibleContent::PossibleContentIterator
+            dtdIter = possibleContent->firstChild();
+          DtdPossibleContent::PossibleContentIterator
+            dtdIterStop = possibleContent->childrenEnd();
+          // iteration sur les contenus possibles fils   
+          for(; dtdIter != dtdIterStop; ++dtdIter ){
+            status &= contentRecurse(*dtdIter, xmlIter, xmlIterStop);
+          }
+          return status; // retour
+          
+        }case M_AST : { // multiplicite "*" 
+          bool status = true;
+          // tant que le contenu xml correspon, on récurse pour faire avancer
+          // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
+          while(status){ 
+            // préparation de l'itérateur et de la condition d'arrete de boucle
+            DtdPossibleContent::PossibleContentIterator
+              dtdIter = possibleContent->firstChild();
+            DtdPossibleContent::PossibleContentIterator
+              dtdIterStop = possibleContent->childrenEnd();
+            // iteration sur les contenus possibles fils   
+            for(; dtdIter != dtdIterStop; ++dtdIter ){
+              status &= contentRecurse(*dtdIter, xmlIter, xmlIterStop);
+            }
+            //xmlIterCopy représente la dernière position "valide" (sorte de backtrack)
+            if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+          }
+          xmlIter = xmlIterCopy; //on revient à la dernière position valide
+          // dans le cas multiplicité * on renvoie toutjour true, mais on est
+          // content d'avoir fait les opérations précédents car on a pu faire
+          // avancer l'itérateur xmlIter
+          return true; 
+        }case M_PLUS : {
+          bool status = true;
+          bool foundOne = false;
+          while(status){
+            for(dtdIter in possibleContent.children ){
+              status &= contentRecurse(*dtdIter, xmlIter, xmlIterStop);
+              foundOne |= status; // si on en a trouvé un foundOne = true
+            }
+            if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+          }
+          xmlIter = xmlIterCopy; //on revient à la dernière position valide
+          return foundOne;
+        }
+      }
+    }
+    case : T_CHOICE { // -------------------------------------------------------
+      assert("Choice" == "not supported yet!");
+    }
+    case : T_ElT { // ----------------------------------------------------------
+      switch( possibleContent->multiplicity() ){
+        case M_NONE : {  
+          bool status = ( possibleContent->name() == (*xmlIter)->name() )
+          ++xmlIter;
+          return status;
+        }
+        case M_AST : {
+          while( possibleContent->name() == (*xmlIter)->name() ){
+            ++xmlIter;
+            // ne pas oublier de vérifier qu'on itère pas en dehors de la liste
+            if(xmlIter == xmlIterEnd) return true;
+          }
+          return true;
+        }
+        case M_PLUS : {
+          bool foundOne = false;
+          while( possibleContent->name() == (*xmlIter)->name() ){
+            foundOne = true;
+            ++xmlIter;
+            // ne pas oublier de vérifier qu'on itère pas en dehors de la liste
+            if(xmlIter == xmlIterEnd) return foundOne;
+          }
+          return foundOne;
+        }
+      }
+    }
+  }
+}

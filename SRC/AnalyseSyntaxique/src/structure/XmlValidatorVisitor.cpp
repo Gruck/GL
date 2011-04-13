@@ -64,7 +64,10 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
 	CALL_MACRO
 	
 	//trouver la définition dtd de cet element,
-	//verifier que pour tout element de la map d'attributs, on ai un équivalent dans la dtd
+	//verifier que le contenu de cet element est valide vis a vis de la dtd
+	
+	
+	
 	return true;
 }
 
@@ -72,5 +75,34 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
 bool XmlValidatorVisitor::visit( XmlText* xmlText){
   CALL_MACRO
   return true;
+}
+
+bool XmlValidatorVisitor::visitContentRecurse(XmlElement* xmlElement, XmlElement::ContentListIterator& currentXmlChildIterator, DtdPossibleContent* possibleContent, DtdPossibleContent::PossibleContentIterator currentDtdChildIterator){
+	CALL_MACRO
+	
+	//faire une copie des itérateurs.
+	XmlElement::ContentListIterator SAVEcurrentXmlChildIterator = currentXmlChildIterator;
+	DtdPossibleContent::PossibleContentIterator SAVEcurrentDtdChildIterator = currentDtdChildIterator;
+	
+	//faire la différence suivant les différents types de contenus possibles
+	
+	if(possibleContent->type() == DtdPossibleContent::T_CHOICE){
+		return true;
+	}else if(possibleContent->type() == DtdPossibleContent::T_SEQUENCE){
+		//faire la différence suivant la multiplicité
+		switch(possibleContent->multiplicity()){
+			case DtdPossibleContent::M_QMARK : {return true; break;}
+			case DtdPossibleContent::M_AST : {return true; break;}
+			case DtdPossibleContent::M_PLUS : {return true; break;}
+			case DtdPossibleContent::M_NONE : {/*visitContentRecurse(xmlElement, currentXmlChildIterator,*/   break;}
+			default : std::cout<<"la multiplicité indiqué dans le possibleContent n'est pas légale\n";
+		}
+	}else if(possibleContent->type() == DtdPossibleContent::T_ELEM){
+		
+	}else{
+		std::cout<<"dtd possible content invalide, n'est ni une sequance, ni un choix, un rien du tout ^^"<<std::endl;
+		return false;
+	}
+	return true;
 }
 

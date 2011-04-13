@@ -49,7 +49,7 @@ private:
   bool visitContent(XmlElement* xmlElement);
   bool checkAttributes(XmlElement* xmlElement);
   bool checkContent(XmlElement* xmlElement);
-  //bool visitContentRecurse(XmlElement* xmlElement, int& currentXmlChildIndex, DtdPossibleContent* possibleContent, int& currentDtdChildIndex);
+  bool visitContentRecurse(XmlElement* xmlElement, XmlElement::ContentListIterator& currentXmlChildIterator, DtdPossibleContent* possibleContent, DtdPossibleContent::PossibleContentIterator currentDtdChildIterator);
 
 
 };

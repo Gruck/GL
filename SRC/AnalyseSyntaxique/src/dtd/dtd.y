@@ -22,7 +22,7 @@ std::list<DtdElement*> listElements;
 /*liste d'attributs*/
 ListAttributesPerElement listAttributesPerElement;
 
-/*root node of the dtd collection*/
+/*Noeud root de l'arborescence*/
 DtdDoc *DtdDataStructure = 0;
 %}
 
@@ -46,19 +46,24 @@ DtdDoc *DtdDataStructure = 0;
 
 main: dtd 
     {
-        cout << "Création de la structure de base"<<endl;
+		/*Instanciation du socle de la structure de donnee */
         DtdDataStructure = new DtdDoc("");
+		/* GESTION DES ELEMENTS */
         for (std::list<DtdElement*>::iterator it = listElements.begin(); it != listElements.end(); it++)
-        {
+		{
             DtdDataStructure->AddElement(*it);
         }
+		/* GESTION DES ATTRIBUTS */
 		for (ListAttributesPerElement::iterator it = listAttributesPerElement.begin();
-				it != listAttributesPerElement.end(); it++) 
+				it != listAttributesPerElement.end(); it++)
+		/* Pour chaque attribut détecté dans le fichier */
 		{
-			printf((*it)->element.c_str());
+			/* On recherche l'element concerné par cet attribut */
 			DtdElement* element = DtdDataStructure->element((*it)->element);
 			if(element != 0)
 			{
+				/* Si il est valide, on copie tout les attributs dans la structure 
+				 * dans les éléments */
 				for (ListAttributes::iterator itAt = (*it)->attributes.begin();
 												itAt != (*it)->attributes.end() ; itAt++) 
 				{
@@ -70,17 +75,20 @@ main: dtd
     ; 
 
 dtd: dtd ATTLIST NAME att_definition CLOSE 
-        {
+        /*Détection d'une ATTLIST*/
+		{
             S_Attribute *newAttribute = new S_Attribute;
             newAttribute->attributes = *$4;
-			delete $4;
+			delete $4; /* destruction de la liste de pointeur utilisée */
             newAttribute->element = string($3);
             listAttributesPerElement.push_back(newAttribute);
         }
    | dtd ELEMENT NAME choix_ou_sequence cardinalite CLOSE 
-        {
-            cout << "Création d'un élément"<<endl;
+        /*Détection d'un élément*/
+		{
+			/*Recuperation de la cardinalite liee a la liste de contenu detecte*/
             $4->setMultiplicity($5);
+			/*Instanciation et stockage de l'element dans la liste d'elements*/
             DtdElement *CurrentDtdNode = new DtdElement(string($3),$4);
             listElements.push_back(CurrentDtdNode);
         }
@@ -89,21 +97,21 @@ dtd: dtd ATTLIST NAME att_definition CLOSE
 
 choix_ou_sequence: choix 
          {
-            
-            cout << "sélection d'un choix"<<endl;
             $$ = $1;   
          }
 		 | sequence 
          {
-            
-            cout << "sélection d'une séquence"<<endl;
             $$ = $1;   
          }
 		 ;
 
 choix: OPENPAR liste_choix_plus CLOSEPAR
+		/* L'element de choix fait office de noeud dans notre arborecence 
+		 * ainsi, nous instancions un nouvel objet de type DtdPossibleContent
+		 * qui sera ensuite retourné, qui va encapsuler la liste de choix 
+		 * construite auparavant par le parser.
+		 */
         {
-            cout << "Créaton d'une Liste choix"<<endl;
             DtdPossibleContent *newContent = new DtdPossibleContent(DtdPossibleContent::T_CHOICE,"",DtdPossibleContent::M_NONE);
             for (std::list<DtdPossibleContent*>::iterator it = $2->begin(); it != $2->end(); it++)
             {
@@ -115,8 +123,10 @@ choix: OPENPAR liste_choix_plus CLOSEPAR
      ;
 
 sequence: OPENPAR liste_sequence CLOSEPAR
+		/* Nous récupérons une séquence de possible Content 
+		 * que nous encapsulons dans un objet de type DtdPossibleContent
+		 */
         {
-            cout << "Création d'une liste séquence"<<endl;
             DtdPossibleContent *newContent = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE,"",DtdPossibleContent::M_NONE);
             for(std::list<DtdPossibleContent*>::iterator it = $2->begin(); it != $2->end(); it++)
             {
@@ -130,63 +140,74 @@ sequence: OPENPAR liste_sequence CLOSEPAR
 cardinalite
        : AST
        {
-            cout << "Cardinalité Astérisque"<<endl;
             $$ = DtdPossibleContent::M_AST;
        }
        |QMARK 
        {
-        
-            cout << "Cardinalité QMARK"<<endl;
             $$ = DtdPossibleContent::M_QMARK;
        }
        |PLUS 
        {
-            cout << "Cardinalité PLUS"<<endl;
             $$ = DtdPossibleContent::M_PLUS;
        }
        | /* empty */ 
        {
-            cout << "Cardinalité Bonne soeur"<<endl;
             $$ = DtdPossibleContent::M_NONE;
        }
 	   ;
 
 liste_choix_plus: liste_choix PIPE item
-        {
-            //
+        /* Etape permettant d'éviter un conflit
+		 */
+		{
             $1->push_back($3);
             $$ = $1;
         }
 		;
 
 liste_sequence: item 
-        {
-            //
+		/* Lorsque l'on rencontre un item simple
+		 * c'est que nous sommes en début de liste
+		 * ainsi on instancie une nouvelle liste 
+		 * et on ajoute le premier element
+		 */
+		{
             ListContent *newList = new ListContent;
             newList->push_back($1);  
             $$= newList;
         } 
 	      | liste_sequence COMMA item
+		/* On ajoute en fin de liste l'élément détecté
+		 * et on remonte la liste
+		 */
         {
-            //    
             $1->push_back($3);
             $$ = $1;
         }    
 	      ;
 
 item: NAME cardinalite
+	/* Instanciation d'un DtdPossibleContent*/
     {
         DtdPossibleContent *newDtdContentNode = 
         new DtdPossibleContent(DtdPossibleContent::T_ELEM,string($1),$2);
         $$ = newDtdContentNode;    
     }
     | PCDATA cardinalite
+	/* Un #PCDATA est condsidere comment element normal au nom fixe
+	 * #PCDATA
+	 */
     {
         DtdPossibleContent *newDtdContentNode = 
             new DtdPossibleContent(DtdPossibleContent::T_ELEM,string("#PCDATA"),$2);
         $$ = newDtdContentNode;  
     }
     | choix_ou_sequence cardinalite
+	/* Cas ou nous récupérons un sous enssemble d'attribut
+	 * Nous récupérons ainsi sa multiplicté et retournons
+	 * l'objet de type DtdPossibleContent contenant tous
+	 * les noeuds fils
+	 */ 
     {       
         $1->setMultiplicity($2);
         $$ = $1;       
@@ -194,12 +215,18 @@ item: NAME cardinalite
     ;
 
 liste_choix: item
-           {
+           /* Même principe que la construction qu'une liste
+			* sequence
+			*/
+		   {
                 ListContent *newList = new ListContent;
                 newList->push_back($1);
                 $$ = newList; 
            }
            | liste_choix PIPE item
+			/* On ajoute en fin de liste l'élément détecté
+			 * et on remonte la liste
+			 */
            {
                 $1->push_back($3);
                 $$ = $1;
@@ -220,6 +247,7 @@ att_definition
 
 attribut
 : NAME att_type defaut_declaration
+/* Le type est forcé à #CDATA d'après l'ennoncé*/
 {
     $$ = new DtdAttribute(string($1),string("#CDATA"));   
 }

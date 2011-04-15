@@ -149,6 +149,18 @@ public:
   XmlElement* childElement(const std::string& name, int nth = 0);
 
   /**
+   * Méthode non générique pour accéder uniquement aux XmlElement fils.
+   *
+   * Cette méthode fournit un accès facile aux XmlElement fils par leurs noms.
+   * Préférez l'utilisation de firstChild() et childrenEnd() lorsque celà est
+   * possible.
+   * Cetté méthode est pratique lorsque l'on s'intéresse uniquement à la structure
+   * du document XML, mais fournit un accès lent (O(N) avec un cast dynamique
+   * par itération)
+   */ 
+  XmlElement* childElement(const std::string& name, const std::string& attributeName, int nth = 0);  	
+	
+  /**
    * Affiche dans un flux standard l'élément courant ainsi que ses contenu fils
    * récursivement.
    *

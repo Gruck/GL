@@ -47,6 +47,21 @@ XmlElement* XmlElement::childElement(const std::string& name, int nth){
 }
 
 
+XmlElement* XmlElement::childElement(const std::string& name, const std::string& attributeName, int nth){
+	CALL_MACRO
+	ContentListIterator iter = firstChild();
+	ContentListIterator stop = childrenEnd();
+	for(;iter != stop; ++iter){
+		XmlElement* elt = dynamic_cast<XmlElement*>(*iter);
+		if(elt && (elt->name() == name) && (elt->_attributes.find(attributeName) != elt->_attributes.end()) ) {
+			if(nth == 0) return elt;
+			--nth;
+		}
+	}
+	return 0;
+}
+
+
 void XmlElement::addChild( XmlContent* toAdd ) {
   CALL_MACRO
   if(!toAdd) return;

@@ -15,7 +15,8 @@
 	//creer le XmlValidatorVisitor
 	//demander au XmlDoc d'accepter la visite sur visitor
 	XmlValidatorVisitor* xmlValidatorVisitor = new XmlValidatorVisitor( dtdDoc );
-	xmlDoc->acceptValidator(xmlValidatorVisitor);
+	bool status = xmlDoc->acceptValidator(xmlValidatorVisitor);
 	delete xmlValidatorVisitor;
+  return status;
   }
   

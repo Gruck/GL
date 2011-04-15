@@ -39,9 +39,9 @@ int main(){
   
 */
   std::cout << "--------------------------------------- create xml\n"; 
-  XmlDoc* xml = XmlDoc::CreateDummyXmlForNoob();
+  XmlDoc* xml = XmlDoc::CreateDummyXmlForRap1();
   std::cout << "--------------------------------------- create dtd\n";
-  DtdDoc* dtd = DtdDoc::CreateDummyDtdForNoob();
+  DtdDoc* dtd = DtdDoc::CreateDummyDtdForRap3();
   std::cout << "--------------------------------------- print xml\n";
   xml->toStream(std::cout);
   std::cout << "--------------------------------------- print dtd\n";
@@ -50,7 +50,7 @@ int main(){
   assert( dtd->element("titre")->name() == std::string("titre") );
   
   std::cout << "--------------------------------------- Validation du Xml\n";
-  XmlValidator::validate(xml, dtd);
+  assert( XmlValidator::validate(xml, dtd) );
 
   std::cout << "--------------------------------------- delete xml\n";
   delete xml;

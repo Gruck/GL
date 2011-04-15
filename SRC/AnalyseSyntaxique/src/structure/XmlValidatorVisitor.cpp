@@ -9,7 +9,10 @@
 #include "DtdElement.h"
 #include "DtdPossibleContent.h"
 
+#include <iostream>
 #include <assert.h>
+
+using namespace std;
 
 bool XmlValidatorVisitor::visit( XmlDoc* xmlDoc){
   CALL_MACRO
@@ -29,17 +32,17 @@ bool XmlValidatorVisitor::visit( XmlContent* content){
   CALL_MACRO
   
   std::cout<<"on ne devrait jamais passer par ici"<<std::endl;
-  
+  return false;
 }
 
-bool XmlValidatorVisitor::visit( XmlElement* xmlElement){
+bool XmlValidatorVisitor::visit( XmlElement* xmlElement ){
   CALL_MACRO
 
- std::cout<<xmlElement->name()<<" : visite de l'élement "<<std::endl;
+  std::cout<<xmlElement->name()<<" : visite de l'élement "<<std::endl;
  
- //si aucune définition dtd pour moi, c'est que je suis en erreur 
- DtdElement* elem = _dtdDoc->element(xmlElement->name());
- if(elem == 0){
+  //si aucune définition dtd pour moi, c'est que je suis en erreur 
+  DtdElement* elem = _dtdDoc->element(xmlElement->name());
+  if(elem == 0){
    	std::cout<< xmlElement->name() << " : l'element n'existe pas dans la dtd"<<std::endl;  
     return false;
   }
@@ -94,7 +97,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
   , XmlElement::ContentListIterator& xmlIter
   , const XmlElement::ContentListIterator& xmlIterEnd )
 {
-  // on copie l'avancement actuel dans les fils de l'elt xml pour pouvoir backtracker
+  CALL_MACRO
+  DEBUG_ONLY( cout << "possibleContent: " << possibleContent->type() << endl; )
   // si besoin
   XmlElement::ContentListIterator xmlIterCopy; 
 

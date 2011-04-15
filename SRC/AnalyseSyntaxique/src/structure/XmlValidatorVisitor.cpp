@@ -35,30 +35,32 @@ bool XmlValidatorVisitor::visit( XmlContent* content){
 bool XmlValidatorVisitor::visit( XmlElement* xmlElement){
   CALL_MACRO
 
- std::cout<<"visiting element called : "<<xmlElement->name()<<std::endl;
+ std::cout<<xmlElement->name()<<" : visite de l'élement "<<std::endl;
  
  //si aucune définition dtd pour moi, c'est que je suis en erreur 
  DtdElement* elem = _dtdDoc->element(xmlElement->name());
- if(elem == 0)
-  return false;
+ if(elem == 0){
+   	std::cout<< xmlElement->name() << " : l'element n'existe pas dans la dtd"<<std::endl;  
+    return false;
+  }
   
  //elem->toStream(std::cout);
  
   XmlElement::ContentListIterator it = xmlElement->firstChild();
   for(;it != xmlElement->childrenEnd();it++){
 		if(!(*it)->acceptValidator(this)){
-			std::cout<<"un de mes fils est invalide"<<std::endl;
+			std::cout<< xmlElement->name() << " : un de mes fils est invalide"<<std::endl;
 			return false;
 		}
 	}
   if(!checkAttributes(xmlElement)){//mes attributs
-  std::cout<<"mes attributs sont invalides"<<std::endl;
+  std::cout<<xmlElement->name() << " : mes attributs sont invalides"<<std::endl;
 		return false;
 	}else if(!checkContent(xmlElement)){//mon contenu
-	std::cout<<"mon contenu est invalide"<<std::endl;
+	std::cout<<xmlElement->name() << " : mon contenu est invalide"<<std::endl;
 		return false;
 	}
-	std::cout<<"l'element "<< xmlElement->name() << " est valide"<<std::endl;  
+	std::cout<< xmlElement->name() << " : l'element est valide"<<std::endl;  
   return true; //un noeud est valide tant qu'on a pas prouvé qu'il était invalide
 }
 

@@ -17,8 +17,8 @@ using namespace std;
 bool XmlValidatorVisitor::visit( XmlDoc* xmlDoc){
   CALL_MACRO
   //verifier toutes les informations générales du XML
-    //doctype
-    std::cout<<"Validation du header du xml"<<std::endl;
+  //doctype
+  std::cout<<"Validation du header du xml"<<std::endl;
   //vérifier que le noeud racine est valide
   if(xmlDoc->root()->acceptValidator(this))
 	return true;
@@ -112,7 +112,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
       DEBUG_ONLY(cout<<"SEQUENCE\n";)
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
-        case DtdPossibleContent::M_NONE :{
+        case DtdPossibleContent::M_NONE : {
           DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
           bool status = true;
           // préparation de l'itérateur et de la condition d'arrete de boucle
@@ -123,6 +123,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // iteration sur les contenus possibles fils   
           for(; dtdIter != dtdIterStop; ++dtdIter ){
             status &= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
+            if(!status) return false;
           }
           return status; // retour
           
@@ -248,8 +249,17 @@ bool XmlValidatorVisitor::visitContentRecurse(
       switch( possibleContent->multiplicity() ){
         DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
         case DtdPossibleContent::M_NONE : {
-          if(xmlIter == xmlIterEnd) return false;
+          if(xmlIter == xmlIterEnd){
+            DEBUG_ONLY(cout << "ran out of xml children nodes!\n"; )
+            return false;
+          }
           bool status = ( possibleContent->value() == (*xmlIter)->name() );
+          DEBUG_ONLY(
+            if(!status){
+              cout << "comp: " << possibleContent->value()
+                  << " != " << (*xmlIter)->name()<<"\n";
+            }
+          )
           ++xmlIter;
           return status;
         }

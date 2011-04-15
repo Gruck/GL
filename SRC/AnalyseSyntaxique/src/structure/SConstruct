@@ -1,2 +1,3 @@
 
 Program(['test.cpp','XmlContent.cpp','XmlElement.cpp','XmlText.cpp','XmlDoc.cpp','DtdDoc.cpp','DtdElement.cpp','XmlValidator.cpp','XmlValidatorVisitor.cpp','DtdPossibleContent.cpp'])
+Program(['test2.cpp','XmlContent.cpp','XmlElement.cpp','XmlText.cpp','XmlDoc.cpp','DtdDoc.cpp','DtdElement.cpp','XmlValidator.cpp','XmlValidatorVisitor.cpp','DtdPossibleContent.cpp'])

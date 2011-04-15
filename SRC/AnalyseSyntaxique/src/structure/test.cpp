@@ -47,7 +47,6 @@ int main(){
   xml->toStream(std::cout);
   std::cout << "--------------------------------------- print dtd\n";
   dtd->toStream(std::cout); 
-
   assert( dtd->element("titre")->name() == std::string("titre") );
   
   std::cout << "--------------------------------------- Validation du Xml\n";

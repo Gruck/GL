@@ -38,7 +38,7 @@ public:
 	/**
    * Constructeur.
    */ 
-  DtdPossibleContent(Type type, const std::string& value, Multiplicity multiplicity = DtdPossibleContent::M_NONE)
+  DtdPossibleContent(Type type, const std::string& value = "", Multiplicity multiplicity = DtdPossibleContent::M_NONE)
   : _multiplicity(multiplicity), _type(type), _value(value){ CALL_MACRO }
 
   /**

@@ -33,11 +33,19 @@ public:
   : XmlContent(0), _nameSpace(nameSpace), _name(name) {
     CALL_MACRO
   }
+  /**
+   * Constructor.
+   */ 
+  XmlElement(const std::string& name)
+  : XmlContent(0), _nameSpace(""), _name(name) {
+    CALL_MACRO
+  }
 
   /**
    * Renvoie le nom de la balise XML.
    */ 
   std::string name() const { return _name; }
+  std::string& name() { return _name; }
 
   /**
    * Renvoie l'espace de nom de la balise XML.

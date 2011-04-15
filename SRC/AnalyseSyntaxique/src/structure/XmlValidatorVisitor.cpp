@@ -36,6 +36,14 @@ bool XmlValidatorVisitor::visit( XmlElement* xmlElement){
   CALL_MACRO
 
  std::cout<<"visiting element called : "<<xmlElement->name()<<std::endl;
+ 
+ //si aucune définition dtd pour moi, c'est que je suis en erreur 
+ DtdElement* elem = _dtdDoc->element(xmlElement->name());
+ if(elem == 0)
+  return false;
+  
+ //elem->toStream(std::cout);
+ 
   XmlElement::ContentListIterator it = xmlElement->firstChild();
   for(;it != xmlElement->childrenEnd();it++){
 		if(!(*it)->acceptValidator(this)){

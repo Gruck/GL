@@ -36,6 +36,8 @@ public:
    */ 
   static DtdDoc* CreateDummyDtdForRap3();
   
+  static DtdDoc* CreateDummyDtdForNoob();
+  
   /**
    * Permet l'ajout d'un element Dtd.
    */ 

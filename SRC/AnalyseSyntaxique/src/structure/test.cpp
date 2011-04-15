@@ -39,9 +39,9 @@ int main(){
   
 */
   std::cout << "--------------------------------------- create xml\n"; 
-  XmlDoc* xml = XmlDoc::CreateDummyXmlForRap1();
+  XmlDoc* xml = XmlDoc::CreateDummyXmlForNoob();
   std::cout << "--------------------------------------- create dtd\n";
-  DtdDoc* dtd = DtdDoc::CreateDummyDtdForRap3();
+  DtdDoc* dtd = DtdDoc::CreateDummyDtdForNoob();
   std::cout << "--------------------------------------- print xml\n";
   xml->toStream(std::cout);
   std::cout << "--------------------------------------- print dtd\n";

@@ -35,6 +35,30 @@ DtdElement* DtdDoc::element(const std::string& eltName){
   return 0;
 }
 
+DtdDoc* DtdDoc::CreateDummyDtdForNoob()
+{
+	CALL_MACRO
+  DtdDoc* Rap1dtd = new DtdDoc();
+
+//creation des diverses composantes de cette Dtd
+DtdPossibleContent* pc1 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, std::string(), DtdPossibleContent::M_NONE);
+DtdPossibleContent* pc2 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "titre", DtdPossibleContent::M_NONE);
+  
+pc1->addChild(pc2);
+DtdElement* el0 = new DtdElement("rapport", pc1);
+
+DtdPossibleContent* pc21 = new DtdPossibleContent(DtdPossibleContent::T_SEQUENCE, "", DtdPossibleContent::M_NONE);
+DtdPossibleContent* pc22 = new DtdPossibleContent(DtdPossibleContent::T_ELEM, "#PCDATA", DtdPossibleContent::M_NONE);
+pc21->addChild(pc22);
+DtdElement* el2 = new DtdElement("titre", pc21);
+
+
+Rap1dtd->AddElement(el0);
+Rap1dtd->AddElement(el2);
+
+return Rap1dtd;
+
+}
 
 
 DtdDoc* DtdDoc::CreateDummyDtdForRap1()

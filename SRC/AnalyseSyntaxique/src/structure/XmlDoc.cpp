@@ -27,7 +27,7 @@ XmlDoc* XmlDoc::CreateDummyXmlForRap1()
 	XmlDoc* rap1xml = new XmlDoc("xhtml");
 	
 	
-  XmlElement* elt = new XmlElement("","raport");
+  XmlElement* elt = new XmlElement("","rapport");
   rap1xml->setRoot(elt);
 
 
@@ -69,4 +69,21 @@ XmlDoc* XmlDoc::CreateDummyXmlForRap1()
 	return rap1xml;
 	
 	
+}
+
+XmlDoc* XmlDoc::CreateDummyXmlForNoob()
+{
+	XmlDoc* rap1xml = new XmlDoc("xhtml");
+	
+	
+  XmlElement* elt = new XmlElement("","rapport");
+  rap1xml->setRoot(elt);
+
+
+  elt->addChild( new XmlElement( "" ,"titreProut" ) );
+  
+  
+  elt->childElement("titreProut")->addChild(new XmlText("COmment faire de la merde" ));
+  
+	return rap1xml;
 }

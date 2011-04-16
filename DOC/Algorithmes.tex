@@ -27,10 +27,29 @@ La validation se fait en suivant le principe d'un parcours d'arbre en profondeur
 \caption{Validation d'un Element Xml}
 \begin{algorithmic}
 \REQUIRE xmlElement \COMMENT{Element à valider}
-\IF {xmlDoc.Racine est valide} 
-       \RETURN vrai
+\STATE dtdDef $\Leftarrow$ DefinitionDtd(Element)
+\IF {dtdDef n'existe pas} 
+       \RETURN faux
 \ELSE
-        \RETURN faux
+
+	\FORALL[On descend dans l'arbre]{fils de xmlElement}
+		\STATE visiter fils
+		\IF{fils invalid}
+			\RETURN faux
+		\ENDIF
+	\ENDFOR
+	
+	\FORALL[On valide les attributs de l'élement]{attribut de xmlElement}
+		\IF{ dtdDef ne permet pas attribut}
+			\RETURN faux
+		\ENDIF
+	\ENDFOR
+	\COMMENT{On valide le contenu de l'élément}
+	\IF{\NOT Contenu est valide (element)}
+		\RETURN faux
+	\ENDIF
+
+        \RETURN vrai
 \ENDIF 
 \end{algorithmic}
 \end{algorithm}

@@ -23,6 +23,7 @@ class XmlElement : public XmlContent
 { 
 public:
   typedef std::map<std::string,std::string> AttributeMap;
+  typedef std::map<std::string,std::string>::iterator AttributeIterator;
   typedef std::list<XmlContent*> ContentList;
   typedef std::list<XmlContent*>::iterator ContentListIterator;
 
@@ -175,6 +176,16 @@ public:
    * pattern visitor implémenté au niveau de l'algorithme de validation. 
    */ 
   bool acceptValidator( XmlValidatorVisitor* validator );
+  
+  /**
+   * Itérateur permettant l'acces au premier attribut 
+   */ 
+  AttributeIterator firstAtrribute(){return attributes.begin();}
+  
+    /**
+   * Itérateur de fin de la map d'attributs 
+   */ 
+  AttributeIterator AtrributesEnd(){return attributes.end();}
 
   ~XmlElement();
   

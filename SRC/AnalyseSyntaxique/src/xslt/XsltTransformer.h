@@ -24,22 +24,27 @@ public:
 	 */
 	~XsltTransformer();
 	
+	/**
+	 * Lance le processing;
+	 */
+	XmlElement* StartProcessing();
 	
+private:
 	/**
 	 * Effectue le traitement de l'arbre xml en fonction de l'arbre Xslt
 	 */
-	void ProcessXslt(XmlElement* ParentNode,XmlElement* NodeInNewTree);
+	void processXslt(XmlElement* ParentNode,XmlElement* NodeInNewTree);
 	
 	/**
-	 * Copie le segment d'arbre T_node dans le nouvel arbe indique par NodeInNewTree
+	 * Copie le segment d'arbre T_node dans le nouvel arbre indique par NodeInNewTree
 	 * en tenant compte du noeud actuel (C_Node) 
 	 */
-	void CopyTree(const XmlElement* T_Node, const XmlContent* C_Node,XmlElement* NodeInNewTree);
+	void copyTree(XmlElement* T_Node, XmlElement* C_Node,XmlElement* NodeInNewTree);
 
 	/**
 	 * Attributs
 	 */
-private:
+	
 	/**
 	 * Noeud root de la structure a transformer et
 	 * de l'arborescence xslt a appliquer

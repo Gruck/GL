@@ -31,20 +31,21 @@ public:
 	void ProcessXslt(XmlElement* ParentNode,XmlElement* NodeInNewTree);
 	
 	/**
-	 *
+	 * Copie le segment d'arbre T_node dans le nouvel arbe indique par NodeInNewTree
+	 * en tenant compte du noeud actuel (C_Node) 
 	 */
 	void CopyTree(const XmlElement* T_Node, const XmlContent* C_Node,XmlElement* NodeInNewTree);
-/**
- * Attributs
- */
 
+	/**
+	 * Attributs
+	 */
 private:
-/**
- * Noeud root de la structure a transformer et
- * de l'arborescence xslt a appliquer
- */
- XmlElement* _xmlRootNode;
- XmlElement* _xsltRootNode;
+	/**
+	 * Noeud root de la structure a transformer et
+	 * de l'arborescence xslt a appliquer
+	 */
+	XmlElement* _xmlRootNode;
+	XmlElement* _xsltRootNode;
 
 };
 

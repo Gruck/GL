@@ -70,6 +70,16 @@ bool XmlValidatorVisitor::checkAttributes(XmlElement* xmlElement){
 	
 	//trouver la définition dtd de cet element,
 	//verifier que pour tout element de la map d'attributs, on ai un équivalent dans la dtd
+  DtdElement* elem = _dtdDoc->element(xmlElement->name());
+  
+  XmlElement::AttributeIterator iterEnd = xmlElement->attributesEnd(); 
+  for(XmlElement::AttributeIterator iter = xmlElement->firstAttribute(); iter != iterEnd; iter++){ 
+    if(!(elem->hasAttribute(iter->first)))
+      return false;
+  }
+  
+  
+  
 	return true;
 }
 
@@ -78,6 +88,9 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
 	
 	//trouver la définition dtd de cet element,
 	//verifier que le contenu de cet element est valide vis a vis de la dtd
+  
+  DtdElement* elem = _dtdDoc->element(xmlElement->name());
+  
 
   XmlElement::ContentListIterator xmlIter = xmlElement->firstChild();
   bool status = visitContentRecurse(

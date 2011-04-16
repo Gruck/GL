@@ -59,6 +59,7 @@ int main(int argc, char **argv)
   printf("Coucou j'ai dilété la datastructure.\n");
   delete XmlDataStructure;
   delete DtdDataStructure;
-  return status;
-
+  if(status)
+    return 0;
+  return 1;
 } 

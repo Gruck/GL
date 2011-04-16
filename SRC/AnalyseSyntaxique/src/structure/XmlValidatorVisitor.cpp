@@ -46,8 +46,6 @@ bool XmlValidatorVisitor::visit( XmlElement* xmlElement ){
    	std::cout<< xmlElement->name() << " : l'element n'existe pas dans la dtd"<<std::endl;  
     return false;
   }
-  
- //elem->toStream(std::cout);
  
   XmlElement::ContentListIterator it = xmlElement->firstChild();
   for(;it != xmlElement->childrenEnd();it++){
@@ -82,11 +80,16 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
 	//verifier que le contenu de cet element est valide vis a vis de la dtd
 
   XmlElement::ContentListIterator xmlIter = xmlElement->firstChild();
-	return visitContentRecurse(
+  bool status = visitContentRecurse(
     _dtdDoc->element(xmlElement->name())->possibleContent()
     , xmlIter
     , xmlElement->childrenEnd()
   );
+  if( xmlIter != xmlElement->childrenEnd() ){
+    cout << "L'élément xml " << xmlElement->fullName() << " contient trop de noeuds fils selon la spécification de la dtd.\n";
+    return false;
+  }
+	return status;
 }
 
 
@@ -174,8 +177,6 @@ bool XmlValidatorVisitor::visitContentRecurse(
     }
     case DtdPossibleContent::T_CHOICE : { // ------------------------Choix (OU)
       DEBUG_ONLY(cout<<"CHOICE\n";)
-      //assert("Choice" == "not supported yet!");
-      
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
         case DtdPossibleContent::M_NONE :{
@@ -209,7 +210,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
             for(; dtdIter != dtdIterStop; ++dtdIter ){
               XmlElement::ContentListIterator xmlIterCopy2 = xmlIter; 
               status |= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
-               if(!status) xmlIter = xmlIterCopy2; // backtarck
+               if(!status) xmlIter = xmlIterCopy2; // backtrack
             }
             //xmlIterCopy représente la dernière position "valide" (sorte de backtrack)
             if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide

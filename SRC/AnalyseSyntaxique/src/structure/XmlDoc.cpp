@@ -80,10 +80,10 @@ XmlDoc* XmlDoc::CreateDummyXmlForNoob()
   rap1xml->setRoot(elt);
 
 
-  elt->addChild( new XmlElement( "" ,"titreProut" ) );
+  elt->addChild( new XmlElement( "" ,"titre" ) );
   
   
-  elt->childElement("titreProut")->addChild(new XmlText("COmment faire de la merde" ));
+  elt->childElement("titre")->addChild(new XmlText("COmment faire de la merde" ));
   
 	return rap1xml;
 }

@@ -32,16 +32,16 @@ XmlDoc* XmlDoc::CreateDummyXmlForRap1()
 
 
   elt->addChild( new XmlElement( "" ,"titre" ) );
+  elt->childElement("titre")->addChild( new XmlText("le titre") );
   
   elt->addChild( new XmlElement( "" ,"auteur" ) );
-  elt->childElement("auteur")->addChild(new XmlElement("","nom"));
   elt->childElement("auteur")->addChild(new XmlElement("","prenom"));
+  elt->childElement("auteur")->addChild(new XmlElement("","nom"));
   
   
-   
-
-  elt->childElement("auteur")->childElement("nom")->addChild(new XmlText("Nical" ));
-  elt->childElement("auteur")->childElement("prenom")->addChild(new XmlText("Silva" ));
+  
+  elt->childElement("auteur")->childElement("prenom")->addChild(new XmlText("Nical" ));
+  elt->childElement("auteur")->childElement("nom")->addChild(new XmlText("Silva" ));
   
   
 

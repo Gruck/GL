@@ -40,9 +40,8 @@ int main(){
 */
   std::cout << "--------------------------------------- create xml\n"; 
   XmlDoc* xml = XmlDoc::CreateDummyXmlForRap1();
-  //xml->root()->childElement("titre")->addChild(new XmlElement("rapport")) ;
   std::cout << "--------------------------------------- create dtd\n";
-  DtdDoc* dtd = DtdDoc::CreateDummyDtdForRap3();
+  DtdDoc* dtd = DtdDoc::CreateDummyDtdForRap1();
   std::cout << "--------------------------------------- print xml\n";
   xml->toStream(std::cout);
   std::cout << "--------------------------------------- print dtd\n";

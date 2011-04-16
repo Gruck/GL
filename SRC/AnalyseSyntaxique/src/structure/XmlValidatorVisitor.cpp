@@ -125,7 +125,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
   // en fonction du type d'opération (Et, Ou, element)
   switch( possibleContent->type() ){
     case DtdPossibleContent::T_SEQUENCE : { // --------------------- Sequence (ET)
-      DEBUG_ONLY(cout<<"SEQUENCE\n";)
+      DEBUG_ONLY(cout<<"SEQUENCE ("<<possibleContent->nbChildren()<<")\n";) 
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
         case DtdPossibleContent::M_NONE : {
@@ -189,12 +189,11 @@ bool XmlValidatorVisitor::visitContentRecurse(
       }
     }
     case DtdPossibleContent::T_CHOICE : { // ------------------------Choix (OU)
-      DEBUG_ONLY(cout<<"CHOICE\n";)
+      DEBUG_ONLY(cout<<"CHOICE ("<<possibleContent->nbChildren()<<")\n";)
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
         case DtdPossibleContent::M_NONE :{
           DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
-          bool status = true;
           // préparation de l'itérateur et de la condition d'arrete de boucle
           DtdPossibleContent::PossibleContentIterator
             dtdIter = possibleContent->firstChild();
@@ -203,10 +202,11 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // iteration sur les contenus possibles fils   
           for(; dtdIter != dtdIterStop; ++dtdIter ){
             XmlElement::ContentListIterator xmlIterCopy2 = xmlIter; 
-            status |= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
-             if(!status) xmlIter = xmlIterCopy2; // backtarck
+            if( visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd) )
+              return true; // Car CHOICE avec Mult NONE est un XOR
+            else xmlIter = xmlIterCopy2; // backtrack
           }
-          return status; // retour
+          return false; // retour
           
         }case DtdPossibleContent::M_AST : { // multiplicite "*"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
@@ -246,7 +246,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
             // iteration sur les contenus possibles fils   
             for(; dtdIter != dtdIterStop; ++dtdIter ){
               XmlElement::ContentListIterator xmlIterCopy2 = xmlIter; 
-              status |= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
+              status = visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
               if(!status) xmlIter = xmlIterCopy2; //backtrack
               foundOne |= status; // si on en a trouvé un foundOne = true
             }

@@ -42,7 +42,7 @@ public:
   : _multiplicity(multiplicity), _type(type), _value(value){ CALL_MACRO }
 
   /**
-   * Renvoie le type.
+   * Renvoie le type (nom de l'élément xml).
    */ 
   inline Type type() const {
     return _type;

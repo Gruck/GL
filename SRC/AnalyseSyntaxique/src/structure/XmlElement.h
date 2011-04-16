@@ -34,11 +34,19 @@ public:
   : XmlContent(0), _nameSpace(nameSpace), _name(name) {
     CALL_MACRO
   }
+  /**
+   * Constructor.
+   */ 
+  XmlElement(const std::string& name)
+  : XmlContent(0), _nameSpace(""), _name(name) {
+    CALL_MACRO
+  }
 
   /**
    * Renvoie le nom de la balise XML.
    */ 
   std::string name() const { return _name; }
+  std::string& name() { return _name; }
 
   /**
    * Renvoie l'espace de nom de la balise XML.
@@ -180,12 +188,12 @@ public:
   /**
    * Itérateur permettant l'acces au premier attribut 
    */ 
-  AttributeIterator firstAtrribute(){return attributes.begin();}
+  AttributeIterator firstAttribute(){return _attributes.begin();}
   
     /**
    * Itérateur de fin de la map d'attributs 
    */ 
-  AttributeIterator AtrributesEnd(){return attributes.end();}
+  AttributeIterator attributesEnd(){return _attributes.end();} 
 
   ~XmlElement();
   

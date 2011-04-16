@@ -9,7 +9,10 @@
 #include "DtdElement.h"
 #include "DtdPossibleContent.h"
 
+#include <iostream>
 #include <assert.h>
+
+using namespace std;
 
 bool XmlValidatorVisitor::visit( XmlDoc* xmlDoc){
   CALL_MACRO
@@ -29,17 +32,17 @@ bool XmlValidatorVisitor::visit( XmlContent* content){
   CALL_MACRO
   
   std::cout<<"on ne devrait jamais passer par ici"<<std::endl;
-  
+  return false;
 }
 
-bool XmlValidatorVisitor::visit( XmlElement* xmlElement){
+bool XmlValidatorVisitor::visit( XmlElement* xmlElement ){
   CALL_MACRO
 
- std::cout<<xmlElement->name()<<" : visite de l'élement "<<std::endl;
+  std::cout<<xmlElement->name()<<" : visite de l'élement "<<std::endl;
  
- //si aucune définition dtd pour moi, c'est que je suis en erreur 
- DtdElement* elem = _dtdDoc->element(xmlElement->name());
- if(elem == 0){
+  //si aucune définition dtd pour moi, c'est que je suis en erreur 
+  DtdElement* elem = _dtdDoc->element(xmlElement->name());
+  if(elem == 0){
    	std::cout<< xmlElement->name() << " : l'element n'existe pas dans la dtd"<<std::endl;  
     return false;
   }
@@ -71,8 +74,8 @@ bool XmlValidatorVisitor::checkAttributes(XmlElement* xmlElement){
 	//verifier que pour tout element de la map d'attributs, on ai un équivalent dans la dtd
   DtdElement* elem = _dtdDoc->element(xmlElement->name());
   
-  XmlElement::AttributeIterator iterEnd = xmlElement.attributesEnd(); 
-  for(XmlElement::AttributeIterator iter = xmlElement.firstAttribute(); iter != iterEnd; iter++){ 
+  XmlElement::AttributeIterator iterEnd = xmlElement->attributesEnd(); 
+  for(XmlElement::AttributeIterator iter = xmlElement->firstAttribute(); iter != iterEnd; iter++){ 
     if(!(elem->hasAttribute(iter->first)))
       return false;
   }
@@ -90,11 +93,13 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
   
   DtdElement* elem = _dtdDoc->element(xmlElement->name());
   
-  XmlElement::ContentListIterator first =  xmlElement->firstChild();
-  visitContentRecurse(elem->getPossibleContent(), first, xmlElement->childrenEnd());
-	
-	
-	return true;
+
+  XmlElement::ContentListIterator xmlIter = xmlElement->firstChild();
+	return visitContentRecurse(
+    _dtdDoc->element(xmlElement->name())->possibleContent()
+    , xmlIter
+    , xmlElement->childrenEnd()
+  );
 }
 
 
@@ -108,16 +113,20 @@ bool XmlValidatorVisitor::visitContentRecurse(
   , XmlElement::ContentListIterator& xmlIter
   , const XmlElement::ContentListIterator& xmlIterEnd )
 {
-  // on copie l'avancement actuel dans les fils de l'elt xml pour pouvoir backtracker
+  CALL_MACRO
+  DEBUG_ONLY( cout << "     visitContentRecurse > possibleContent: " << possibleContent->value() << endl; )
+  
   // si besoin
   XmlElement::ContentListIterator xmlIterCopy; 
 
   // en fonction du type d'opération (Et, Ou, element)
   switch( possibleContent->type() ){
     case DtdPossibleContent::T_SEQUENCE : { // --------------------- Sequence (ET)
+      DEBUG_ONLY(cout<<"SEQUENCE\n";)
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
-        case DtdPossibleContent::M_NONE :{ 
+        case DtdPossibleContent::M_NONE :{
+          DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
           bool status = true;
           // préparation de l'itérateur et de la condition d'arrete de boucle
           DtdPossibleContent::PossibleContentIterator
@@ -130,7 +139,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
           }
           return status; // retour
           
-        }case DtdPossibleContent::M_AST : { // multiplicite "*" 
+        }case DtdPossibleContent::M_AST : { // multiplicite "*"
+          DEBUG_ONLY(cout<<"multiplicity: *\n";)
           bool status = true;
           // tant que le contenu xml correspon, on récurse pour faire avancer
           // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
@@ -153,6 +163,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // avancer l'itérateur xmlIter
           return true; 
         }case DtdPossibleContent::M_PLUS : {
+          DEBUG_ONLY(cout<<"multiplicity: +\n";)
           bool status = true;
           bool foundOne = false;
           while(status){
@@ -174,11 +185,13 @@ bool XmlValidatorVisitor::visitContentRecurse(
       }
     }
     case DtdPossibleContent::T_CHOICE : { // ------------------------Choix (OU)
+      DEBUG_ONLY(cout<<"CHOICE\n";)
       //assert("Choice" == "not supported yet!");
       
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
-        case DtdPossibleContent::M_NONE :{ 
+        case DtdPossibleContent::M_NONE :{
+          DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
           bool status = true;
           // préparation de l'itérateur et de la condition d'arrete de boucle
           DtdPossibleContent::PossibleContentIterator
@@ -193,7 +206,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
           }
           return status; // retour
           
-        }case DtdPossibleContent::M_AST : { // multiplicite "*" 
+        }case DtdPossibleContent::M_AST : { // multiplicite "*"
+          DEBUG_ONLY(cout<<"multiplicity: *\n";)
           bool status = true;
           // tant que le contenu xml correspon, on récurse pour faire avancer
           // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
@@ -218,6 +232,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // avancer l'itérateur xmlIter
           return true; 
         }case DtdPossibleContent::M_PLUS : {
+          DEBUG_ONLY(cout<<"multiplicity: +\n";)
           bool status = true;
           bool foundOne = false;
           while(status){
@@ -242,13 +257,18 @@ bool XmlValidatorVisitor::visitContentRecurse(
     }  
     
     case DtdPossibleContent::T_ELEM : { // --------------------------------------
+      DEBUG_ONLY(cout<<"ELEMENT\n";)
       switch( possibleContent->multiplicity() ){
-        case DtdPossibleContent::M_NONE : {  
+        DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
+        case DtdPossibleContent::M_NONE : {
+          if(xmlIter == xmlIterEnd) return false;
           bool status = ( possibleContent->value() == (*xmlIter)->name() );
           ++xmlIter;
           return status;
         }
         case DtdPossibleContent::M_AST : {
+          DEBUG_ONLY(cout<<"multiplicity: *\n";)
+          if(xmlIter == xmlIterEnd) return true;
           while( possibleContent->value() == (*xmlIter)->name() ){
             ++xmlIter;
             // ne pas oublier de vérifier qu'on itère pas en dehors de la liste
@@ -257,6 +277,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
           return true;
         }
         case DtdPossibleContent::M_PLUS : {
+          DEBUG_ONLY(cout<<"multiplicity: +\n";)
+          if(xmlIter == xmlIterEnd) return false;
           bool foundOne = false;
           while( possibleContent->value() == (*xmlIter)->name() ){
             foundOne = true;

@@ -95,7 +95,7 @@ public:
   /**
    * Obtient le possibleContent associé a ce noeud
    */ 
-    DtdPossibleContent* getPossibleContent(){return _possibleContent;}
+    DtdPossibleContent* possibleContent(){return _possibleContent;}
   
 private:
   std::string _name;

@@ -11,11 +11,12 @@
   //bool XmlValidator::validate( XmlDoc* xmlDoc) const
   bool XmlValidator::validate( XmlDoc* xmlDoc, DtdDoc* dtdDoc)
   {
-	CALL_MACRO
-	//creer le XmlValidatorVisitor
-	//demander au XmlDoc d'accepter la visite sur visitor
-	XmlValidatorVisitor* xmlValidatorVisitor = new XmlValidatorVisitor( dtdDoc );
-	xmlDoc->acceptValidator(xmlValidatorVisitor);
-	delete xmlValidatorVisitor;
+    CALL_MACRO
+    //creer le XmlValidatorVisitor
+    //demander au XmlDoc d'accepter la visite sur visitor
+    XmlValidatorVisitor* xmlValidatorVisitor = new XmlValidatorVisitor( dtdDoc );
+    bool status = xmlDoc->acceptValidator(xmlValidatorVisitor);
+    delete xmlValidatorVisitor;
+    return status;
   }
   

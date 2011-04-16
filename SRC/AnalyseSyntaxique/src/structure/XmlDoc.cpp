@@ -33,6 +33,9 @@ XmlDoc* XmlDoc::CreateDummyXmlForRap1()
 
   elt->addChild( new XmlElement( "" ,"titre" ) );
   elt->childElement("titre")->addChild( new XmlText("le titre") );
+
+  //elt->addChild( new XmlElement("p") );
+  //elt->childElement("p")->addChild(new XmlText("ooops"));
   
   elt->addChild( new XmlElement( "" ,"auteur" ) );
   elt->childElement("auteur")->addChild(new XmlElement("","prenom"));

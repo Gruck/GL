@@ -28,6 +28,10 @@ public:
    */  
   XmlElement* parent() { CALL_MACRO return _parent; }
 
+  /**
+   * Renvoie le nom du noeud xml si l'instance est de type XmlElement, ou renvoie
+   * #PCDATA si l'instance est de type XmlText.
+   */ 
   virtual std::string name() const = 0;
 
   /**

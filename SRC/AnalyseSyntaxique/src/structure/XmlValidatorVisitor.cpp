@@ -98,7 +98,7 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
     , xmlIter
     , xmlElement->childrenEnd()
   );
-  if( xmlIter != xmlElement->childrenEnd() ){
+  if( (status) && (xmlIter != xmlElement->childrenEnd() ) ){
     cout << "L'élément xml " << xmlElement->fullName() << " contient trop de noeuds fils selon la spécification de la dtd.\n";
     return false;
   }
@@ -148,7 +148,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
           bool status = true;
           // tant que le contenu xml correspon, on récurse pour faire avancer
           // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
-          while(status){ 
+          while(status){
+            cout << "bwaaaaaahhhhh\n";
             // préparation de l'itérateur et de la condition d'arrete de boucle
             DtdPossibleContent::PossibleContentIterator
               dtdIter = possibleContent->firstChild();
@@ -156,10 +157,12 @@ bool XmlValidatorVisitor::visitContentRecurse(
               dtdIterStop = possibleContent->childrenEnd();
             // iteration sur les contenus possibles fils   
             for(; dtdIter != dtdIterStop; ++dtdIter ){
-              status &= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
+              if( ! visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd) )
+                status = false;
             }
             //xmlIterCopy représente la dernière position "valide" (sorte de backtrack)
             if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+            if(xmlIter == xmlIterEnd) break;
           }
           xmlIter = xmlIterCopy; //on revient à la dernière position valide
           // dans le cas multiplicité * on renvoie toutjour true, mais on est
@@ -227,6 +230,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
             }
             //xmlIterCopy représente la dernière position "valide" (sorte de backtrack)
             if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+            if(xmlIter == xmlIterEnd) break;
           }
           xmlIter = xmlIterCopy; //on revient à la dernière position valide
           // dans le cas multiplicité * on renvoie toutjour true, mais on est

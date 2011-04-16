@@ -25,8 +25,14 @@ void DtdElement::toStream( std::ostream& stream ){
   // attributs
   AttributeMap::iterator iter = firstAttribute();
   AttributeMap::iterator stop = attributesEnd();
-  for(;iter!=stop;++iter){
-    stream << "<!ATTLIST "<< name() <<" " << iter->first  <<" " << iter->second << " #IMPLIED>\n";
+  if(iter!=stop)
+  {
+    stream << "<!ATTLIST "<< name() <<" "<<iter->first  <<" " << iter->second << " #IMPLIED";
+    iter++;
+    for(;iter!=stop;++iter){
+      stream <<"\n"<< iter->first  <<" " << iter->second << " #IMPLIED";
+    }
+    stream << ">\n";
   }
 	
 }

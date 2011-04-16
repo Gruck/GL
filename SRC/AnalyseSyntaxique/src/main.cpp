@@ -53,7 +53,6 @@ int main(int argc, char **argv)
   //ici doit être mis l'apel au validateur  
   //XmlValidator::validate( XmlDataStructure, DtdDataStructure); 
   
-  
   DtdDataStructure->toStream(std::cout);
     
   printf("Coucou j'ai dilété la datastructure.\n");

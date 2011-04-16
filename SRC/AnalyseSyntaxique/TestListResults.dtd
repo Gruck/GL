@@ -1,5 +1,5 @@
 <!ELEMENT testlist (test)*>
-<!ELEMENT test (description)>
+<!ELEMENT test (#PCDATA)>
 <!ATTLIST test
         nom CDATA #IMPLIED
         resultat CDATA #IMPLIED

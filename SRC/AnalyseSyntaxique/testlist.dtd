@@ -1,0 +1,8 @@
+<!ELEMENT testlist (test)*>
+<!ELEMENT test (description)>
+<!ATTLIST test
+        nom CDATA #IMPLIED
+        resultat CDATA #IMPLIED
+        fichiertest CDATA #IMPLIED
+>
+

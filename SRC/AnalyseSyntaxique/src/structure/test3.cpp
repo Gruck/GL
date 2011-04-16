@@ -65,7 +65,7 @@ bool test3a(){
   return status;
 }
 
-bool test3a(){
+bool test3b(){
   std::cout << "======================================= Test Attrib b\n"; 
   std::cout << "--------------------------------------- create xml\n"; 
   XmlDoc* xml = new XmlDoc("html");

@@ -1,0 +1,55 @@
+\section{Algorithmes}
+
+\subsection*{Introduction}
+\paragraph{Visitor}
+La totalité de notre conception repose en grande partie sur l'utilisation du \textit{design pattern visitor}. Le concept de ce design pattern repose sur le double dispatch qui permet de réduire les dépendance des algorithmes vis à vis des structures de données.\\
+
+
+\subsection{Algorithme générale de validation}
+La validation se fait en suivant le principe d'un parcours d'arbre en profondeur. Chaque noeud du document xml ne sera donc validé que si ses fils ont été validé avant.
+
+
+
+
+\begin{algorithm}
+\caption{Validation d'un Document Xml}
+\begin{algorithmic}
+\REQUIRE xmlDoc \COMMENT{Document à valider}
+\IF {xmlDoc.Racine est valide} 
+       \RETURN vrai
+\ELSE
+        \RETURN faux
+\ENDIF 
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Validation d'un Element Xml}
+\begin{algorithmic}
+\REQUIRE xmlElement \COMMENT{Element à valider}
+\STATE dtdDef $\Leftarrow$ DefinitionDtd(Element)
+\IF {dtdDef n'existe pas} 
+       \RETURN faux
+\ELSE
+
+	\FORALL[On descend dans l'arbre]{fils de xmlElement}
+		\STATE visiter fils
+		\IF{fils invalid}
+			\RETURN faux
+		\ENDIF
+	\ENDFOR
+	
+	\FORALL[On valide les attributs de l'élement]{attribut de xmlElement}
+		\IF{ dtdDef ne permet pas attribut}
+			\RETURN faux
+		\ENDIF
+	\ENDFOR
+	\COMMENT{On valide le contenu de l'élément}
+	\IF{\NOT Contenu est valide (element)}
+		\RETURN faux
+	\ENDIF
+
+        \RETURN vrai
+\ENDIF 
+\end{algorithmic}
+\end{algorithm}

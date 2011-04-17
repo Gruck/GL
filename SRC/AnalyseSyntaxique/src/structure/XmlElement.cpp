@@ -49,17 +49,16 @@ XmlElement* XmlElement::childElement(const std::string& name, int nth){
 
 XmlElement* XmlElement::childElement(const std::string& name, const std::string& attributeName, const std::string& attributeValue, int nth){
 	CALL_MACRO
-	std::cout << " Appel de childElement poru l'attribut "<< attributeName << "cherche" << attributeName << std::endl;
 	ContentListIterator iter = firstChild();
 	ContentListIterator stop = childrenEnd();
 	for(;iter != stop; ++iter){
 		XmlElement* elt = dynamic_cast<XmlElement*>(*iter);
-		std::cout << "oho " << (elt->_attributes.find(attributeName) != elt->_attributes.end()) << std::endl;
-		std::cout << "Valeur de la clé  : " << (*(elt->_attributes).find(attributeName)).second << std::endl;
+		
+
 		if(elt && (elt->name() == name) 
-		   && (elt->_attributes.find(attributeName) != elt->_attributes.end()))
+		   && (elt->_attributes.find(attributeName) != elt->_attributes.end())
+		   && ( (*(elt->_attributes.find(attributeName))).second == attributeValue ) )
 		{
-			std::cout << " J'ai trouvé le template :-) "<< std::endl;
 			if(nth == 0) return elt;
 			--nth;
 		}

@@ -51,14 +51,20 @@ int main(int argc, char **argv)
         else  printf("Parse ended with sucess\n");
         
   //ici doit être mis l'apel au validateur  
-  int status = XmlValidator::validate( XmlDataStructure, DtdDataStructure); 
-  
+  bool status = XmlValidator::validate( XmlDataStructure, DtdDataStructure); 
+  if(status)
+    std::cout <<"tout c'est bien passé"<<std::endl;
+  std::cout<<"on a un problemeklsgshgpixhgixhgixhgij"<<std::endl;
   DtdDataStructure->toStream(std::cout);
     
   printf("Coucou j'ai dilété la datastructure.\n");
   delete XmlDataStructure;
   delete DtdDataStructure;
-  if(status)
+  if(status){
+    std::cout<<"reussite de l'analyse"<<std::endl;
     return 0;
+  }else{
+  std::cout<<"echec de l'analyse"<<std::endl;
   return 1;
+  }
 } 

@@ -1,3 +1,4 @@
+
 XMLPARSERPATH= src/xml 
 DTDPARSERPATH= src/dtd
 XSLTPARSERPATH= src/xslt
@@ -17,7 +18,8 @@ DEPSXSLT = $(OBJ)/xslt/main.o $(OBJ)/xslt/XsltTransformer.o $(OBJ)/xslt/xslt.tab
 STRH= $(SRC)/structure/*.h
 MKDIR= MKDIR 
 
-all : $(MKDIR) $(APP) $(TRANS)
+all : $(MKDIR) $(APP) 
+# $(TRANS)
 
 # Edition des liens, rajouter ici dans la listes de dépendances les ".o"
 # constitués lors de la compilation.
@@ -34,6 +36,7 @@ $(TRANS) : $(DEPSXML) $(DEPSSTRXML) $(DEPSXSLT) $(DEPSSTRDTD)
 	g++ $(CPPFLAGS) $+ -o $@
 
 # Compilation des fichiers .cpp situés a la racine du répertoire src
+$(OBJ)/%.o : $(SRC)/%.cpp
 	@echo "Compilation de $< "
 	g++ $(CPPFLAGS) $(DIRFLAGS) -c $< -o $@
 
@@ -110,5 +113,6 @@ clean:
 	rm -f $(SRC)/dtd/dtd.tab.h
 	
 	rm -f $(OBJ)/xml/*.o $(OBJ)/dtd/*.o $(OBJ)/structure/*.o $(OBJ)/xslt/*.o
+	rem -f $(OBJ)/main.o
 
 	rm -f ./$(APP)

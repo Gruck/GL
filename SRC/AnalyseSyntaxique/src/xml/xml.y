@@ -26,17 +26,21 @@ XmlDoc *XmlDataStructure;
 XmlElement *CurrentNode = 0;
 /* New node of the tree, created when an open markup is detected */
 XmlElement *tempNode;
+	
 
 %}
 
 %union {
    char * s;
    ElementName * en;  /* le nom d'un element avec son namespace */
+   AttList *la; 
 }
 
 %token EQ SLASH CLOSE END CLOSESPECIAL DOCTYPE
 %token <s> ENCODING VALUE DATA COMMENT NAME NSNAME
 %token <en> NSSTART START STARTSPECIAL
+
+%type <la> attributes
 
 %%
 
@@ -103,18 +107,29 @@ start
 empty_or_content
  : attributes SLASH CLOSE 
  {
+	 for ( AttList::iterator it = $1->begin() ; it != $1->end() ; it++ )
+	 {
+		 CurrentNode->addAttribute((*it).first, (*it).second);
+	 }
 	CurrentNode = CurrentNode->parent();
  }	
  | attributes close_content_and_end
    name_or_nsname_opt CLOSE 
  {
+	for ( AttList::iterator it = $1->begin() ; it != $1->end() ; it++ )
+	{
+		CurrentNode->addAttribute((*it).first, (*it).second);
+	}
 	CurrentNode = CurrentNode->parent();
  }	
  ;
 
 attributes
  : attributes NAME EQ VALUE
- | /* empty */
+{
+	$1->push_back(make_pair($2, $4));
+}
+| /* empty */ { $$ = new AttList }
  ;
 
 
@@ -139,15 +154,6 @@ content
  ;
 %%
 
-/*int main(int argc, char **argv)
-{
-  int err;
-
-  err = yyparse();
-  if (err != 0) printf("Parse ended with %d error(s)\n", err);
-  	else  printf("Parse ended with sucess\n", err);
-  return 0;
-}*/
 int yywrap(void)
 {
   return 1;

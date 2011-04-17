@@ -54,8 +54,16 @@ XmlElement* XmlElement::childElement(const std::string& name, const std::string&
 	ContentListIterator stop = childrenEnd();
 	for(;iter != stop; ++iter){
 		XmlElement* elt = dynamic_cast<XmlElement*>(*iter);
+		std::cout << attributeName << std::endl;
 		std::cout << "oho " << (elt->_attributes.find(attributeName) != elt->_attributes.end()) << std::endl;
-		std::cout << "Valeur de la clé  : " << (*(elt->_attributes).find(attributeName)).second << std::endl;
+		
+		std::cout << "Affichage de la map" << std::endl;
+		std::cout << "Nombre d'élément : " << (elt->_attributes).empty() << std::endl;
+		for ( AttributeIterator it = elt->_attributes.begin() ; it != elt->_attributes.end() ; it++ )
+		{
+			std::cout << (*it).first << " : " << (*it).second << std::endl;
+		}
+
 		if(elt && (elt->name() == name) 
 		   && (elt->_attributes.find(attributeName) != elt->_attributes.end()))
 		{

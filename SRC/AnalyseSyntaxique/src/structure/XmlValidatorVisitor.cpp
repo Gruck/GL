@@ -142,16 +142,40 @@ bool XmlValidatorVisitor::visitContentRecurse(
             status &= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
             if(!status) return false;
           }
-          return status; // retour
-          
-        }case DtdPossibleContent::M_AST : { // multiplicite "*"
+          return status; // retour  
+        }
+        case DtdPossibleContent::M_QMARK : { // multiplicite "?"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
           xmlIterCopy = xmlIter;
           bool status = true;
-          // tant que le contenu xml correspon, on récurse pour faire avancer
+          // tant que le contenu xml correspond, on récurse pour faire avancer
+          // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
+          // préparation de l'itérateur et de la condition d'arret de boucle
+          DtdPossibleContent::PossibleContentIterator
+            dtdIter = possibleContent->firstChild();
+          DtdPossibleContent::PossibleContentIterator
+            dtdIterStop = possibleContent->childrenEnd();
+          // iteration sur les contenus possibles fils   
+          for(; dtdIter != dtdIterStop; ++dtdIter ){
+            if( ! visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd) )
+              status = false;
+          }
+          //xmlIterCopy représente la dernière position "valide" (sorte de backtrack)
+          if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+          xmlIter = xmlIterCopy; //on revient à la dernière position valide
+          // dans le cas multiplicité * on renvoie toutjour true, mais on est
+          // content d'avoir fait les opérations précédentes car on a pu faire
+          // avancer l'itérateur xmlIter
+          return true;
+        }
+        case DtdPossibleContent::M_AST : { // multiplicite "*"
+          DEBUG_ONLY(cout<<"multiplicity: *\n";)
+          xmlIterCopy = xmlIter;
+          bool status = true;
+          // tant que le contenu xml correspond, on récurse pour faire avancer
           // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
           while(status){
-            // préparation de l'itérateur et de la condition d'arrete de boucle
+            // préparation de l'itérateur et de la condition d'arret de boucle
             DtdPossibleContent::PossibleContentIterator
               dtdIter = possibleContent->firstChild();
             DtdPossibleContent::PossibleContentIterator
@@ -213,7 +237,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
           }
           return false; // retour
           
-        }case DtdPossibleContent::M_AST : { // multiplicite "*"
+        }
+        case DtdPossibleContent::M_AST : { // multiplicite "*"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
           bool status = true;
           // tant que le contenu xml correspon, on récurse pour faire avancer
@@ -234,6 +259,23 @@ bool XmlValidatorVisitor::visitContentRecurse(
             if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
             if(xmlIter == xmlIterEnd) break;
           }
+        }
+        case DtdPossibleContent::M_QMARK : { // multiplicite "?"
+          DEBUG_ONLY(cout<<"multiplicity: ?\n";)       
+          // préparation de l'itérateur et de la condition d'arrete de boucle
+          DtdPossibleContent::PossibleContentIterator
+            dtdIter = possibleContent->firstChild();
+          DtdPossibleContent::PossibleContentIterator
+            dtdIterStop = possibleContent->childrenEnd();
+          // iteration sur les contenus possibles fils
+          bool status = false;
+          for(; dtdIter != dtdIterStop; ++dtdIter ){
+            XmlElement::ContentListIterator xmlIterCopy2 = xmlIter; 
+            status |= visitContentRecurse(*dtdIter, xmlIter, xmlIterEnd);
+             if(!status) xmlIter = xmlIterCopy2; // backtrack
+          }
+          //xmlIterCopy représente la dernière position "valide" (sorte de backtrack)
+          if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
           xmlIter = xmlIterCopy; //on revient à la dernière position valide
           // dans le cas multiplicité * on renvoie toutjour true, mais on est
           // content d'avoir fait les opérations précédents car on a pu faire
@@ -292,6 +334,21 @@ bool XmlValidatorVisitor::visitContentRecurse(
             // ne pas oublier de vérifier qu'on itère pas en dehors de la liste
             if(xmlIter == xmlIterEnd) return true;
           }
+          return true;
+        }
+        case DtdPossibleContent::M_QMARK : {
+          if(xmlIter == xmlIterEnd){
+            DEBUG_ONLY(cout << "ran out of xml children nodes!\nBut its ok (mult ?)"; )
+            return true;
+          }
+          bool status = ( possibleContent->value() == (*xmlIter)->name() );
+          DEBUG_ONLY(
+            if(!status){
+              cout << "comp: " << possibleContent->value()
+                  << " != " << (*xmlIter)->name()<<"\n";
+            }
+          )
+          ++xmlIter;
           return true;
         }
         case DtdPossibleContent::M_PLUS : {

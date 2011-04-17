@@ -12,8 +12,9 @@ echo '<testlist>' >> TestListResults.xml
 
 
 ./TEST_UNIT.sh rap1.xml " test validité fichier rap1. " TestListResults.xml
-./TEST_UNIT.sh rap2.xml " test validité fichier rap1. " TestListResults.xml
-./TEST_UNIT.sh rap3.xml " test validité fichier rap1. " TestListResults.xml
+./TEST_UNIT.sh rap2.xml " test validité fichier rap2. " TestListResults.xml
+./TEST_UNIT.sh rap3.xml " test validité fichier rap3. " TestListResults.xml
+./TEST_UNIT.sh test1.xml " test validité fichier test1. " TestListResults.xml
 
 
 

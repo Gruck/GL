@@ -74,21 +74,48 @@ La validation se fait en suivant le principe d'un parcours d'arbre en profondeur
 \end{algorithmic}
 \end{algorithm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+~\\
+Le déroulement de l'algorithme de validation sémantique des contenus fils du document Xml
+est très commenté dans le fichier source XmlValidatorVisitor.cpp (méthode \textit{XmlValidatorVisitor.visitContentRecurse}). En raison de la taille de l'algorithme ainsi que des efforts mis en places pour le commenter, la présentation sous forme algorithmique s'est révélée plus difficile à lire que le listing original. Aussi le fonctionnement de l'algorithme est détaillé directement dans le code source.
+~\\
 \begin{algorithm}
 \caption{Validation du contenu immédiat d'un Element Xml}
 \label{CheckContent}
 \begin{algorithmic}
-\REQUIRE xmlElement \COMMENT{Element dont les attributs sont à valider}
+\REQUIRE xmlIter \COMMENT{Itérateur vers un contenu fils de l'élément xml }
+\REQUIRE xmlIterEnd \COMMENT{Itérateur de fin des contenus fils de l'élément xml }
+\REQUIRE possibleContent \COMMENT{noeud de l'arbre des contenus possibles de l'élément xml }
 \STATE dtdDef $\Leftarrow$ DefinitionDtd(Element)
-\IF[cas superflu dans l'utilisation normale]{dtdDef n'existe pas} 
-       \RETURN faux
-\ELSE
-	\FORALL[On parcours tous les attributs]{Attribut de xmlElement}
-		\IF{attributs non défini dans dtdDef}
-			\RETURN faux
-		\ENDIF
-	\ENDFOR
-	\RETURN vrai
+\IF{possibleContent.type $=$ SEQUENCE} 
+  \IF{possibleContent.multiplicity $=$ NORMAL}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ STAR}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ QMARK}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ PLUS}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ENDIF
+\ELSIF{possibleContent.type $=$ CHOICE}
+  \IF{possibleContent.multiplicity $=$ NORMAL}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ STAR}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ QMARK}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ PLUS}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ENDIF
+\ELSIF{possibleContent.type $=$ ELEMENT}
+	\IF{possibleContent.multiplicity $=$ NORMAL}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ STAR}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ QMARK}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ELSIF{possibleContent.multiplicity $=$ PLUS}
+    \STATE traitement particulier (cf. XmlValidatorVisitor.cpp)
+  \ENDIF
 \ENDIF 
 \end{algorithmic}
 \end{algorithm}

@@ -110,6 +110,36 @@ bool XmlValidatorVisitor::visit( XmlText* xmlText){
   return true;
 }
 
+
+
+/* -----------------------------------------------------------------------------
+ *
+ *                       Validation des éléments fils
+ * 
+ * C'est le "gros morceau" de la validation sémantique du xml.
+ * La (longue) méthode suivante est récursive.
+ *
+ * Le principe général est de traité les 12 cas possibles par deuw switch
+ * imbriqués.
+ * La cette méthode est appliquée pour chaque élément du document xml.
+ * L'enchainement de la récurtion suit la structure de l'arbre des contenus
+ * possibles (dans la dtd).
+ *
+ * 
+ * Si le contenu possible courant est un choix ou une séqence, on appelle
+ * récursivement la méthode en tenant compte de la multiplicité (backtrack
+ * éventuel, etc.)
+ * 
+ * Si le contenu possible est de type "élément" on le compare au contenu fils
+ * courant du xml, et on fait avancer l'itérateur du contenu xml fils courant en
+ * tenant compte de la multiplicité.
+ *
+ * Toute la complexité de l'algorithme réside dans le parcours de l'arbre des
+ * contenus possibles, tout en avançant/backtrackant dans la liste des contenus
+ * réels du document xml.
+ * -------------------------------------------------------------------------- */
+
+
 bool XmlValidatorVisitor::visitContentRecurse(
   DtdPossibleContent* possibleContent
   , XmlElement::ContentListIterator& xmlIter
@@ -123,7 +153,9 @@ bool XmlValidatorVisitor::visitContentRecurse(
 
   // en fonction du type d'opération (Et, Ou, element)
   switch( possibleContent->type() ){
-    case DtdPossibleContent::T_SEQUENCE : { // --------------------- Sequence (ET)
+// #####################################################################SEQUENCE    
+// #############################################################################    
+    case DtdPossibleContent::T_SEQUENCE : {
       DEBUG_ONLY(cout<<"SEQUENCE ("<<possibleContent->nbChildren()<<")\n";) 
       // en fonction de la multiplicité
       switch(possibleContent->multiplicity() ){
@@ -142,6 +174,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           }
           return status; // retour  
         }
+// #############################################################################
         case DtdPossibleContent::M_QMARK : { // multiplicite "?"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
           xmlIterCopy = xmlIter;
@@ -166,6 +199,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // avancer l'itérateur xmlIter
           return true;
         }
+// #############################################################################
         case DtdPossibleContent::M_AST : { // multiplicite "*"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
           xmlIterCopy = xmlIter;
@@ -191,7 +225,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // dans le cas multiplicité * on renvoie toutjour true, mais on est
           // content d'avoir fait les opérations précédentes car on a pu faire
           // avancer l'itérateur xmlIter
-          return true; 
+          return true;
+// #############################################################################
         }case DtdPossibleContent::M_PLUS : {
           DEBUG_ONLY(cout<<"multiplicity: +\n";)
           bool status = true;
@@ -215,6 +250,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
         }
       }
     }
+// #######################################################################CHOICE
+// #############################################################################
     case DtdPossibleContent::T_CHOICE : { // ------------------------Choix (OU)
       DEBUG_ONLY(cout<<"CHOICE ("<<possibleContent->nbChildren()<<")\n";)
       // en fonction de la multiplicité
@@ -234,8 +271,8 @@ bool XmlValidatorVisitor::visitContentRecurse(
             else xmlIter = xmlIterCopy2; // backtrack
           }
           return false; // retour
-          
         }
+// #############################################################################
         case DtdPossibleContent::M_AST : { // multiplicite "*"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
           bool status = true;
@@ -258,6 +295,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
             if(xmlIter == xmlIterEnd) break;
           }
         }
+// #############################################################################
         case DtdPossibleContent::M_QMARK : { // multiplicite "?"
           DEBUG_ONLY(cout<<"multiplicity: ?\n";)       
           // préparation de l'itérateur et de la condition d'arrete de boucle
@@ -279,7 +317,9 @@ bool XmlValidatorVisitor::visitContentRecurse(
           // content d'avoir fait les opérations précédents car on a pu faire
           // avancer l'itérateur xmlIter
           return true; 
-        }case DtdPossibleContent::M_PLUS : {
+        }
+// #############################################################################
+        case DtdPossibleContent::M_PLUS : {
           DEBUG_ONLY(cout<<"multiplicity: +\n";)
           bool status = true;
           bool foundOne = false;
@@ -304,8 +344,9 @@ bool XmlValidatorVisitor::visitContentRecurse(
         }
       }
     }  
-    
-    case DtdPossibleContent::T_ELEM : { // --------------------------------------
+// ######################################################################ELEMENT
+// #############################################################################    
+    case DtdPossibleContent::T_ELEM : {
       DEBUG_ONLY(cout<<"ELEMENT\n";)
       switch( possibleContent->multiplicity() ){
         DEBUG_ONLY(cout<<"multiplicity: NONE\n";)
@@ -324,6 +365,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           ++xmlIter;
           return status;
         }
+// #############################################################################
         case DtdPossibleContent::M_AST : {
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
           if(xmlIter == xmlIterEnd) return true;
@@ -334,6 +376,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           }
           return true;
         }
+// #############################################################################
         case DtdPossibleContent::M_QMARK : {
           if(xmlIter == xmlIterEnd){
             DEBUG_ONLY(cout << "ran out of xml children nodes!\nBut its ok (mult ?)"; )
@@ -349,6 +392,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           ++xmlIter;
           return true;
         }
+// #############################################################################
         case DtdPossibleContent::M_PLUS : {
           DEBUG_ONLY(cout<<"multiplicity: +\n";)
           if(xmlIter == xmlIterEnd) return false;

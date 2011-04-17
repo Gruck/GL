@@ -1,5 +1,7 @@
 #! /bin/sh
 
+make -j4
+
 if [ -f "TestListResults.xml" ]
 then
   rm TestListResults.xml

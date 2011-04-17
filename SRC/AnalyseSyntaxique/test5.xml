@@ -1,0 +1,19 @@
+<!DOCTYPE rapport SYSTEM "test5.dtd">
+<root>
+  <plop>
+    <foo>
+      du texte
+    </foo>
+    <bar>
+    </bar>
+  </plop>
+  <haha>
+    <foo></foo>
+    <foo></foo>
+    <foo> Yvan le hareng </foo>
+    <foo></foo>
+    <bar> José le sanglier </bar>
+  </haha>
+  <plop>
+  </plop>
+</root>

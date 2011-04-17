@@ -99,6 +99,7 @@ bool XmlValidatorVisitor::checkContent(XmlElement* xmlElement){
     , xmlElement->childrenEnd()
   );
   if( (status) && (xmlIter != xmlElement->childrenEnd() ) ){
+    while(xmlIter != xmlElement->childrenEnd() ) {cout << "# "; ++xmlIter;}
     cout << "L'élément xml " << xmlElement->fullName() << " contient trop de noeuds fils selon la spécification de la dtd.\n";
     return false;
   }
@@ -145,11 +146,11 @@ bool XmlValidatorVisitor::visitContentRecurse(
           
         }case DtdPossibleContent::M_AST : { // multiplicite "*"
           DEBUG_ONLY(cout<<"multiplicity: *\n";)
+          xmlIterCopy = xmlIter;
           bool status = true;
           // tant que le contenu xml correspon, on récurse pour faire avancer
           // l'itérateur xmlIter (c'est une référence, gardons le à l'esprit)
           while(status){
-            cout << "bwaaaaaahhhhh\n";
             // préparation de l'itérateur et de la condition d'arrete de boucle
             DtdPossibleContent::PossibleContentIterator
               dtdIter = possibleContent->firstChild();
@@ -166,7 +167,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
           }
           xmlIter = xmlIterCopy; //on revient à la dernière position valide
           // dans le cas multiplicité * on renvoie toutjour true, mais on est
-          // content d'avoir fait les opérations précédents car on a pu faire
+          // content d'avoir fait les opérations précédentes car on a pu faire
           // avancer l'itérateur xmlIter
           return true; 
         }case DtdPossibleContent::M_PLUS : {
@@ -185,6 +186,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
               foundOne |= status; // si on en a trouvé un foundOne = true
             }
             if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+            if(xmlIter == xmlIterEnd) break;
           }
           xmlIter = xmlIterCopy; //on revient à la dernière position valide
           return foundOne;
@@ -255,6 +257,7 @@ bool XmlValidatorVisitor::visitContentRecurse(
               foundOne |= status; // si on en a trouvé un foundOne = true
             }
             if(status) xmlIterCopy = xmlIter;//on avance la dernière position valide
+            if(xmlIter == xmlIterEnd) break;
           }
           xmlIter = xmlIterCopy; //on revient à la dernière position valide
           return foundOne;

@@ -291,15 +291,24 @@ bool test2e(){
   dtd->AddElement(new DtdElement("bar"
     , new DtdPossibleContent(DtdPossibleContent::T_ELEM,"#PCDATA") ) );
   std::cout << "--------------------------------------- print xml\n";
-  xml->toStream(std::cout);
+  xml2->toStream(std::cout);
   std::cout << "--------------------------------------- print dtd\n";
   dtd->toStream(std::cout); 
   assert( dtd->element("foo")->name() == std::string("foo") );
   
   std::cout << "--------------------------------------- Validation du Xml\n";
+/*
   bool status = ( (XmlValidator::validate(xml, dtd) )
     && (XmlValidator::validate(xml2, dtd) ) );
-
+*/
+  bool t = XmlValidator::validate(xml, dtd);
+  assert( t );
+  bool tt = XmlValidator::validate(xml2, dtd);
+  assert( tt );
+  bool ttt = XmlValidator::validate(xml3, dtd);
+  assert( ttt );
+  bool status = t & tt & ttt;
+  
   std::cout << "--------------------------------------- delete xml\n";
   delete xml;
   std::cout << "--------------------------------------- delete dtd\n";

@@ -1,0 +1,5 @@
+<!ELEMENT root (plop|haha)*>
+<!ELEMENT plop (foo,bar)?>
+<!ELEMENT haha (foo+,bar)+>
+<!ELEMENT foo (#PCDATA?)>
+<!ELEMENT bar (#PCDATA?)>

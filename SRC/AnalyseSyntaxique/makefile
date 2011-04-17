@@ -18,8 +18,8 @@ DEPSXSLT = $(OBJ)/xslt/main.o $(OBJ)/xslt/XsltTransformer.o $(OBJ)/xslt/xslt.tab
 STRH= $(SRC)/structure/*.h
 MKDIR= MKDIR 
 
-all : $(MKDIR) $(APP) 
-# $(TRANS)
+all : $(MKDIR) $(APP) $(TRANS)
+
 
 # Edition des liens, rajouter ici dans la listes de dépendances les ".o"
 # constitués lors de la compilation.
@@ -113,6 +113,6 @@ clean:
 	rm -f $(SRC)/dtd/dtd.tab.h
 	
 	rm -f $(OBJ)/xml/*.o $(OBJ)/dtd/*.o $(OBJ)/structure/*.o $(OBJ)/xslt/*.o
-	rem -f $(OBJ)/main.o
+	rm -f $(OBJ)/main.o
 
 	rm -f ./$(APP)

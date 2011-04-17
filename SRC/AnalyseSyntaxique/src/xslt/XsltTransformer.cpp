@@ -12,7 +12,12 @@ const std::string MATCH = "match";
 XmlElement* XsltTransformer::StartProcessing()
 {
 	XmlElement* outputRootNode = new XmlElement("","output");
-	this->processXslt(_xmlRootNode,outputRootNode);
+	// Entourloupe :-) 
+	XmlElement* Entourloupe = new XmlElement("","Entourloupe");
+	Entourloupe->addChild(_xmlRootNode);
+	this->processXslt(Entourloupe,outputRootNode);
+	Entourloupe->detachChild(_xmlRootNode);
+	delete Entourloupe;
 	return outputRootNode;
 }
 
@@ -50,9 +55,19 @@ void XsltTransformer::processXslt(XmlElement* ParentNode, XmlElement* NodeInNewT
 				// Si il existe un template pour le noeud
 				{
 					std::cout << "J'ai trouve le template qui va bien !"<< std::endl;
-					this->copyTree(T_Element,(XmlElement*)*(childIterator),NodeInNewTree);
-					// Cast autorisé en XmlElement*
-					// et safe, car nous sommes sur qu'il s'agit d'un XmlElement
+					for ( XmlElement::ContentListIterator it = T_Element->firstChild() ; it != T_Element->childrenEnd() ; it++ )
+					{
+						if ( (*it)->name() == std::string("#PCDATA") )
+						{
+							NodeInNewTree->addChild(new XmlText(((XmlText*)(*it))->text()));
+						}
+						else
+						{
+							this->copyTree((XmlElement*)(*it),(XmlElement*)(*childIterator),NodeInNewTree);
+					    }
+						// Cast autorisé en XmlElement*
+						// et safe, car nous sommes sur qu'il s'agit d'un XmlElement
+					}
 				}
 			}
 		}
@@ -84,7 +99,7 @@ void XsltTransformer::copyTree(XmlElement* T_Node,
 		this->processXslt(C_Node, NodeInNewTree);
 	}
 	else 
-	//cas du neoud normal
+	//cas du noeud normal
 	{
 		if(T_Node->name() == std::string("#PCDATA"))
 		{

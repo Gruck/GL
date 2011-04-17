@@ -20,10 +20,8 @@ bool XmlValidatorVisitor::visit( XmlDoc* xmlDoc){
   //doctype
   std::cout<<"Validation du header du xml"<<std::endl;
   //vérifier que le noeud racine est valide
-  if(xmlDoc->root()->acceptValidator(this))
-	return true;
-  else
-	return false;
+  return xmlDoc->root()->acceptValidator(this);
+
 	
   
 }

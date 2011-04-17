@@ -17,6 +17,10 @@
     XmlValidatorVisitor* xmlValidatorVisitor = new XmlValidatorVisitor( dtdDoc );
     bool status = xmlDoc->acceptValidator(xmlValidatorVisitor);
     delete xmlValidatorVisitor;
+    if(status)
+    std::cout <<"tout c'est bien passé"<<std::endl;
+    else
+    std::cout<<"on a un probleme dans XmlValidator"<<std::endl;
     return status;
   }
   

@@ -167,7 +167,7 @@ public:
    * du document XML, mais fournit un accès lent (O(N) avec un cast dynamique
    * par itération)
    */ 
-  XmlElement* childElement(const std::string& name, const std::string& attributeName, int nth = 0);  	
+	XmlElement* childElement(const std::string& name, const std::string& attributeName, const std::string& attributeValue, int nth = 0);  	
 	
   /**
    * Affiche dans un flux standard l'élément courant ainsi que ses contenu fils

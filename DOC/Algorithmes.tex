@@ -10,9 +10,10 @@ La validation se fait en suivant le principe d'un parcours d'arbre en profondeur
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{algorithm}
 \caption{Validation d'un Document Xml}
+\label{ValidateXmlDoc}
 \begin{algorithmic}
 \REQUIRE xmlDoc \COMMENT{Document à valider}
 \IF {xmlDoc.Racine est valide} 
@@ -22,9 +23,10 @@ La validation se fait en suivant le principe d'un parcours d'arbre en profondeur
 \ENDIF 
 \end{algorithmic}
 \end{algorithm}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{algorithm}
 \caption{Validation d'un Element Xml}
+\label{ValidateXmlElement}
 \begin{algorithmic}
 \REQUIRE xmlElement \COMMENT{Element à valider}
 \STATE dtdDef $\Leftarrow$ DefinitionDtd(Element)
@@ -39,17 +41,54 @@ La validation se fait en suivant le principe d'un parcours d'arbre en profondeur
 		\ENDIF
 	\ENDFOR
 	
-	\FORALL[On valide les attributs de l'élement]{attribut de xmlElement}
-		\IF{ dtdDef ne permet pas attribut}
-			\RETURN faux
-		\ENDIF
-	\ENDFOR
-	\COMMENT{On valide le contenu de l'élément}
+	\STATE validation des attributs\COMMENT{cf Algorithm~\ref{CheckAttributes}}
+	\IF{les attributs ne sont pas valides}
+		\RETURN faux
+	\ENDIF
+	\STATE validation du contenu de l'élément\COMMENT{cf Algorithm~\ref{CheckContent}}
 	\IF{\NOT Contenu est valide (element)}
 		\RETURN faux
 	\ENDIF
 
         \RETURN vrai
+\ENDIF 
+\end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{algorithm}
+\caption{Validation des attributs d'un Element Xml}
+\label{CheckAttributes}
+\begin{algorithmic}
+\REQUIRE xmlElement \COMMENT{Element dont les attributs sont à valider}
+\STATE dtdDef $\Leftarrow$ DefinitionDtd(Element)
+\IF[cas superflu dans l'utilisation normale]{dtdDef n'existe pas} 
+       \RETURN faux
+\ELSE
+	\FORALL[On parcours tous les attributs]{Attribut de xmlElement}
+		\IF{attributs non défini dans dtdDef}
+			\RETURN faux
+		\ENDIF
+	\ENDFOR
+	\RETURN vrai
+\ENDIF 
+\end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{algorithm}
+\caption{Validation du contenu immédiat d'un Element Xml}
+\label{CheckContent}
+\begin{algorithmic}
+\REQUIRE xmlElement \COMMENT{Element dont les attributs sont à valider}
+\STATE dtdDef $\Leftarrow$ DefinitionDtd(Element)
+\IF[cas superflu dans l'utilisation normale]{dtdDef n'existe pas} 
+       \RETURN faux
+\ELSE
+	\FORALL[On parcours tous les attributs]{Attribut de xmlElement}
+		\IF{attributs non défini dans dtdDef}
+			\RETURN faux
+		\ENDIF
+	\ENDFOR
+	\RETURN vrai
 \ENDIF 
 \end{algorithmic}
 \end{algorithm}

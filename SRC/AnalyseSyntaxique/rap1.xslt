@@ -28,6 +28,11 @@
   </body></html>
 </xsl:template>
 
+<xsl:template match="p">
+<coucou>
+      <xsl:apply-templates/>
+</coucou>
+</xsl:template>
 
 <xsl:template match="titre">
     <p>Ceci est un titre:\n</p>

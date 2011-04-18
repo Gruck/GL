@@ -34,10 +34,11 @@ void XsltTransformer::processXslt(XmlElement* ParentNode, XmlElement* NodeInNewT
 		for (; childIterator != ParentNode->childrenEnd(); childIterator++)
 		// Pour tout les fils du noeud courant
 		{
-			if((*childIterator)->name() == std::string("#CDATA"))
+			std::cout << (*childIterator)->name() << std::endl;
+			if((*childIterator)->name() == std::string("#PCDATA"))
 			// Ce test permet d'effectuer une differenciation entre 
 			// XmlText et XmlElement, en effet XmlText::name() retourne
-			// systematiquement #CDATA, ainsi le cast est autorisé
+			// systematiquement #PCDATA, ainsi le cast est autorisé
 			// Cas XmlText : On recopie le noeud dans le nouvel arbre
 			{
 				XmlText* C_node = (XmlText*) (*childIterator);
@@ -70,7 +71,7 @@ void XsltTransformer::processXslt(XmlElement* ParentNode, XmlElement* NodeInNewT
 				}
 			}
 		}
-	}
+	} 
 }
 
 void XsltTransformer::copyTree(XmlElement* T_Node, 

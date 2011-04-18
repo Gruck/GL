@@ -12,7 +12,9 @@ const std::string MATCH = "match";
 XmlElement* XsltTransformer::StartProcessing()
 {
 	XmlElement* outputRootNode = new XmlElement("","output");
-	// Entourloupe :-) 
+	// Entourloupe : Nous sommes obligé d'encapsuler le noeud racine 
+	// dans un nouveau noeud temporaire de façon à pouvoir appliquer
+	// un traitement sur ce dernier si il y en à un
 	XmlElement* Entourloupe = new XmlElement("","Entourloupe");
 	Entourloupe->addChild(_xmlRootNode);
 	this->processXslt(Entourloupe,outputRootNode);
@@ -24,8 +26,6 @@ XmlElement* XsltTransformer::StartProcessing()
 
 void XsltTransformer::processXslt(XmlElement* ParentNode, XmlElement* NodeInNewTree)
 {
-	
-	std::cout << "Lancement de process xslt " << ParentNode->name() << std::endl;
 	XmlElement::ContentListIterator childIterator = ParentNode->firstChild();
 	if(ParentNode->nbChildren() !=0)
 	// Test pour verifier que nous somme sur un noeud, et non une feuille
@@ -34,7 +34,6 @@ void XsltTransformer::processXslt(XmlElement* ParentNode, XmlElement* NodeInNewT
 		for (; childIterator != ParentNode->childrenEnd(); childIterator++)
 		// Pour tout les fils du noeud courant
 		{
-			std::cout << "Recherche du template pour le noeud " << (*childIterator)->name() << std::endl;
 			if((*childIterator)->name() == std::string("#CDATA"))
 			// Ce test permet d'effectuer une differenciation entre 
 			// XmlText et XmlElement, en effet XmlText::name() retourne
@@ -50,60 +49,45 @@ void XsltTransformer::processXslt(XmlElement* ParentNode, XmlElement* NodeInNewT
 			// Les templates sont obligatoirement de type XmlElement
 			{
 				XmlElement* T_Element = _xsltRootNode->childElement(TEMPLATE, MATCH, (*childIterator)->name());
-				std::cout << "C'est un XmlElement recherche du template "<< std::endl;
 				if(T_Element != 0)
 				// Si il existe un template pour le noeud
 				{
-					std::cout << "J'ai trouve le template qui va bien !"<< std::endl;
 					for ( XmlElement::ContentListIterator it = T_Element->firstChild() ; it != T_Element->childrenEnd() ; it++ )
+					// Nous traitons tout les fils du noeud template
 					{
 						if ( (*it)->name() == std::string("#PCDATA") )
+						// Si le noeud est un XmlText (par la même magouille que précedemment)
+						//  on ajoute le noeud dans l'arbre xslt crée
 						{
 							NodeInNewTree->addChild(new XmlText(((XmlText*)(*it))->text()));
 						}
 						else
+						// Sinon on appelle récursivement la methode copyTree sur le noeud de type XmlElement
 						{
 							this->copyTree((XmlElement*)(*it),(XmlElement*)(*childIterator),NodeInNewTree);
 					    }
-						// Cast autorisé en XmlElement*
-						// et safe, car nous sommes sur qu'il s'agit d'un XmlElement
 					}
 				}
 			}
 		}
 	}
-	else 
-	// Cas ou nous travaillons sur une feuille : Recherche de template 
-	// A appliquer, similaire au cas d'un fils
-	{
-		// TODO être sur de ce qui viens d'etre dit, ce cas est peutêtre a négliger, car il aura fait 
-		// la cible du même traitement au niveau n+1
-	}
-
 }
 
 void XsltTransformer::copyTree(XmlElement* T_Node, 
 					XmlElement* C_Node,XmlElement* NodeInNewTree)
 {
-	
-	std::cout << "Lancement de copyTree " << T_Node->name() << std::endl;
-
 	if (T_Node->name() == std::string("apply-templates")) 
 	// Si nous sommes dans le cas "apply-template" , alors nous appelons 
     // recursivement la methode process Xslt, sur tout les fils du noeud
 	// ciblé par apply template, comme stipulé dans le sujet
 	{
-		// TODO possible erreur ici, par tout ses fils il entend tout les fils du 
-		// noeud courant, ou tout les fils du noeud cilbé par l'attribut spécifié
-		std::cout << "Apply Template Detecté "<< std::endl;
 		this->processXslt(C_Node, NodeInNewTree);
 	}
 	else 
-	//cas du noeud normal
+	//Cas du noeud normal
 	{
 		if(T_Node->name() == std::string("#PCDATA"))
 		{
-			std::cout << "Noeud Text " << T_Node->name() << std::endl;
 			// Si le noeud template est de type text, alors on ajoute
 			// le noeud dans l'architecture du nouveau 
 			XmlText* newNode = new XmlText(T_Node->name());
@@ -113,7 +97,6 @@ void XsltTransformer::copyTree(XmlElement* T_Node,
 		// Sinon nous sommes dans le cas d'un noeud de type 
 		// XmlElement, qui devra etre traite recursivement
 		{
-			std::cout << "Noeud Element " << T_Node->name() << std::endl;
 			// On applique le noeud actuel
 			XmlElement* Node = (XmlElement*)(T_Node);
 			XmlElement* child = new XmlElement(Node->nameSpace(), Node->name());
@@ -123,12 +106,15 @@ void XsltTransformer::copyTree(XmlElement* T_Node,
 			{
 				XmlElement::ContentListIterator childIterator = T_Node->firstChild();
 				for(; childIterator != T_Node->childrenEnd() ; childIterator++)
+				// Pour tout les noeuds du du Template
 				{
 					if((*childIterator)->name() == std::string("#PCDATA"))
+					// Cas si le fils est un XmlText
 					{
 						child->addChild(new XmlText(((XmlText*)(*childIterator))->text()));
 					}
 					else
+					// Cas si il s'agit d'un xmlElement
 					{
 						this->copyTree((XmlElement*)(*childIterator), C_Node, child);
 					}

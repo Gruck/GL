@@ -3,7 +3,7 @@
 
 <xsl:template match="rapport">
   <html><body>
-    <p>Liste de nombres :</p>
+    <p>Liste de nombres :\n</p>
     <ul>
       <xsl:apply-templates/>
     </ul>
@@ -12,7 +12,7 @@
 
 <xsl:template match="chapitre">
   <html><body>
-    <p>Jean Michel Loutre :</p>
+    <p>Jean Michel Loutre :\n</p>
     <ul>
       <xsl:apply-templates/>
     </ul>
@@ -21,7 +21,7 @@
 
 <xsl:template match="section">
   <html><body>
-    <p>TAGUEULE</p>
+    <p>Ceci est une révolution:\n</p>
     <ul>
       <xsl:apply-templates/>
     </ul>
@@ -30,7 +30,7 @@
 
 
 <xsl:template match="titre">
-    <p>Popo</p>
+    <p>Ceci est un titre:\n</p>
 </xsl:template>
 
 </xsl:stylesheet>
